@@ -8,7 +8,7 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} SHARED
   src/get_resource.cpp
   src/get_resources.cpp
   src/get_search_paths.cpp)
