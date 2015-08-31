@@ -25,8 +25,7 @@ if(AMENT_ENABLE_TESTING)
 
   ament_add_gtest(${PROJECT_NAME}_utest test/utest.cpp)
   if(TARGET ${PROJECT_NAME}_utest)
-    target_include_directories(${PROJECT_NAME}_utest
-      PUBLIC "../include")
+    target_include_directories(${PROJECT_NAME}_utest PUBLIC include)
     target_link_libraries(${PROJECT_NAME}_utest ${PROJECT_NAME})
   endif()
 endif()
