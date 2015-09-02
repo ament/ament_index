@@ -52,21 +52,17 @@ get_search_paths()
   char delim = ';';
 #endif
   while (getline(ss, tok, delim)) {
+    if (tok.empty()) {
+      continue;
+    }
     // skip non existing directories
     struct stat s;
-    auto retcode = stat(tok.c_str(), &s);
-    if (retcode) {
+    if (stat(tok.c_str(), &s)) {
       continue;
     }
-#ifndef _WIN32
-    if (!S_ISDIR(s.st_mode)) {
-#else
-    if (s.st_mode & _S_IFDIR) {
-#endif
-      continue;
+    if ((s.st_mode & S_IFMT) == S_IFDIR) {
+      paths.push_back(tok);
     }
-
-    paths.push_back(tok);
   }
 
 #ifdef _WIN32
