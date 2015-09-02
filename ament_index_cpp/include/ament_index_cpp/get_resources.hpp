@@ -18,9 +18,12 @@
 #include <map>
 #include <string>
 
+#include <ament_index_cpp/visibility_control.h>
+
 namespace ament_index_cpp
 {
 
+AMENT_INDEX_CPP_PUBLIC
 std::map<std::string, std::string>
 get_resources(const std::string & resource_type);
 

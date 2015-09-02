@@ -35,7 +35,7 @@ void set_ament_prefix_path(std::list<std::string> subfolders)
 #ifndef _WIN32
       ament_prefix_path += ":";
 #else
-      ament_prefix_path += ";"
+      ament_prefix_path += ";";
 #endif
     }
     ament_prefix_path += path;
@@ -44,7 +44,7 @@ void set_ament_prefix_path(std::list<std::string> subfolders)
 #ifndef _WIN32
   int retcode = setenv("AMENT_PREFIX_PATH", ament_prefix_path.c_str(), 1);
 #else
-  errno_t retcode = _putenv_s("AMENT_PREFIX_PATH", ament_prefix_path);
+  errno_t retcode = _putenv_s("AMENT_PREFIX_PATH", ament_prefix_path.c_str());
 #endif
   if (retcode) {
     throw std::runtime_error("Failed to set environment variable 'AMENT_PREFIX_PATH'");

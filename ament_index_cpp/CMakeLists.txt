@@ -12,6 +12,7 @@ add_library(${PROJECT_NAME} SHARED
   src/get_resource.cpp
   src/get_resources.cpp
   src/get_search_paths.cpp)
+target_compile_definitions(${PROJECT_NAME} PRIVATE "AMENT_INDEX_CPP_BUILDING_DLL")
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 ament_export_include_directories(include)
@@ -25,8 +26,7 @@ if(AMENT_ENABLE_TESTING)
 
   ament_add_gtest(${PROJECT_NAME}_utest test/utest.cpp)
   if(TARGET ${PROJECT_NAME}_utest)
-    target_include_directories(${PROJECT_NAME}_utest
-      PUBLIC "../include")
+    target_include_directories(${PROJECT_NAME}_utest PUBLIC include)
     target_link_libraries(${PROJECT_NAME}_utest ${PROJECT_NAME})
   endif()
 endif()
