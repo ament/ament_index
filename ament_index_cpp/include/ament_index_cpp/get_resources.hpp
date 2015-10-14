@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef __ament_index_cpp__get_resources__h__
-#define __ament_index_cpp__get_resources__h__
+#ifndef AMENT_INDEX_CPP__GET_RESOURCES_HPP_
+#define AMENT_INDEX_CPP__GET_RESOURCES_HPP_
 
 #include <map>
 #include <string>
 
-#include <ament_index_cpp/visibility_control.h>
+#include "ament_index_cpp/visibility_control.h"
 
 namespace ament_index_cpp
 {
@@ -27,6 +27,6 @@ AMENT_INDEX_CPP_PUBLIC
 std::map<std::string, std::string>
 get_resources(const std::string & resource_type);
 
-}  // namespace
+}  // namespace ament_index_cpp
 
-#endif  // __ament_index_cpp__get_resources__h__
+#endif  // AMENT_INDEX_CPP__GET_RESOURCES_HPP_

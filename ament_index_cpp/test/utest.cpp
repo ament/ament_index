@@ -12,14 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <stdexcept>
-#include <stdlib.h>
-
 #include <gtest/gtest.h>
 
-#include <ament_index_cpp/get_resource.hpp>
-#include <ament_index_cpp/get_resources.hpp>
-#include <ament_index_cpp/get_search_paths.hpp>
+#include <stdlib.h>
+
+#include <list>
+#include <map>
+#include <stdexcept>
+#include <string>
+
+#include "ament_index_cpp/get_resource.hpp"
+#include "ament_index_cpp/get_resources.hpp"
+#include "ament_index_cpp/get_search_paths.hpp"
 
 void set_ament_prefix_path(std::list<std::string> subfolders)
 {
