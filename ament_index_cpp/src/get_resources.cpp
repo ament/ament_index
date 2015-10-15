@@ -12,15 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "ament_index_cpp/get_resources.hpp"
+
 #ifndef _WIN32
 #include <dirent.h>
 #else
 #include <windows.h>
 #endif
+#include <map>
 #include <stdexcept>
+#include <string>
 
-#include <ament_index_cpp/get_resources.hpp>
-#include <ament_index_cpp/get_search_paths.hpp>
+#include "ament_index_cpp/get_search_paths.hpp"
 
 namespace ament_index_cpp
 {
@@ -71,4 +74,4 @@ get_resources(const std::string & resource_type)
   return resources;
 }
 
-}  // namespace
+}  // namespace ament_index_cpp

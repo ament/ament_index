@@ -12,11 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <sstream>
-#include <stdexcept>
+#include "ament_index_cpp/get_search_paths.hpp"
+
 #include <sys/stat.h>
 
-#include <ament_index_cpp/get_search_paths.hpp>
+#include <list>
+#include <sstream>
+#include <stdexcept>
+#include <string>
 
 #ifdef _WIN32
 #define stat _stat
@@ -74,4 +77,4 @@ get_search_paths()
   return paths;
 }
 
-}  // namespace
+}  // namespace ament_index_cpp

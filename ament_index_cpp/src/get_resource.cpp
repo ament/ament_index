@@ -12,13 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "ament_index_cpp/get_resource.hpp"
+
 #include <cassert>
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+#include <string>
 
-#include <ament_index_cpp/get_resource.hpp>
-#include <ament_index_cpp/get_search_paths.hpp>
+#include "ament_index_cpp/get_search_paths.hpp"
 
 namespace ament_index_cpp
 {
@@ -50,4 +52,4 @@ get_resource(
   return false;
 }
 
-}  // namespace
+}  // namespace ament_index_cpp
