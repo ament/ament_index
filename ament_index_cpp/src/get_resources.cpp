@@ -50,7 +50,9 @@ get_resources(const std::string & resource_type)
       if (entry->d_name[0] == '.') {
         continue;
       }
-      resources[entry->d_name] = base_path;
+      if (resources.find(entry->d_name) == resources.end()) {
+        resources[entry->d_name] = base_path;
+      }
     }
     closedir(dir);
 
@@ -64,12 +66,13 @@ get_resources(const std::string & resource_type)
     do {
       // ignore directories
       if ((find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0) {
-        resources[find_data.cFileName] = base_path;
+        if (resources.find(find_data.cFileName) == resources.end()) {
+          resources[find_data.cFileName] = base_path;
+        }
       }
     } while (FindNextFile(find_handle, &find_data));
     FindClose(find_handle);
 #endif
-    break;
   }
   return resources;
 }
