@@ -72,8 +72,8 @@ def get_resources(resource_type):
         resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type)
         if os.path.isdir(resource_path):
             for filename in os.listdir(resource_path):
-                resources[filename] = path
-            break
+                if filename not in resources:
+                    resources[filename] = path
     return resources
 
 
