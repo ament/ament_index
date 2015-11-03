@@ -105,9 +105,9 @@ TEST(AmentIndexCpp, get_resources_overlay) {
   subfolders.push_back("prefix2");
   set_ament_prefix_path(subfolders);
   std::map<std::string, std::string> resources = ament_index_cpp::get_resources("resource_type2");
-  EXPECT_EQ(resources.size(), 1);
+  EXPECT_EQ(resources.size(), 2);
   for (auto it : resources) {
-    EXPECT_EQ(it.first, "foo");
+    EXPECT_TRUE(it.first == "foo" || it.first == "bar");
   }
 }
 

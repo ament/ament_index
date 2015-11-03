@@ -70,8 +70,8 @@ def test_resources():
 def test_resources_overlay():
     set_ament_prefix_path(['prefix1', 'prefix2'])
     resources = get_resources('resource_type2')
-    assert len(resources) == 1, 'Expected one resource'
-    assert set(resources.keys()) == set(['foo']), 'Expected different resources'
+    assert len(resources) == 2, 'Expected two resource'
+    assert set(resources.keys()) == set(['foo', 'bar']), 'Expected different resources'
 
 
 def test_resources_underlay():
