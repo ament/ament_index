@@ -16,6 +16,7 @@
 
 #include <sys/stat.h>
 
+#include <cstdlib>
 #include <list>
 #include <sstream>
 #include <stdexcept>
