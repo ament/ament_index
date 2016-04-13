@@ -71,10 +71,13 @@ def get_resources(resource_type):
     for path in get_search_paths():
         resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type)
         if os.path.isdir(resource_path):
-            for filename in os.listdir(resource_path):
-                if filename not in resources \
-                        and not filename.startswith('.'):
-                    resources[filename] = path
+            for resource in os.listdir(resource_path):
+                # Ignore subdirectories, and anything starting with a dot
+                if os.path.isdir(os.path.join(resource_path, resource)) \
+                        or resource.startswith('.'):
+                    continue
+                if resource not in resources:
+                    resources[resource] = path
     return resources
 
 
