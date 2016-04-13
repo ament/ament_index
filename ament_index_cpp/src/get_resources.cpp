@@ -16,6 +16,7 @@
 
 #ifndef _WIN32
 #include <dirent.h>
+#include <errno.h>
 #else
 #include <windows.h>
 #endif
@@ -46,10 +47,21 @@ get_resources(const std::string & resource_type)
     }
     dirent * entry;
     while ((entry = readdir(dir)) != NULL) {
-      // ignore folders starting with a dot
+      // ignore directories
+      auto subdir = opendir((path + "/" + entry->d_name).c_str());
+      if (subdir) {
+        closedir(subdir);
+        continue;
+      }
+      if (errno != ENOTDIR) {
+        continue;
+      }
+
+      // ignore files starting with a dot
       if (entry->d_name[0] == '.') {
         continue;
       }
+
       if (resources.find(entry->d_name) == resources.end()) {
         resources[entry->d_name] = base_path;
       }
@@ -65,10 +77,17 @@ get_resources(const std::string & resource_type)
     }
     do {
       // ignore directories
-      if ((find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0) {
-        if (resources.find(find_data.cFileName) == resources.end()) {
-          resources[find_data.cFileName] = base_path;
-        }
+      if ((find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+        continue;
+      }
+
+      // ignore files starting with a dot
+      if (find_data.cFileName[0] == '.') {
+        continue;
+      }
+
+      if (resources.find(find_data.cFileName) == resources.end()) {
+        resources[find_data.cFileName] = base_path;
       }
     } while (FindNextFile(find_handle, &find_data));
     FindClose(find_handle);
