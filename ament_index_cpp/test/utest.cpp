@@ -67,7 +67,7 @@ TEST(AmentIndexCpp, search_paths) {
   subfolders.push_back("prefix2");
   set_ament_prefix_path(subfolders);
   std::list<std::string> search_paths = ament_index_cpp::get_search_paths();
-  EXPECT_EQ(search_paths.size(), 2);
+  EXPECT_EQ(search_paths.size(), 2UL);
 }
 
 TEST(AmentIndexCpp, not_existing_search_paths) {
@@ -76,7 +76,7 @@ TEST(AmentIndexCpp, not_existing_search_paths) {
   subfolders.push_back("not_existing_prefix");
   set_ament_prefix_path(subfolders);
   std::list<std::string> search_paths = ament_index_cpp::get_search_paths();
-  EXPECT_EQ(search_paths.size(), 1);
+  EXPECT_EQ(search_paths.size(), 1UL);
 }
 
 TEST(AmentIndexCpp, get_unknown_resources) {
@@ -85,7 +85,7 @@ TEST(AmentIndexCpp, get_unknown_resources) {
   set_ament_prefix_path(subfolders);
   std::map<std::string, std::string> resources =
     ament_index_cpp::get_resources("unknown_resource_type");
-  EXPECT_EQ(resources.size(), 0);
+  EXPECT_EQ(resources.size(), 0UL);
 }
 
 TEST(AmentIndexCpp, get_resources) {
@@ -93,7 +93,7 @@ TEST(AmentIndexCpp, get_resources) {
   subfolders.push_back("prefix1");
   set_ament_prefix_path(subfolders);
   std::map<std::string, std::string> resources = ament_index_cpp::get_resources("resource_type1");
-  EXPECT_EQ(resources.size(), 2);
+  EXPECT_EQ(resources.size(), 2UL);
   for (auto it : resources) {
     EXPECT_TRUE(it.first == "foo" || it.first == "bar");
   }
@@ -105,7 +105,7 @@ TEST(AmentIndexCpp, get_resources_overlay) {
   subfolders.push_back("prefix2");
   set_ament_prefix_path(subfolders);
   std::map<std::string, std::string> resources = ament_index_cpp::get_resources("resource_type2");
-  EXPECT_EQ(resources.size(), 2);
+  EXPECT_EQ(resources.size(), 2UL);
   for (auto it : resources) {
     EXPECT_TRUE(it.first == "foo" || it.first == "bar");
   }
@@ -117,7 +117,7 @@ TEST(AmentIndexCpp, get_resources_underlay) {
   subfolders.push_back("prefix2");
   set_ament_prefix_path(subfolders);
   std::map<std::string, std::string> resources = ament_index_cpp::get_resources("resource_type3");
-  EXPECT_EQ(resources.size(), 1);
+  EXPECT_EQ(resources.size(), 1UL);
   for (auto it : resources) {
     EXPECT_EQ(it.first, "bar");
   }
