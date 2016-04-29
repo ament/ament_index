@@ -18,7 +18,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC include)
 ament_export_include_directories(include)
 ament_export_libraries(${PROJECT_NAME})
 
-if(AMENT_ENABLE_TESTING)
+if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # prevent cppcheck from being found, since it fails to process the file utest.cpp
   set(ament_cmake_cppcheck_FOUND TRUE)
