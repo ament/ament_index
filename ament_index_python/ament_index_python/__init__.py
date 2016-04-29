@@ -43,15 +43,21 @@ def get_resource(resource_type, resource_name):
     :type resource_name: str
     :returns: the content (bytes) of the resource
     :raises: :exc:`EnvironmentError`
+    :raises: :exc:`OSError`
     :raises: :exc:`LookupError`
     """
     assert resource_type, 'The resource type must not be empty'
-    assert resource_name, 'The resource type must not be empty'
+    assert resource_name, 'The resource name must not be empty'
     for path in get_search_paths():
         resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type, resource_name)
         if os.path.isfile(resource_path):
-            with open(resource_path, 'r') as h:
-                content = h.read()
+            try:
+                with open(resource_path, 'r') as h:
+                    content = h.read()
+            except OSError as e:
+                raise OSError(
+                    "Could not open the resource '%s' of type '%s':\n%s"
+                    % (resource_name, resource_type, e))
             return content
     raise LookupError(
         "Could not find the resource '%s' of type '%s'" % (resource_name, resource_type))
@@ -59,7 +65,7 @@ def get_resource(resource_type, resource_name):
 
 def get_resources(resource_type):
     """
-    Get the resource names of all resource of the specified type.
+    Get the resource names of all resources of the specified type.
 
     :param resource_type: the type of the resource
     :type resource_type: str
@@ -93,7 +99,7 @@ def has_resource(resource_type, resource_name):
     :raises: :exc:`EnvironmentError`
     """
     assert resource_type, 'The resource type must not be empty'
-    assert resource_name, 'The resource type must not be empty'
+    assert resource_name, 'The resource name must not be empty'
     for path in get_search_paths():
         resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type, resource_name)
         if os.path.isfile(resource_path):
