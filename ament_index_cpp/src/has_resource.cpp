@@ -12,10 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "ament_index_cpp/get_resource.hpp"
+#include "ament_index_cpp/has_resource.hpp"
 
 #include <fstream>
-#include <sstream>
 #include <stdexcept>
 #include <string>
 
@@ -25,17 +24,16 @@ namespace ament_index_cpp
 {
 
 bool
-get_resource(
+has_resource(
   const std::string & resource_type,
   const std::string & resource_name,
-  std::string & content,
   std::string * prefix_path)
 {
   if (resource_type.empty()) {
-    throw std::runtime_error("ament_index_cpp::get_resource() resource type must not be empty");
+    throw std::runtime_error("ament_index_cpp::has_resource() resource type must not be empty");
   }
   if (resource_name.empty()) {
-    throw std::runtime_error("ament_index_cpp::get_resource() resource name must not be empty");
+    throw std::runtime_error("ament_index_cpp::has_resource() resource name must not be empty");
   }
   auto paths = get_search_paths();
   for (auto path : paths) {
@@ -43,9 +41,6 @@ get_resource(
       resource_type + "/" + resource_name;
     std::ifstream s(resource_path);
     if (s.is_open()) {
-      std::stringstream buffer;
-      buffer << s.rdbuf();
-      content = buffer.str();
       if (prefix_path) {
         *prefix_path = path;
       }
