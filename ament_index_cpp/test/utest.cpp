@@ -159,3 +159,31 @@ TEST(AmentIndexCpp, get_resource_overlay) {
   EXPECT_TRUE(success);
   EXPECT_EQ(content, "foo1");
 }
+
+TEST(AmentIndexCpp, get_resource_overlay_base_path) {
+  // Ensure that a resource found in the overlay returns the correct path
+  std::list<std::string> subfolders;
+  subfolders.push_back("prefix1");
+  subfolders.push_back("prefix2");
+  set_ament_prefix_path(subfolders);
+  std::string content;
+  std::string base_path;
+  // This resource is only found in the overlay
+  bool success = ament_index_cpp::get_resource("resource_type2", "foo", content, &base_path);
+  EXPECT_TRUE(success);
+  EXPECT_EQ(base_path, generate_subfolder_path("prefix1"));
+}
+
+TEST(AmentIndexCpp, get_resource_underlay_base_path) {
+  // Ensure that a resource found in the underlay returns the correct path
+  std::list<std::string> subfolders;
+  subfolders.push_back("prefix1");
+  subfolders.push_back("prefix2");
+  set_ament_prefix_path(subfolders);
+  std::string content;
+  std::string base_path;
+  // This resource is only found in the underlay
+  bool success = ament_index_cpp::get_resource("resource_type2", "bar", content, &base_path);
+  EXPECT_TRUE(success);
+  EXPECT_EQ(base_path, generate_subfolder_path("prefix2"));
+}
