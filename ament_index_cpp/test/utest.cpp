@@ -96,21 +96,26 @@ TEST(AmentIndexCpp, get_unknown_resources) {
 }
 
 TEST(AmentIndexCpp, get_resources) {
+  // Ensure that if multiple resources of a particular type exist, all are found
   std::list<std::string> subfolders;
   subfolders.push_back("prefix1");
   set_ament_prefix_path(subfolders);
+  // There are two resources of this type
   std::map<std::string, std::string> resources = ament_index_cpp::get_resources("resource_type1");
   EXPECT_EQ(resources.size(), 2UL);
   for (auto it : resources) {
+    EXPECT_EQ(it.second, generate_subfolder_path("prefix1"));
     EXPECT_TRUE(it.first == "foo" || it.first == "bar");
   }
 }
 
 TEST(AmentIndexCpp, get_resources_overlay) {
+  // Ensure that a resource type found in two prefixes returns two paths
   std::list<std::string> subfolders;
   subfolders.push_back("prefix1");
   subfolders.push_back("prefix2");
   set_ament_prefix_path(subfolders);
+  // This resource type is found in prefix1 and prefix2
   std::map<std::string, std::string> resources = ament_index_cpp::get_resources("resource_type2");
   EXPECT_EQ(resources.size(), 2UL);
   for (auto it : resources) {
@@ -119,13 +124,16 @@ TEST(AmentIndexCpp, get_resources_overlay) {
 }
 
 TEST(AmentIndexCpp, get_resources_underlay) {
+  // Ensure that a resource only found in one prefix only returns one path
   std::list<std::string> subfolders;
   subfolders.push_back("prefix1");
   subfolders.push_back("prefix2");
   set_ament_prefix_path(subfolders);
+  // This resource type is only found in prefix2
   std::map<std::string, std::string> resources = ament_index_cpp::get_resources("resource_type3");
   EXPECT_EQ(resources.size(), 1UL);
   for (auto it : resources) {
+    EXPECT_EQ(it.second, generate_subfolder_path("prefix2"));
     EXPECT_EQ(it.first, "bar");
   }
 }
@@ -149,12 +157,27 @@ TEST(AmentIndexCpp, get_resource) {
   EXPECT_EQ(content, "foo");
 }
 
-TEST(AmentIndexCpp, get_resource_overlay) {
+TEST(AmentIndexCpp, get_resource_underlay) {
+  // Ensure that a resource can be found in the underlay if it doesn't exist in the overlay
   std::list<std::string> subfolders;
   subfolders.push_back("prefix1");
   subfolders.push_back("prefix2");
   set_ament_prefix_path(subfolders);
   std::string content;
+  // This resource is only found in the underlay
+  bool success = ament_index_cpp::get_resource("resource_type2", "bar", content);
+  EXPECT_TRUE(success);
+  EXPECT_EQ(content, "");
+}
+
+TEST(AmentIndexCpp, get_resource_overlay) {
+  // Ensure that the resource in the overlay is found before the one in the underlay
+  std::list<std::string> subfolders;
+  subfolders.push_back("prefix1");
+  subfolders.push_back("prefix2");
+  set_ament_prefix_path(subfolders);
+  std::string content;
+  // This resource is in both the overlay and the underlay
   bool success = ament_index_cpp::get_resource("resource_type5", "foo", content);
   EXPECT_TRUE(success);
   EXPECT_EQ(content, "foo1");
