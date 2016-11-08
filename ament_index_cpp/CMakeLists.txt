@@ -11,7 +11,8 @@ find_package(ament_cmake REQUIRED)
 add_library(${PROJECT_NAME} SHARED
   src/get_resource.cpp
   src/get_resources.cpp
-  src/get_search_paths.cpp)
+  src/get_search_paths.cpp
+  src/has_resource.cpp)
 target_compile_definitions(${PROJECT_NAME} PRIVATE "AMENT_INDEX_CPP_BUILDING_DLL")
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 

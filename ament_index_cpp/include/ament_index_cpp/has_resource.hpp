@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AMENT_INDEX_CPP__GET_RESOURCE_HPP_
-#define AMENT_INDEX_CPP__GET_RESOURCE_HPP_
+#ifndef AMENT_INDEX_CPP__HAS_RESOURCE_HPP_
+#define AMENT_INDEX_CPP__HAS_RESOURCE_HPP_
 
 #include <string>
 
@@ -24,12 +24,11 @@ namespace ament_index_cpp
 
 AMENT_INDEX_CPP_PUBLIC
 bool
-get_resource(
+has_resource(
   const std::string & resource_type,
   const std::string & resource_name,
-  std::string & content,
   std::string * prefix_path = nullptr);
 
 }  // namespace ament_index_cpp
 
-#endif  // AMENT_INDEX_CPP__GET_RESOURCE_HPP_
+#endif  // AMENT_INDEX_CPP__HAS_RESOURCE_HPP_

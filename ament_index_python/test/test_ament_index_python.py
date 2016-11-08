@@ -100,12 +100,14 @@ def test_resource():
     exists = has_resource('resource_type4', 'foo')
     assert exists, 'Resource should exist'
 
-    resource = get_resource('resource_type4', 'foo')
+    resource, prefix = get_resource('resource_type4', 'foo')
     assert resource == 'foo', 'Expected different content'
+    assert os.path.basename(prefix) == 'prefix1', 'Expected different prefix'
 
 
 def test_resource_overlay():
     set_ament_prefix_path(['prefix1', 'prefix2'])
 
-    resource = get_resource('resource_type5', 'foo')
+    resource, prefix = get_resource('resource_type5', 'foo')
     assert resource == 'foo1', 'Expected different content'
+    assert os.path.basename(prefix) == 'prefix1', 'Expected different prefix'

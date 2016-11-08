@@ -35,13 +35,13 @@ def get_search_paths():
 
 def get_resource(resource_type, resource_name):
     """
-    Get the content of a specific resource.
+    Get the content of a specific resource and its prefix path.
 
     :param resource_type: the type of the resource
     :type resource_type: str
     :param resource_names: the name of the resource
     :type resource_name: str
-    :returns: the content (bytes) of the resource
+    :returns: a tuple of the content (bytes) of the resource and its prefix path
     :raises: :exc:`EnvironmentError`
     :raises: :exc:`OSError`
     :raises: :exc:`LookupError`
@@ -58,7 +58,7 @@ def get_resource(resource_type, resource_name):
                 raise OSError(
                     "Could not open the resource '%s' of type '%s':\n%s"
                     % (resource_name, resource_type, e))
-            return content
+            return content, path
     raise LookupError(
         "Could not find the resource '%s' of type '%s'" % (resource_name, resource_type))
 
