@@ -25,16 +25,23 @@
 #include "ament_index_cpp/get_resources.hpp"
 #include "ament_index_cpp/get_search_paths.hpp"
 
-void set_ament_prefix_path(std::list<std::string> subfolders)
+std::string generate_subfolder_path(std::string subfolder)
 {
-  std::string ament_prefix_path;
-  // get base path of this file
+  // Get base path of this file
   std::string base_path = __FILE__;
   const std::string filename = "utest.cpp";
   base_path = base_path.substr(0, base_path.length() - filename.length() - 1);
-  // generate joined string of all absolute paths
+  // Generate the base path of the subfolder in this directory
+  return base_path + "/" + subfolder;
+}
+
+void set_ament_prefix_path(std::list<std::string> subfolders)
+{
+  std::string ament_prefix_path;
+  // Generate a joined string of all absolute paths
+  // Subfolders later in the list are searched later in the index
   for (auto subfolder : subfolders) {
-    std::string path = base_path + "/" + subfolder;
+    std::string path = generate_subfolder_path(subfolder);
     if (!ament_prefix_path.empty()) {
 #ifndef _WIN32
       ament_prefix_path += ":";
@@ -44,7 +51,7 @@ void set_ament_prefix_path(std::list<std::string> subfolders)
     }
     ament_prefix_path += path;
   }
-  // set environment variable
+  // Set environment variable
 #ifndef _WIN32
   int retcode = setenv("AMENT_PREFIX_PATH", ament_prefix_path.c_str(), 1);
 #else
