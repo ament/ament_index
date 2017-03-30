@@ -14,9 +14,12 @@ add_library(${PROJECT_NAME} SHARED
   src/get_search_paths.cpp
   src/has_resource.cpp)
 target_compile_definitions(${PROJECT_NAME} PRIVATE "AMENT_INDEX_CPP_BUILDING_DLL")
-target_include_directories(${PROJECT_NAME} PUBLIC include)
+target_include_directories(${PROJECT_NAME} PUBLIC
+  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+  "$<INSTALL_INTERFACE:include>")
 
 ament_export_include_directories(include)
+ament_export_interfaces(export_${PROJECT_NAME})
 ament_export_libraries(${PROJECT_NAME})
 
 if(BUILD_TESTING)
@@ -38,6 +41,7 @@ install(DIRECTORY include/
   DESTINATION include)
 
 install(TARGETS ${PROJECT_NAME}
+  EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin)
