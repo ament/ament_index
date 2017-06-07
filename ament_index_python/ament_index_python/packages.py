@@ -24,13 +24,13 @@ class PackageNotFoundError(KeyError):
 
 def get_package_prefix(package_name):
     """
-    Return the installation prefix directory where of the given package.
+    Return the installation prefix directory of the given package.
 
     For example, if you install the package 'foo' into
     '/home/user/ros2_ws/install' and you called this function with 'foo' as the
     argument, then it will return that directory.
 
-    :param package_name str: name of the package to locate
+    :param str package_name: name of the package to locate
     :returns: installation prefix of the package
     :raises: :exc:`PackageNotFoundError` if the package is not found
     """
@@ -51,7 +51,7 @@ def get_package_share_directory(package_name):
     argument, then it will return '/home/user/ros2_ws/install/share/foo' as
     the package's share directory.
 
-    :param package_name str: name of the package to locate
+    :param str package_name: name of the package to locate
     :returns: share directory of the package
     :raises: :exc:`PackageNotFoundError` if the package is not found
     """
