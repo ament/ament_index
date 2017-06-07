@@ -22,6 +22,16 @@ class PackageNotFoundError(KeyError):
     pass
 
 
+def get_packages_with_prefixes():
+    """
+    Return a dict of package names to the prefixes in which they are found.
+
+    :returns: dict of package names to their prefixes
+    :rtype: dict
+    """
+    return get_resources('packages')
+
+
 def get_package_prefix(package_name):
     """
     Return the installation prefix directory of the given package.
@@ -34,7 +44,7 @@ def get_package_prefix(package_name):
     :returns: installation prefix of the package
     :raises: :exc:`PackageNotFoundError` if the package is not found
     """
-    packages = get_resources('packages')
+    packages = get_packages_with_prefixes()
     if package_name not in packages:
         raise PackageNotFoundError(
             "package '{}' not found, searching: {}".format(package_name, get_search_paths())

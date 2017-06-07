@@ -16,6 +16,7 @@ import os
 
 from ament_index_python import get_package_prefix
 from ament_index_python import get_package_share_directory
+from ament_index_python import get_packages_with_prefixes
 from ament_index_python import get_resource
 from ament_index_python import get_resources
 from ament_index_python import get_search_paths
@@ -114,6 +115,22 @@ def test_resource_overlay():
     resource, prefix = get_resource('resource_type5', 'foo')
     assert resource == 'foo1', 'Expected different content'
     assert os.path.basename(prefix) == 'prefix1', 'Expected different prefix'
+
+
+def test_get_packages_with_prefixes():
+    set_ament_prefix_path(['prefix1', 'prefix2'])
+
+    packages = get_packages_with_prefixes()
+    assert 'foo' in packages, "Expected to find 'foo'"
+    assert os.path.basename(packages['foo']) == 'prefix1', "Expected to find 'foo' in 'prefix1'"
+    assert 'bar' in packages, "Expected to find 'bar'"
+    assert os.path.basename(packages['bar']) == 'prefix1', "Expected to find 'bar' in 'prefix1'"
+    assert 'baz' in packages, "Expected to find 'baz'"
+    assert os.path.basename(packages['baz']) == 'prefix2', "Expected to find 'baz' in 'prefix2'"
+
+    os.environ['AMENT_PREFIX_PATH'] = '/path/does/not/exist'
+
+    assert not get_packages_with_prefixes(), "Expected to find no packages"
 
 
 def test_get_package_prefix():
