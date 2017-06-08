@@ -14,8 +14,9 @@
 
 import os
 
-from .search_paths import get_search_paths
+from .resources import get_resource
 from .resources import get_resources
+from .search_paths import get_search_paths
 
 
 class PackageNotFoundError(KeyError):
@@ -44,12 +45,13 @@ def get_package_prefix(package_name):
     :returns: installation prefix of the package
     :raises: :exc:`PackageNotFoundError` if the package is not found
     """
-    packages = get_packages_with_prefixes()
-    if package_name not in packages:
+    try:
+        content, package_prefix = get_resource('packages', package_name)
+    except LookupError:
         raise PackageNotFoundError(
             "package '{}' not found, searching: {}".format(package_name, get_search_paths())
         )
-    return packages[package_name]
+    return package_prefix
 
 
 def get_package_share_directory(package_name):
