@@ -14,10 +14,14 @@
 
 import os
 
+from ament_index_python import get_package_prefix
+from ament_index_python import get_package_share_directory
+from ament_index_python import get_packages_with_prefixes
 from ament_index_python import get_resource
 from ament_index_python import get_resources
 from ament_index_python import get_search_paths
 from ament_index_python import has_resource
+from ament_index_python import PackageNotFoundError
 
 
 def set_ament_prefix_path(subfolders):
@@ -111,3 +115,70 @@ def test_resource_overlay():
     resource, prefix = get_resource('resource_type5', 'foo')
     assert resource == 'foo1', 'Expected different content'
     assert os.path.basename(prefix) == 'prefix1', 'Expected different prefix'
+
+
+def test_get_packages_with_prefixes():
+    set_ament_prefix_path(['prefix1', 'prefix2'])
+
+    packages = get_packages_with_prefixes()
+    assert 'foo' in packages, "Expected to find 'foo'"
+    assert os.path.basename(packages['foo']) == 'prefix1', "Expected to find 'foo' in 'prefix1'"
+    assert 'bar' in packages, "Expected to find 'bar'"
+    assert os.path.basename(packages['bar']) == 'prefix1', "Expected to find 'bar' in 'prefix1'"
+    assert 'baz' in packages, "Expected to find 'baz'"
+    assert os.path.basename(packages['baz']) == 'prefix2', "Expected to find 'baz' in 'prefix2'"
+
+    os.environ['AMENT_PREFIX_PATH'] = '/path/does/not/exist'
+
+    assert not get_packages_with_prefixes(), "Expected to find no packages"
+
+
+def test_get_package_prefix():
+    set_ament_prefix_path(['prefix1', 'prefix2'])
+
+    def get_package_prefix_basename(package_name):
+        return os.path.basename(get_package_prefix(package_name))
+
+    assert get_package_prefix_basename('foo') == 'prefix1', "Expected 'foo' in 'prefix1'"
+    # found in both prefix1 and prefix2, but prefix1 is ahead on the APP
+    assert get_package_prefix_basename('bar') == 'prefix1', "Expected 'bar' in 'prefix2'"
+    assert get_package_prefix_basename('baz') == 'prefix2', "Expected 'baz' in 'prefix2'"
+
+    try:
+        get_package_prefix('does_not_exist')
+    except PackageNotFoundError:
+        pass
+    except Exception as exc:
+        assert False, "Expected PackageNotFoundError, got: {}".format(type(exc))
+
+    try:
+        get_package_prefix('does_not_exist')
+    except KeyError:
+        pass
+    except Exception as exc:
+        assert False, "Expected KeyError or subclass, got: {}".format(type(exc))
+
+
+def test_get_package_share_directory():
+    set_ament_prefix_path(['prefix1', 'prefix2'])
+
+    def get_package_share_directory_test(package_name, expect_prefix):
+        full_share_dir = get_package_share_directory(package_name)
+        left_over, dirname = os.path.split(full_share_dir)
+        assert dirname == package_name, "Expected package name '{}'".format(package_name)
+        left_over, dirname = os.path.split(left_over)
+        assert dirname == 'share', "Expected 'share'"
+        left_over, dirname = os.path.split(left_over)
+        assert dirname == expect_prefix, "Expected '{}'".format(expect_prefix)
+
+    get_package_share_directory_test('foo', 'prefix1')
+    # found in both prefix1 and prefix2, but prefix1 is ahead on the APP
+    get_package_share_directory_test('bar', 'prefix1')
+    get_package_share_directory_test('baz', 'prefix2')
+
+    try:
+        get_package_share_directory('does_not_exist')
+    except PackageNotFoundError:
+        pass
+    except Exception as exc:
+        assert False, "Expected PackageNotFoundError, got: {}".format(type(exc))
