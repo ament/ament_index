@@ -20,9 +20,9 @@ setup(
         'Topic :: Software Development',
     ],
     description='Python API to access the ament resource index.',
-    long_description='''\
+    long_description="""\
 A Python API to find resources based on their type in the ament resource index
-and get the content of individual resources.''',
+and get the content of individual resources.""",
     license='Apache License, Version 2.0',
     test_suite='test',
 )

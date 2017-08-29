@@ -68,21 +68,21 @@ def test_resources():
     set_ament_prefix_path(['prefix1'])
     resources = get_resources('resource_type1')
     assert len(resources) == 2, 'Expected two resources'
-    assert set(resources.keys()) == set(['foo', 'bar']), 'Expected different resources'
+    assert set(resources.keys()) == {'foo', 'bar'}, 'Expected different resources'
 
 
 def test_resources_overlay():
     set_ament_prefix_path(['prefix1', 'prefix2'])
     resources = get_resources('resource_type2')
     assert len(resources) == 2, 'Expected two resource'
-    assert set(resources.keys()) == set(['foo', 'bar']), 'Expected different resources'
+    assert set(resources.keys()) == {'foo', 'bar'}, 'Expected different resources'
 
 
 def test_resources_underlay():
     set_ament_prefix_path(['prefix1', 'prefix2'])
     resources = get_resources('resource_type3')
     assert len(resources) == 1, 'Expected one resource'
-    assert set(resources.keys()) == set(['bar']), 'Expected different resources'
+    assert set(resources.keys()) == {'bar'}, 'Expected different resources'
 
 
 def test_unknown_resource():
@@ -130,7 +130,7 @@ def test_get_packages_with_prefixes():
 
     os.environ['AMENT_PREFIX_PATH'] = '/path/does/not/exist'
 
-    assert not get_packages_with_prefixes(), "Expected to find no packages"
+    assert not get_packages_with_prefixes(), 'Expected to find no packages'
 
 
 def test_get_package_prefix():
@@ -149,14 +149,14 @@ def test_get_package_prefix():
     except PackageNotFoundError:
         pass
     except Exception as exc:
-        assert False, "Expected PackageNotFoundError, got: {}".format(type(exc))
+        assert False, 'Expected PackageNotFoundError, got: {}'.format(type(exc))
 
     try:
         get_package_prefix('does_not_exist')
     except KeyError:
         pass
     except Exception as exc:
-        assert False, "Expected KeyError or subclass, got: {}".format(type(exc))
+        assert False, 'Expected KeyError or subclass, got: {}'.format(type(exc))
 
 
 def test_get_package_share_directory():
@@ -181,4 +181,4 @@ def test_get_package_share_directory():
     except PackageNotFoundError:
         pass
     except Exception as exc:
-        assert False, "Expected PackageNotFoundError, got: {}".format(type(exc))
+        assert False, 'Expected PackageNotFoundError, got: {}'.format(type(exc))
