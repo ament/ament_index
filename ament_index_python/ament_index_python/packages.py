@@ -49,8 +49,7 @@ def get_package_prefix(package_name):
         content, package_prefix = get_resource('packages', package_name)
     except LookupError:
         raise PackageNotFoundError(
-            "package '{}' not found, searching: {}".format(package_name, get_search_paths())
-        )
+            "package '{}' not found, searching: {}".format(package_name, get_search_paths()))
     return package_prefix
 
 
