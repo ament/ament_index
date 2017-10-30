@@ -32,6 +32,8 @@ public:
 
   AMENT_INDEX_CPP_PUBLIC
   virtual ~PackageNotFoundError();
+
+  const std::string package_name;
 };
 
 /// Return the installation prefix of the given package if found.

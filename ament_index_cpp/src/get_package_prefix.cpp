@@ -38,8 +38,9 @@ format_package_not_found_error_message(const std::string & package_name)
   return message + "]";
 }
 
-PackageNotFoundError::PackageNotFoundError(const std::string & package_name)
-: std::out_of_range(format_package_not_found_error_message(package_name))
+PackageNotFoundError::PackageNotFoundError(const std::string & _package_name)
+: std::out_of_range(format_package_not_found_error_message(_package_name)),
+  package_name(_package_name)
 {}
 
 PackageNotFoundError::~PackageNotFoundError() {}
