@@ -13,10 +13,14 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 add_library(${PROJECT_NAME} SHARED
+  src/get_package_prefix.cpp
+  src/get_package_share_directory.cpp
+  src/get_packages_with_prefixes.cpp
   src/get_resource.cpp
   src/get_resources.cpp
   src/get_search_paths.cpp
-  src/has_resource.cpp)
+  src/has_resource.cpp
+)
 target_compile_definitions(${PROJECT_NAME} PRIVATE "AMENT_INDEX_CPP_BUILDING_DLL")
 target_include_directories(${PROJECT_NAME} PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"

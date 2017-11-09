@@ -21,6 +21,9 @@
 #include <stdexcept>
 #include <string>
 
+#include "ament_index_cpp/get_package_prefix.hpp"
+#include "ament_index_cpp/get_package_share_directory.hpp"
+#include "ament_index_cpp/get_packages_with_prefixes.hpp"
 #include "ament_index_cpp/get_resource.hpp"
 #include "ament_index_cpp/get_resources.hpp"
 #include "ament_index_cpp/get_search_paths.hpp"
@@ -209,4 +212,57 @@ TEST(AmentIndexCpp, get_resource_underlay_base_path) {
   bool success = ament_index_cpp::get_resource("resource_type2", "bar", content, &base_path);
   EXPECT_TRUE(success);
   EXPECT_EQ(base_path, generate_subfolder_path("prefix2"));
+}
+
+TEST(AmentIndexCpp, get_package_prefix) {
+  // Ensure that a known to exist package is found and that a known to not exist package is not.
+  std::list<std::string> subfolders;
+  subfolders.push_back("prefix1");  // only contains foo and bar packages
+  subfolders.push_back("prefix2");  // only contains bar and baz packages
+  set_ament_prefix_path(subfolders);
+  // foo is found in prefix 1
+  EXPECT_EQ(generate_subfolder_path("prefix1"), ament_index_cpp::get_package_prefix("foo"));
+  // bar is in both, but prefix 1 takes precedence
+  EXPECT_EQ(generate_subfolder_path("prefix1"), ament_index_cpp::get_package_prefix("bar"));
+  // baz is found in prefix 2 only
+  EXPECT_EQ(generate_subfolder_path("prefix2"), ament_index_cpp::get_package_prefix("baz"));
+  // exception when package is not found
+  EXPECT_THROW(
+    ament_index_cpp::get_package_prefix("does_not_exist"),
+    ament_index_cpp::PackageNotFoundError);
+  // exception when the package name is empty
+  EXPECT_THROW(
+    ament_index_cpp::get_package_prefix(""),
+    std::runtime_error);
+}
+
+TEST(AmentIndexCpp, get_package_share_directory) {
+  // Ensure that a known to exist package is found and the share directory is correct.
+  std::list<std::string> subfolders;
+  subfolders.push_back("prefix1");  // only contains foo and bar packages
+  subfolders.push_back("prefix2");  // only contains bar and baz packages
+  set_ament_prefix_path(subfolders);
+  // bar is in both, but prefix 1 takes precedence
+  EXPECT_EQ(
+    generate_subfolder_path("prefix1") + "/share/bar",
+    ament_index_cpp::get_package_share_directory("bar"));
+}
+
+TEST(AmentIndexCpp, get_packages_with_prefixes) {
+  // Ensure the list of packages and prefixes matches resource layout.
+  std::list<std::string> subfolders;
+  subfolders.push_back("prefix1");  // only contains foo and bar packages
+  subfolders.push_back("prefix2");  // only contains bar and baz packages
+  set_ament_prefix_path(subfolders);
+
+  std::map<std::string, std::string> packages_with_prefixes =
+    ament_index_cpp::get_packages_with_prefixes();
+  // should be exactly three elements
+  EXPECT_EQ(3UL, packages_with_prefixes.size());
+  // foo is found in prefix 1
+  EXPECT_EQ(generate_subfolder_path("prefix1"), packages_with_prefixes["foo"]);
+  // bar is in both, but prefix 1 takes precedence
+  EXPECT_EQ(generate_subfolder_path("prefix1"), packages_with_prefixes["bar"]);
+  // baz is found in prefix 2 only
+  EXPECT_EQ(generate_subfolder_path("prefix2"), packages_with_prefixes["baz"]);
 }
