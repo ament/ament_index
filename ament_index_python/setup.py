@@ -24,5 +24,5 @@ setup(
 A Python API to find resources based on their type in the ament resource index
 and get the content of individual resources.""",
     license='Apache License, Version 2.0',
-    test_suite='test',
+    tests_require=['pytest'],
 )
