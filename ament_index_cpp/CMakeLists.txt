@@ -39,9 +39,10 @@ ament_export_libraries(${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
-  # prevent cppcheck from being found, since it fails to process the file utest.cpp
-  set(ament_cmake_cppcheck_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
+  ament_lint_auto_find_test_dependencies(
+    EXCLUDE
+    ament_cmake_cppcheck
+  )
 
   ament_add_gtest(${PROJECT_NAME}_utest test/utest.cpp)
   if(TARGET ${PROJECT_NAME}_utest)
