@@ -1,4 +1,4 @@
-# Copyright 2015 Open Source Robotics Foundation, Inc.
+# Copyright 2015-2019 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -71,6 +71,26 @@ def get_resources(resource_type):
                 if resource not in resources:
                     resources[resource] = path
     return resources
+
+
+def get_resource_types():
+    """
+    Get the resource types.
+
+    :returns: set of resource types within the search paths
+    :raises: :exc:`EnvironmentError`
+    """
+    resource_types = set()
+    for path in get_search_paths():
+        basepath = os.path.join(path, RESOURCE_INDEX_SUBFOLDER)
+        if os.path.isdir(basepath):
+            for resource_type in os.listdir(basepath):
+                # Ignore non-subdirectories, and anything starting with a dot
+                if not os.path.isdir(os.path.join(basepath, resource_type)) \
+                        or resource_type.startswith('.'):
+                    continue
+                resource_types.add(resource_type)
+    return resource_types
 
 
 def has_resource(resource_type, resource_name):
