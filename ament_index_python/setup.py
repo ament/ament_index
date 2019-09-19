@@ -9,6 +9,10 @@ setup(
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/environment', [
+            'completion/ament_index-argcomplete.bash',
+            'completion/ament_index-argcomplete.zsh'
+        ]),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -31,4 +35,9 @@ A Python API to find resources based on their type in the ament resource index
 and get the content of individual resources.""",
     license='Apache License, Version 2.0',
     tests_require=['pytest'],
+    entry_points={
+        'console_scripts': [
+            'ament_index = ament_index_python.cli:main',
+        ],
+    },
 )
