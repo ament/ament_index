@@ -13,6 +13,8 @@ setup(
             'completion/ament_index-argcomplete.bash',
             'completion/ament_index-argcomplete.zsh'
         ]),
+        ('share/ament_index/resource_index/packages',
+            ['resource/' + package_name]),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
