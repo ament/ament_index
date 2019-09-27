@@ -68,7 +68,9 @@ def resource_type_completer(prefix, **kwargs):
 
 
 def resource_name_completer(prefix, parsed_args, **kwargs):
-    resource_type = getattr(parsed_args, 'resource_type')
+    resource_type = getattr(parsed_args, 'resource_type', None)
+    if not resource_type:
+        return []
     return get_resources(resource_type).keys()
 
 
