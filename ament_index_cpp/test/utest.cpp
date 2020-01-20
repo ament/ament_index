@@ -27,6 +27,7 @@
 #include "ament_index_cpp/get_resource.hpp"
 #include "ament_index_cpp/get_resources.hpp"
 #include "ament_index_cpp/get_search_paths.hpp"
+#include "ament_index_cpp/has_resource.hpp"
 
 std::string generate_subfolder_path(std::string subfolder)
 {
@@ -89,6 +90,10 @@ TEST(AmentIndexCpp, not_existing_search_paths) {
   EXPECT_EQ(search_paths.size(), 1UL);
 }
 
+TEST(AmentIndexCpp, get_empty_resources) {
+  EXPECT_THROW(ament_index_cpp::get_resources(""), std::runtime_error);
+}
+
 TEST(AmentIndexCpp, get_unknown_resources) {
   std::list<std::string> subfolders;
   subfolders.push_back("prefix1");
@@ -139,6 +144,11 @@ TEST(AmentIndexCpp, get_resources_underlay) {
     EXPECT_EQ(it.second, generate_subfolder_path("prefix2"));
     EXPECT_EQ(it.first, "bar");
   }
+}
+
+TEST(AmentIndexCpp, get_empty_resource) {
+  std::string content;
+  EXPECT_THROW(ament_index_cpp::get_resource("", "", content), std::runtime_error);
 }
 
 TEST(AmentIndexCpp, get_unknown_resource) {
@@ -265,4 +275,51 @@ TEST(AmentIndexCpp, get_packages_with_prefixes) {
   EXPECT_EQ(generate_subfolder_path("prefix1"), packages_with_prefixes["bar"]);
   // baz is found in prefix 2 only
   EXPECT_EQ(generate_subfolder_path("prefix2"), packages_with_prefixes["baz"]);
+}
+
+TEST(AmentIndexCpp, has_empty_name){
+  EXPECT_THROW(
+      ament_index_cpp::has_resource("type", ""),
+      std::runtime_error);
+}
+
+TEST(AmentIndexCpp, has_empty_type){
+  EXPECT_THROW(
+      ament_index_cpp::has_resource("", ""),
+      std::runtime_error);
+}
+
+TEST(AmentIndexCpp, has_unknown_resource) {
+  bool success = ament_index_cpp::has_resource("resource_type4", "bar21");
+  EXPECT_FALSE(success);
+}
+
+TEST(AmentIndexCpp, has_resource){
+  std::string res_type = "resource_type1";
+  std::string res_name = "foo";
+  std::string result_path;
+
+  // Basic case return prefix path
+  bool success = ament_index_cpp::has_resource(res_type, res_name, &result_path);
+  EXPECT_TRUE(success);
+  EXPECT_EQ(result_path, generate_subfolder_path("prefix1"));
+
+  // Basic case without return prefix path
+  res_type = "resource_type3";
+  res_name = "bar";
+  success = ament_index_cpp::has_resource(res_type, res_name);
+  EXPECT_TRUE(success);
+
+  // Return resource only available in prefix2
+  res_type = "packages";
+  res_name = "baz";
+  success = ament_index_cpp::has_resource(res_type, res_name, &result_path);
+  EXPECT_TRUE(success);
+  EXPECT_EQ(result_path, generate_subfolder_path("prefix2"));
+
+  // Fail test looking nested directory
+  res_type = "resource_type1";
+  res_name = "resource";
+  success = ament_index_cpp::has_resource(res_type, res_name, &result_path);
+  EXPECT_FALSE(success);
 }
