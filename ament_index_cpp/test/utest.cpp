@@ -285,7 +285,7 @@ TEST(AmentIndexCpp, has_empty_name){
 
 TEST(AmentIndexCpp, has_empty_type){
   EXPECT_THROW(
-      ament_index_cpp::has_resource("", ""),
+      ament_index_cpp::has_resource("", "name"),
       std::runtime_error);
 }
 
@@ -295,31 +295,15 @@ TEST(AmentIndexCpp, has_unknown_resource) {
 }
 
 TEST(AmentIndexCpp, has_resource){
-  std::string res_type = "resource_type1";
-  std::string res_name = "foo";
   std::string result_path;
 
-  // Basic case return prefix path
-  bool success = ament_index_cpp::has_resource(res_type, res_name, &result_path);
-  EXPECT_TRUE(success);
+  EXPECT_TRUE(ament_index_cpp::has_resource("resource_type1", "foo", &result_path));
   EXPECT_EQ(result_path, generate_subfolder_path("prefix1"));
 
-  // Basic case without return prefix path
-  res_type = "resource_type3";
-  res_name = "bar";
-  success = ament_index_cpp::has_resource(res_type, res_name);
-  EXPECT_TRUE(success);
+  EXPECT_TRUE(ament_index_cpp::has_resource("resource_type3", "bar"));
 
-  // Return resource only available in prefix2
-  res_type = "packages";
-  res_name = "baz";
-  success = ament_index_cpp::has_resource(res_type, res_name, &result_path);
-  EXPECT_TRUE(success);
+  EXPECT_TRUE(ament_index_cpp::has_resource("packages", "baz", &result_path));
   EXPECT_EQ(result_path, generate_subfolder_path("prefix2"));
 
-  // Fail test looking nested directory
-  res_type = "resource_type1";
-  res_name = "resource";
-  success = ament_index_cpp::has_resource(res_type, res_name, &result_path);
-  EXPECT_FALSE(success);
+  EXPECT_FALSE(ament_index_cpp::has_resource("resource_type1",  "resource", &result_path));
 }
