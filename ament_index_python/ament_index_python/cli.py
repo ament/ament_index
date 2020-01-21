@@ -71,7 +71,7 @@ def resource_name_completer(prefix, parsed_args, **kwargs):
     resource_type = getattr(parsed_args, 'resource_type', None)
     if not resource_type:
         return []
-    return (t for t in list(get_resources(resource_type).keys()) if t.startswith(prefix))
+    return (t for t in get_resources(resource_type).keys() if t.startswith(prefix))
 
 
 if __name__ == '__main__':
