@@ -195,7 +195,6 @@ def test_get_resource_types():
     set_ament_prefix_path([])
     with pytest.raises(EnvironmentError) as excinfo:
         get_resource_types()
-    assert excinfo.type is EnvironmentError, f'Expected EnvironmentError, got: {excinfo.type}'
 
     set_ament_prefix_path(['prefix1', 'prefix2'])
     resources = get_resource_types()
