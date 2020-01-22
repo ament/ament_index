@@ -13,15 +13,22 @@
 # limitations under the License.
 
 import os
+from pathlib import Path
 
 from ament_index_python import get_package_prefix
 from ament_index_python import get_package_share_directory
 from ament_index_python import get_packages_with_prefixes
 from ament_index_python import get_resource
+from ament_index_python import get_resource_types
 from ament_index_python import get_resources
 from ament_index_python import get_search_paths
 from ament_index_python import has_resource
 from ament_index_python import PackageNotFoundError
+from ament_index_python.cli import main
+from ament_index_python.cli import resource_name_completer
+from ament_index_python.cli import resource_type_completer
+
+import pytest
 
 
 def set_ament_prefix_path(subfolders):
@@ -182,3 +189,101 @@ def test_get_package_share_directory():
         pass
     except Exception as exc:
         assert False, 'Expected PackageNotFoundError, got: {}'.format(type(exc))
+
+
+def test_get_resource_types():
+    set_ament_prefix_path([])
+    with pytest.raises(EnvironmentError) as excinfo:
+        get_resource_types()
+    assert excinfo.type is EnvironmentError, f'Expected EnvironmentError, got: {excinfo.type}'
+
+    set_ament_prefix_path(['prefix1', 'prefix2'])
+    resources = get_resource_types()
+    assert resources == {
+        'resource_type1',
+        'resource_type2',
+        'resource_type3',
+        'resource_type4',
+        'resource_type5',
+        'packages'
+    }, ('Expected resources to be: resource_type1, resource_type2, resource_type3, '
+        'resource_type4, resource_type5 and packages')
+
+    set_ament_prefix_path(['prefix1'])
+    resources = get_resource_types()
+    assert resources == {
+        'resource_type1',
+        'resource_type2',
+        'resource_type4',
+        'resource_type5',
+        'packages'
+    }, ('Expected resources to be: resource_type1, resource_type2, resource_type4, '
+        'resource_type5 and packages')
+
+
+def test_main_tool(capsys):
+    set_ament_prefix_path(['prefix1', 'prefix2'])
+    base_path = Path(__file__).parent
+
+    main()
+    captured = capsys.readouterr()
+    expected_result = (
+        'packages\n'
+        'resource_type1\n'
+        'resource_type2\n'
+        'resource_type3\n'
+        'resource_type4\n'
+        'resource_type5\n'
+    )
+    assert captured.out == expected_result
+
+    main(argv=['packages'])
+    captured = capsys.readouterr()
+    expected_result = '\n'.join([
+        f"bar\t{base_path / 'prefix1'}",
+        f"baz\t{base_path / 'prefix2'}",
+        f"foo\t{base_path / 'prefix1'}",
+        ''
+    ])
+    assert captured.out == expected_result
+
+    main(argv=['packages', 'bar'])
+    captured = capsys.readouterr()
+    expected_result = str(base_path / 'prefix1\n')
+    assert captured.out == expected_result
+
+    main(argv=['resource_type4', 'foo'])
+    captured = capsys.readouterr()
+    expected_result = f"{base_path / 'prefix1'}\n<<<\nfoo\n>>>\n"
+    assert captured.out == expected_result
+
+    result = main(argv=['packages', 'not_available'])
+    captured = capsys.readouterr()
+    expected_result = "Could not find the resource 'not_available' of type 'packages'"
+    assert result == expected_result
+
+
+def test_autocomplete():
+    set_ament_prefix_path(['prefix1', 'prefix2'])
+
+    result = sorted(resource_type_completer('res'))
+    expected_result = [
+        'resource_type1',
+        'resource_type2',
+        'resource_type3',
+        'resource_type4',
+        'resource_type5'
+    ]
+    assert result == expected_result
+
+    class arguments():
+        resource_type = 'packages'
+
+    result = sorted(resource_name_completer('ba', arguments))
+    expected_result = ['bar', 'baz']
+    assert result == expected_result
+
+    setattr(arguments, 'resource_type', None)
+    result = sorted(resource_name_completer('ba', arguments))
+    expected_result = []
+    assert result == expected_result

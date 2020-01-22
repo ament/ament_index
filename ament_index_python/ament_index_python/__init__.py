@@ -18,6 +18,7 @@ from .packages import get_package_share_directory
 from .packages import get_packages_with_prefixes
 from .packages import PackageNotFoundError
 from .resources import get_resource
+from .resources import get_resource_types
 from .resources import get_resources
 from .resources import has_resource
 from .search_paths import get_search_paths
@@ -29,6 +30,7 @@ __all__ = [
     'get_resource',
     'get_resources',
     'get_search_paths',
+    'get_resource_types',
     'has_resource',
     'PackageNotFoundError',
     'RESOURCE_INDEX_SUBFOLDER',
