@@ -193,7 +193,7 @@ def test_get_package_share_directory():
 
 def test_get_resource_types():
     set_ament_prefix_path([])
-    with pytest.raises(EnvironmentError) as excinfo:
+    with pytest.raises(EnvironmentError):
         get_resource_types()
 
     set_ament_prefix_path(['prefix1', 'prefix2'])
