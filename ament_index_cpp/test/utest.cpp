@@ -277,16 +277,16 @@ TEST(AmentIndexCpp, get_packages_with_prefixes) {
   EXPECT_EQ(generate_subfolder_path("prefix2"), packages_with_prefixes["baz"]);
 }
 
-TEST(AmentIndexCpp, has_empty_name){
+TEST(AmentIndexCpp, has_empty_name) {
   EXPECT_THROW(
-      ament_index_cpp::has_resource("type", ""),
-      std::runtime_error);
+    ament_index_cpp::has_resource("type", ""),
+    std::runtime_error);
 }
 
-TEST(AmentIndexCpp, has_empty_type){
+TEST(AmentIndexCpp, has_empty_type) {
   EXPECT_THROW(
-      ament_index_cpp::has_resource("", "name"),
-      std::runtime_error);
+    ament_index_cpp::has_resource("", "name"),
+    std::runtime_error);
 }
 
 TEST(AmentIndexCpp, has_unknown_resource) {
@@ -294,7 +294,7 @@ TEST(AmentIndexCpp, has_unknown_resource) {
   EXPECT_FALSE(success);
 }
 
-TEST(AmentIndexCpp, has_resource){
+TEST(AmentIndexCpp, has_resource) {
   std::string result_path;
 
   EXPECT_TRUE(ament_index_cpp::has_resource("resource_type1", "foo", &result_path));
@@ -305,5 +305,5 @@ TEST(AmentIndexCpp, has_resource){
   EXPECT_TRUE(ament_index_cpp::has_resource("packages", "baz", &result_path));
   EXPECT_EQ(result_path, generate_subfolder_path("prefix2"));
 
-  EXPECT_FALSE(ament_index_cpp::has_resource("resource_type1",  "resource", &result_path));
+  EXPECT_FALSE(ament_index_cpp::has_resource("resource_type1", "resource", &result_path));
 }
