@@ -136,7 +136,6 @@ def test_get_package_prefix():
         return PurePath(get_package_prefix(package_name)).name
 
     assert get_package_prefix_basename('foo') == 'prefix1', "Expected 'foo' in 'prefix1'"
-    # found in both prefix1 and prefix2, but prefix1 is ahead on the APP
     assert get_package_prefix_basename('bar') == 'prefix1', "Expected 'bar' in 'prefix2'"
     assert get_package_prefix_basename('baz') == 'prefix2', "Expected 'baz' in 'prefix2'"
 
@@ -157,7 +156,6 @@ def test_get_package_share_directory():
         assert dirname == expect_prefix, f"Expected '{expect_prefix}'"
 
     get_package_share_directory_test('foo', 'prefix1')
-    # found in both prefix1 and prefix2, but prefix1 is ahead on the APP
     get_package_share_directory_test('bar', 'prefix1')
     get_package_share_directory_test('baz', 'prefix2')
 
