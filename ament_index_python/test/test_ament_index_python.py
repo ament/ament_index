@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import os
-from pathlib import Path
+from pathlib import Path, PurePath
 
 from ament_index_python import get_package_prefix
 from ament_index_python import get_package_share_directory
@@ -33,11 +33,11 @@ import pytest
 
 def set_ament_prefix_path(subfolders):
     paths = []
-    base_path = os.path.dirname(__file__)
+    base_path = Path(__file__).parent
     for subfolder in subfolders:
-        path = os.path.join(base_path, subfolder)
-        if os.path.isdir(path):
-            paths.append(path)
+        path = base_path / subfolder
+        if path.is_dir():
+            paths.append(str(path))
     ament_prefix_path = os.pathsep.join(paths)
     os.environ['AMENT_PREFIX_PATH'] = ament_prefix_path
 
@@ -103,7 +103,7 @@ def test_resource():
 
     resource, prefix = get_resource('resource_type4', 'foo')
     assert resource == 'foo', 'Expected different content'
-    assert os.path.basename(prefix) == 'prefix1', 'Expected different prefix'
+    assert PurePath(prefix).name == 'prefix1', 'Expected different prefix'
 
 
 def test_resource_overlay():
@@ -111,7 +111,7 @@ def test_resource_overlay():
 
     resource, prefix = get_resource('resource_type5', 'foo')
     assert resource == 'foo1', 'Expected different content'
-    assert os.path.basename(prefix) == 'prefix1', 'Expected different prefix'
+    assert PurePath(prefix).name == 'prefix1', 'Expected different prefix'
 
 
 def test_get_packages_with_prefixes():
@@ -119,12 +119,11 @@ def test_get_packages_with_prefixes():
 
     packages = get_packages_with_prefixes()
     assert 'foo' in packages, "Expected to find 'foo'"
-    assert os.path.basename(packages['foo']) == 'prefix1', "Expected to find 'foo' in 'prefix1'"
+    assert PurePath(packages['foo']).name == 'prefix1', "Expected to find 'foo' in 'prefix1'"
     assert 'bar' in packages, "Expected to find 'bar'"
-    assert os.path.basename(packages['bar']) == 'prefix1', "Expected to find 'bar' in 'prefix1'"
+    assert PurePath(packages['bar']).name == 'prefix1', "Expected to find 'bar' in 'prefix1'"
     assert 'baz' in packages, "Expected to find 'baz'"
-    assert os.path.basename(packages['baz']) == 'prefix2', "Expected to find 'baz' in 'prefix2'"
-
+    assert PurePath(packages['baz']).name == 'prefix2', "Expected to find 'baz' in 'prefix2'"
     os.environ['AMENT_PREFIX_PATH'] = '/path/does/not/exist'
 
     assert not get_packages_with_prefixes(), 'Expected to find no packages'
@@ -134,7 +133,7 @@ def test_get_package_prefix():
     set_ament_prefix_path(['prefix1', 'prefix2'])
 
     def get_package_prefix_basename(package_name):
-        return os.path.basename(get_package_prefix(package_name))
+        return PurePath(get_package_prefix(package_name)).name
 
     assert get_package_prefix_basename('foo') == 'prefix1', "Expected 'foo' in 'prefix1'"
     # found in both prefix1 and prefix2, but prefix1 is ahead on the APP
