@@ -44,13 +44,8 @@ def set_ament_prefix_path(subfolders):
 
 def test_empty_search_paths():
     set_ament_prefix_path([])
-    try:
+    with pytest.raises(EnvironmentError):
         get_search_paths()
-        assert False, 'get_search_paths() failed to raise exception'
-    except EnvironmentError:
-        pass
-    except Exception as e:
-        assert False, 'get_search_paths() raised wrong exception: ' + type(e)
 
 
 def test_search_paths():
@@ -97,13 +92,8 @@ def test_unknown_resource():
     exists = has_resource('resource_type4', 'bar')
     assert not exists, 'Resource should not exist'
 
-    try:
+    with pytest.raises(LookupError):
         get_resource('resource_type4', 'bar')
-        assert False, 'get_resource() failed to raise exception'
-    except LookupError:
-        pass
-    except Exception as e:
-        assert False, 'get_resource() raised wrong exception: ' + type(e)
 
 
 def test_resource():
@@ -151,19 +141,8 @@ def test_get_package_prefix():
     assert get_package_prefix_basename('bar') == 'prefix1', "Expected 'bar' in 'prefix2'"
     assert get_package_prefix_basename('baz') == 'prefix2', "Expected 'baz' in 'prefix2'"
 
-    try:
+    with pytest.raises(PackageNotFoundError):
         get_package_prefix('does_not_exist')
-    except PackageNotFoundError:
-        pass
-    except Exception as exc:
-        assert False, 'Expected PackageNotFoundError, got: {}'.format(type(exc))
-
-    try:
-        get_package_prefix('does_not_exist')
-    except KeyError:
-        pass
-    except Exception as exc:
-        assert False, 'Expected KeyError or subclass, got: {}'.format(type(exc))
 
 
 def test_get_package_share_directory():
@@ -183,12 +162,8 @@ def test_get_package_share_directory():
     get_package_share_directory_test('bar', 'prefix1')
     get_package_share_directory_test('baz', 'prefix2')
 
-    try:
+    with pytest.raises(PackageNotFoundError):
         get_package_share_directory('does_not_exist')
-    except PackageNotFoundError:
-        pass
-    except Exception as exc:
-        assert False, 'Expected PackageNotFoundError, got: {}'.format(type(exc))
 
 
 def test_get_resource_types():
