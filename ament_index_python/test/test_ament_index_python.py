@@ -150,11 +150,11 @@ def test_get_package_share_directory():
     def get_package_share_directory_test(package_name, expect_prefix):
         full_share_dir = get_package_share_directory(package_name)
         left_over, dirname = os.path.split(full_share_dir)
-        assert dirname == package_name, "Expected package name '{}'".format(package_name)
+        assert dirname == package_name, f"Expected package name '{package_name}'"
         left_over, dirname = os.path.split(left_over)
         assert dirname == 'share', "Expected 'share'"
         left_over, dirname = os.path.split(left_over)
-        assert dirname == expect_prefix, "Expected '{}'".format(expect_prefix)
+        assert dirname == expect_prefix, f"Expected '{expect_prefix}'"
 
     get_package_share_directory_test('foo', 'prefix1')
     # found in both prefix1 and prefix2, but prefix1 is ahead on the APP
