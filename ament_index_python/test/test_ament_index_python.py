@@ -142,6 +142,7 @@ def test_get_package_prefix():
 
     with pytest.raises(PackageNotFoundError):
         get_package_prefix('does_not_exist')
+    assert issubclass(PackageNotFoundError, KeyError)
 
 
 def test_get_package_share_directory():
