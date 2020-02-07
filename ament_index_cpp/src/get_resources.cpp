@@ -72,7 +72,7 @@ get_resources(const std::string & resource_type)
     closedir(dir);
 
 #else
-    std::string pattern = rcpputils::fs::path{path} / "*";
+    const auto pattern = (path / "*").string();
     WIN32_FIND_DATA find_data;
     HANDLE find_handle = FindFirstFile(pattern.c_str(), &find_data);
     if (find_handle == INVALID_HANDLE_VALUE) {
