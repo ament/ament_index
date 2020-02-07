@@ -24,8 +24,9 @@
 #include <stdexcept>
 #include <string>
 
-#include "ament_index_cpp/get_search_paths.hpp"
 #include "rcpputils/filesystem_helper.hpp"
+
+#include "ament_index_cpp/get_search_paths.hpp"
 
 namespace ament_index_cpp
 {

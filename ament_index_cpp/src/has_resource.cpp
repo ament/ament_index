@@ -17,7 +17,8 @@
 #include <fstream>
 #include <stdexcept>
 #include <string>
-#include <rcpputils/filesystem_helper.hpp>
+
+#include "rcpputils/filesystem_helper.hpp"
 
 #include "ament_index_cpp/get_search_paths.hpp"
 

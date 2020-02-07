@@ -16,8 +16,9 @@
 
 #include <string>
 
-#include "ament_index_cpp/get_package_prefix.hpp"
 #include "rcpputils/filesystem_helper.hpp"
+
+#include "ament_index_cpp/get_package_prefix.hpp"
 
 namespace ament_index_cpp
 {
