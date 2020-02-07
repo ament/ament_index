@@ -17,6 +17,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <string>
+#include <rcpputils/filesystem_helper.hpp>
 
 #include "ament_index_cpp/get_search_paths.hpp"
 
@@ -37,9 +38,9 @@ has_resource(
   }
   auto paths = get_search_paths();
   for (auto path : paths) {
-    auto resource_path = path + "/share/ament_index/resource_index/" +
-      resource_type + "/" + resource_name;
-    std::ifstream s(resource_path);
+    auto resource_path = rcpputils::fs::path{path} / "share" / "ament_index" / "resource_index" /
+      resource_type / resource_name;
+    std::ifstream s(resource_path.string());
     if (s.is_open()) {
       if (prefix_path) {
         *prefix_path = path;
