@@ -16,6 +16,8 @@
 
 #include <string>
 
+#include "rcpputils/filesystem_helper.hpp"
+
 #include "ament_index_cpp/get_package_prefix.hpp"
 
 namespace ament_index_cpp
@@ -24,7 +26,9 @@ namespace ament_index_cpp
 std::string
 get_package_share_directory(const std::string & package_name)
 {
-  return get_package_prefix(package_name) + "/share/" + package_name;
+  auto share_directory =
+    rcpputils::fs::path{get_package_prefix(package_name)} / "share" / package_name;
+  return share_directory.string();
 }
 
 }  // namespace ament_index_cpp

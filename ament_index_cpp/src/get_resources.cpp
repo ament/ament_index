@@ -24,6 +24,8 @@
 #include <stdexcept>
 #include <string>
 
+#include "rcpputils/filesystem_helper.hpp"
+
 #include "ament_index_cpp/get_search_paths.hpp"
 
 namespace ament_index_cpp
@@ -38,17 +40,18 @@ get_resources(const std::string & resource_type)
   std::map<std::string, std::string> resources;
   auto paths = get_search_paths();
   for (auto base_path : paths) {
-    auto path = base_path + "/share/ament_index/resource_index/" + resource_type;
+    auto path =
+      rcpputils::fs::path{base_path} / "share" / "ament_index" / "resource_index" / resource_type;
 
 #ifndef _WIN32
-    auto dir = opendir(path.c_str());
+    auto dir = opendir(path.string().c_str());
     if (!dir) {
       continue;
     }
     dirent * entry;
     while ((entry = readdir(dir)) != NULL) {
       // ignore directories
-      auto subdir = opendir((path + "/" + entry->d_name).c_str());
+      auto subdir = opendir((path / entry->d_name).string().c_str());
       if (subdir) {
         closedir(subdir);
         continue;
@@ -69,7 +72,7 @@ get_resources(const std::string & resource_type)
     closedir(dir);
 
 #else
-    std::string pattern = path + "/*";
+    const auto pattern = (path / "*").string();
     WIN32_FIND_DATA find_data;
     HANDLE find_handle = FindFirstFile(pattern.c_str(), &find_data);
     if (find_handle == INVALID_HANDLE_VALUE) {
