@@ -40,7 +40,7 @@ get_resource(
     throw std::runtime_error("ament_index_cpp::get_resource() resource name must not be empty");
   }
   auto paths = get_search_paths();
-  for (auto path : paths) {
+  for (const auto & path : paths) {
     auto resource_path = rcpputils::fs::path{path} / "share" / "ament_index" / "resource_index" /
     resource_type / resource_name;
     std::ifstream s(resource_path.string());

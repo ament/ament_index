@@ -60,7 +60,7 @@ get_search_paths()
       continue;
     }
     // skip non existing directories
-    struct stat s;
+    struct stat s{};
     if (stat(tok.c_str(), &s)) {
       continue;
     }
