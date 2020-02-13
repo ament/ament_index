@@ -32,7 +32,7 @@ format_package_not_found_error_message(const std::string & package_name)
   for (const auto & path : search_paths) {
     message += path + ", ";
   }
-  if (search_paths.size() > 0) {
+  if (!search_paths.empty()) {
     message = message.substr(0, message.size() - 2);
   }
   return message + "]";
@@ -43,7 +43,7 @@ PackageNotFoundError::PackageNotFoundError(const std::string & _package_name)
   package_name(_package_name)
 {}
 
-PackageNotFoundError::~PackageNotFoundError() {}
+PackageNotFoundError::~PackageNotFoundError() = default;
 
 std::string
 get_package_prefix(const std::string & package_name)
