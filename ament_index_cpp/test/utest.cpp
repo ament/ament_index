@@ -21,8 +21,6 @@
 #include <stdexcept>
 #include <string>
 
-#include "rcpputils/filesystem_helper.hpp"
-
 #include "ament_index_cpp/get_package_prefix.hpp"
 #include "ament_index_cpp/get_package_share_directory.hpp"
 #include "ament_index_cpp/get_packages_with_prefixes.hpp"
@@ -255,10 +253,8 @@ TEST(AmentIndexCpp, get_package_share_directory) {
   subfolders.push_back("prefix2");  // only contains bar and baz packages
   set_ament_prefix_path(subfolders);
   // bar is in both, but prefix 1 takes precedence
-  const auto subfolder_path =
-    rcpputils::fs::path{generate_subfolder_path("prefix1")} / "share" / "bar";
   EXPECT_EQ(
-    subfolder_path.string(),
+    generate_subfolder_path("prefix1") + "/share/bar",
     ament_index_cpp::get_package_share_directory("bar"));
 }
 

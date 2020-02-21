@@ -19,8 +19,6 @@
 #include <stdexcept>
 #include <string>
 
-#include "rcpputils/filesystem_helper.hpp"
-
 #include "ament_index_cpp/get_search_paths.hpp"
 
 namespace ament_index_cpp
@@ -40,10 +38,10 @@ get_resource(
     throw std::runtime_error("ament_index_cpp::get_resource() resource name must not be empty");
   }
   auto paths = get_search_paths();
-  for (const auto & path : paths) {
-    auto resource_path = rcpputils::fs::path{path} / "share" / "ament_index" / "resource_index" /
-    resource_type / resource_name;
-    std::ifstream s(resource_path.string());
+  for (auto path : paths) {
+    auto resource_path = path + "/share/ament_index/resource_index/" +
+      resource_type + "/" + resource_name;
+    std::ifstream s(resource_path);
     if (s.is_open()) {
       std::stringstream buffer;
       buffer << s.rdbuf();

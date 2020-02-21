@@ -18,7 +18,6 @@ unless the library was explicitly added as a static library."
   ON)
 
 find_package(ament_cmake REQUIRED)
-find_package(rcpputils REQUIRED)
 
 add_library(${PROJECT_NAME}
   src/get_package_prefix.cpp
@@ -33,7 +32,6 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE "AMENT_INDEX_CPP_BUILDING_DLL
 target_include_directories(${PROJECT_NAME} PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
   "$<INSTALL_INTERFACE:include>")
-ament_target_dependencies(${PROJECT_NAME} rcpputils)
 
 ament_export_include_directories(include)
 ament_export_interfaces(export_${PROJECT_NAME} HAS_LIBRARY_TARGET)
