@@ -16,7 +16,7 @@
 
 #ifndef _WIN32
 #include <dirent.h>
-#include <cerrno>
+#include <errno.h>
 #else
 #include <windows.h>
 #endif
@@ -39,7 +39,7 @@ get_resources(const std::string & resource_type)
   }
   std::map<std::string, std::string> resources;
   auto paths = get_search_paths();
-  for (const auto & base_path : paths) {
+  for (auto base_path : paths) {
     auto path =
       rcpputils::fs::path{base_path} / "share" / "ament_index" / "resource_index" / resource_type;
 
@@ -49,7 +49,7 @@ get_resources(const std::string & resource_type)
       continue;
     }
     dirent * entry;
-    while ((entry = readdir(dir)) != nullptr) {
+    while ((entry = readdir(dir)) != NULL) {
       // ignore directories
       auto subdir = opendir((path / entry->d_name).string().c_str());
       if (subdir) {
