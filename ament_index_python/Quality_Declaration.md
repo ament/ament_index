@@ -1,5 +1,3 @@
-
-
 This document is a declaration of software quality for the `ament_index_python` package, based on the guidelines in [REP-2004](https://github.com/ros-infrastructure/rep/blob/rep-2004/rep-2004.rst).
 
 # `ament_index_python` Quality Declaration
