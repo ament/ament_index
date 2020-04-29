@@ -63,7 +63,7 @@ All pull requests must resolve related documentation changes before merging
 
 ### Feature Documentation [3.i]
 
-`ament_index_python` does not have a documented feature list. Although it currently states part of its concept overview [here]([https://github.com/ament/ament_cmake/blob/master/ament_cmake_core/doc/resource_index.md](https://github.com/ament/ament_cmake/blob/master/ament_cmake_core/doc/resource_index.md))
+`ament_index_python` does not have a documented feature list. Although it currently states part of its conceptual overview [here](https://github.com/ament/ament_cmake/blob/master/ament_cmake_core/doc/resource_index.md)
 
 ### Public API Documentation [3.ii]
 
