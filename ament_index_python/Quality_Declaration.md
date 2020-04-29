@@ -117,8 +117,7 @@ Current coverage statistics can be viewed [here](https://ci.ros2.org/job/ci_linu
 
 ### Performance [4.iv]
 
-`ament_index_python` follows the recommendations for performance testing of Python code in the [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#performance), and opts to do performance analysis on each release rather than each change.
-It is not yet defined if this package requires performance testing and how addresses this topic.
+`ament_index_python` does not conduct performance tests. It is not yet defined if this package requires performance testing and how addresses this topic.
 
 ### Linters and Static Analysis [4.v]
 
