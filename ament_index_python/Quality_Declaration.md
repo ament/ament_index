@@ -1,3 +1,4 @@
+
 This document is a declaration of software quality for the `ament_index_python` package, based on the guidelines in [REP-2004](https://github.com/ros-infrastructure/rep/blob/rep-2004/rep-2004.rst).
 
 # `ament_index_python` Quality Declaration
@@ -139,7 +140,7 @@ Currently nightly test results can be seen here:
 
 # Current status Summary
 
-The chart below compares the requirements in the REP-2004 with the current state of the rcutils package.
+The chart below compares the requirements in the REP-2004 with the current state of the `ament_index_python package`.
 |Number|  Requirement| Current state |
 |--|--|--|
 |1| **Version policy** |---|
