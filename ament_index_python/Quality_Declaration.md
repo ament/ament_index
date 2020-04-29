@@ -1,4 +1,5 @@
 
+
 This document is a declaration of software quality for the `ament_index_python` package, based on the guidelines in [REP-2004](https://github.com/ros-infrastructure/rep/blob/rep-2004/rep-2004.rst).
 
 # `ament_index_python` Quality Declaration
@@ -98,7 +99,7 @@ New features are required to have tests before being added.
 
 ### Public API Testing [4.ii]
 
-As the API is not defined explicitly, this section is considered unresolved.
+All the functionality of this package is tested, having lines code coverage report result of [96%](https://ci.ros2.org/job/ci_linux_coverage/85/cobertura/ament_index_python/).
 
 
 ### Coverage [4.iii]
@@ -164,7 +165,7 @@ The chart below compares the requirements in the REP-2004 with the current state
 |3.v.b| Centralized declaration available for peer review |✓|
 |4| Testing | --- |
 |4.i| Feature items tests | ✓ |
-|4.ii| Public API tests | ☓ |
+|4.ii| Public API tests | ✓ |
 |4.iii.a| Using coverage |✓ |
 |4.iii.a| Coverage policy | ✓ |
 |4.iv.a| Performance tests (if applicable) | ☓ |
