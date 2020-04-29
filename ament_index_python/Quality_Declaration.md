@@ -14,7 +14,7 @@ Below are the rationales, notes, and caveats for this claim, organized by each r
 
 ### Version Stability [1.ii]
 
-Currently this package version is 0.8.0.''
+`ament_index_python` is not yet at a stable version, i.e. >= 1.0.0"
 
 ### Public API Declaration [1.iii]
 
