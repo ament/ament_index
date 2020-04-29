@@ -26,11 +26,11 @@ Not defined API for this package
 
 ### ABI Stability Policy [1.v]
 
-`ament_index_python` must be concerned with ABI stability, and will maintain ABI stability within a ROS distribution.
+`ament_index_python` is a Python package, so it does not need to handle ABI stability.
 
 ### ABI and ABI Stability Within a Released ROS Distribution [1.vi]
 
-`ament_index_python` will not break API nor ABI within a released ROS distribution, i.e. no major releases once the ROS distribution is released.
+`ament_index_python` will not break API within a released ROS distribution, i.e. no major releases once the ROS distribution is released.
 
 ## Change Control Process [2]
 
