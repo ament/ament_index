@@ -18,7 +18,7 @@ Below are the rationales, notes, and caveats for this claim, organized by each r
 
 ### Public API Declaration [1.iii]
 
-Not defined API for this package
+`ament_index_python` public API is composed with the functions available in the module, exported in the [init file](./ament_index_python/__init__.py) and the [command line utility script](./ament_index_python/cli.py). 
 
 ### API Stability Policy [1.iv]
 
@@ -70,7 +70,7 @@ All pull requests must resolve related documentation changes before merging.
 
 ### Public API Documentation [3.ii]
 
-`ament_index_python` does not cover a public API documentation.
+`ament_index_python` API is not documented.
 
 ### License [3.iii]
 
@@ -150,7 +150,7 @@ The chart below compares the requirements in the REP-2004 with the current state
 |1| **Version policy** |---|
 |1.i|Version Policy available | ✓ |
 |1.ii|Stable version |☓|
-|1.iii|Declared public API|☓|
+|1.iii|Declared public API|✓|
 |1.iv|API stability policy|✓|
 |1.v|ABI stability policy|✓|
 |1.vi_|API/ABI stable within ros distribution|✓|
