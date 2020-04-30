@@ -1,5 +1,3 @@
-
-
 This document is a declaration of software quality for the `ament_index_python` package, based on the guidelines in [REP-2004](https://github.com/ros-infrastructure/rep/blob/rep-2004/rep-2004.rst).
 
 # `ament_index_python` Quality Declaration
@@ -39,12 +37,15 @@ Not defined API for this package
 `ament_index_python` follows the recommended guidelines for ROS Core packages in the [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#change-control-process).
 
 ### Change Requests [2.i]
+
 All changes will occur through a pull request, check [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#change-control-process) for additional information.
 
 ### Contributor Origin [2.ii]
+
 This package uses DCO as its confirmation of contributor origin policy. More information can be found in [CONTRIBUTING](./CONTRIBUTING.md)
 
 ### Peer Review Policy [2.iii]
+
 All pull request will be peer-reviewed, check [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#change-control-process) for additional information.
 
 ### Continuous Integration [2.iv]
@@ -59,13 +60,13 @@ Currently nightly results can be seen here:
 
 ###  Documentation Policy [2.v]
 
-All pull requests must resolve related documentation changes before merging
+All pull requests must resolve related documentation changes before merging.
 
 ## Documentation [3]
 
 ### Feature Documentation [3.i]
 
-`ament_index_python` does not have a documented feature list. Although it currently states part of its conceptual overview [here](https://github.com/ament/ament_cmake/blob/master/ament_cmake_core/doc/resource_index.md)
+`ament_index_python` does not have a documented feature list. Although it currently states part of its conceptual overview [here](https://github.com/ament/ament_cmake/blob/master/ament_cmake_core/doc/resource_index.md).
 
 ### Public API Documentation [3.ii]
 
@@ -100,7 +101,6 @@ New features are required to have tests before being added.
 ### Public API Testing [4.ii]
 
 All the functionality of this package is tested, having lines code coverage report result of [96%](https://ci.ros2.org/job/ci_linux_coverage/85/cobertura/ament_index_python/).
-
 
 ### Coverage [4.iii]
 
@@ -137,6 +137,10 @@ Currently nightly test results can be seen here:
 ## Platform Support [6]
 
 `ament_index_python` supports all of the tier 1 platforms as described in [REP-2000](https://www.ros.org/reps/rep-2000.html#support-tiers), and tests each change against all of them.
+
+## Vulnerability Disclosure Policy [7.i]
+
+`ament_index_python` does not have a Vulnerability Disclosure Policy
 
 # Current status Summary
 
