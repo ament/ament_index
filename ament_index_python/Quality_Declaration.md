@@ -18,7 +18,7 @@ Below are the rationales, notes, and caveats for this claim, organized by each r
 
 ### Public API Declaration [1.iii]
 
-`ament_index_python` public API is composed with the functions available in the module, exported in the [init file](./ament_index_python/__init__.py) and the [command line utility script](./ament_index_python/cli.py). 
+The public API of `ament_index_python` is composed of the functions available in the module, exported in the [init file](./ament_index_python/__init__.py) and the [command line utility script](./ament_index_python/cli.py).
 
 ### API Stability Policy [1.iv]
 
@@ -38,7 +38,7 @@ Below are the rationales, notes, and caveats for this claim, organized by each r
 
 ### Change Requests [2.i]
 
-All changes will occur through a pull request, check [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#change-control-process) for additional information.
+All changes will occur through a pull request, check the [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#change-control-process) for additional information.
 
 ### Contributor Origin [2.ii]
 
@@ -46,11 +46,11 @@ This package uses DCO as its confirmation of contributor origin policy. More inf
 
 ### Peer Review Policy [2.iii]
 
-All pull request will be peer-reviewed, check [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#change-control-process) for additional information.
+All pull requests will be peer-reviewed, check [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#change-control-process) for additional information.
 
 ### Continuous Integration [2.iv]
 
-All pull request must pass CI on all [tier 1 platforms](https://www.ros.org/reps/rep-2000.html#support-tiers)
+All pull requests must pass CI on all [tier 1 platforms](https://www.ros.org/reps/rep-2000.html#support-tiers)
 
 Currently nightly results can be seen here:
 * [linux-aarch64_release](https://ci.ros2.org/view/nightly/job/nightly_linux-aarch64_release/lastBuild/testReport/ament_index_python.src.ament.ament_index.ament_index_python.test/)
@@ -70,7 +70,7 @@ All pull requests must resolve related documentation changes before merging.
 
 ### Public API Documentation [3.ii]
 
-`ament_index_python` API is not documented.
+Most `ament_index_python` API functions are documented using docstrings. However, this is not hosted anywhere.
 
 ### License [3.iii]
 
@@ -100,7 +100,7 @@ New features are required to have tests before being added.
 
 ### Public API Testing [4.ii]
 
-All the functionality of this package is tested, having lines code coverage report result of [96%](https://ci.ros2.org/job/ci_linux_coverage/85/cobertura/ament_index_python/).
+All the functionality of the declared API in this package is covered in its unit tests. Currently it has a line coverage of [96%](https://ci.ros2.org/job/ci_linux_coverage/85/cobertura/ament_index_python/).
 
 ### Coverage [4.iii]
 
