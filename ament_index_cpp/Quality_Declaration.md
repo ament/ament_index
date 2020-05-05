@@ -122,7 +122,7 @@ Current coverage statistics can be viewed [here](https://ci.ros2.org/job/ci_linu
 
 ### Linters and Static Analysis [4.v]
 
-`ament_index_cpp` uses and passes all the ROS2 standard linters and static analysis tools for a Python package as described in the [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#linters-and-static-analysis). Passing implies there are no linter/static errors when testing against CI of supported platforms.
+`ament_index_cpp` uses and passes all the ROS2 standard linters and static analysis tools for a C++ package as described in the [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#linters-and-static-analysis). Passing implies there are no linter/static errors when testing against CI of supported platforms.
 
 Currently nightly results can be seen here:
 * [linux-aarch64_release](https://ci.ros2.org/view/nightly/job/nightly_linux-aarch64_release/lastBuild/testReport/ament_index_cpp/)
