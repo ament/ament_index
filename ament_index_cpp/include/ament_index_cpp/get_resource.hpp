@@ -23,10 +23,10 @@ namespace ament_index_cpp
 {
 /// Get a the content and path of a resource
 /**
- * \param resource_type type of the resource
- * \param resource_name name of the resource
- * \param content content of the resource
- * \param prefix_path the installation prefix of the given resource if found.
+ * \param[in] resource_type type of the resource
+ * \param[in] resource_name name of the resource
+ * \param[out] content content of the resource
+ * \param[out] prefix_path the installation prefix of the given resource if found.
  * \return `true` is the resource exists, `false` otherwise.
  * \throws std::runtime_error if resource_type or resource_name are empty.
  */

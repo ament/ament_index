@@ -38,7 +38,7 @@ public:
 
 /// Return the installation prefix of the given package if found.
 /**
- * \param package_name the name of the package to locate.
+ * \param[in] package_name the name of the package to locate.
  * \return installation prefix path in which the package was found.
  * \throws PackageNotFoundError when the given package is not found.
  */
