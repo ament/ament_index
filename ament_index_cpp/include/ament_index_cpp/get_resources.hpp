@@ -23,6 +23,12 @@
 namespace ament_index_cpp
 {
 
+/// Get a map of resources names to their installation prefix.
+/**
+ * \param resource_type type of the resource.
+ * \return a map of resources names to their installation prefix.
+ * \throws std::runtime_error if resource_type is empty.
+ */
 AMENT_INDEX_CPP_PUBLIC
 std::map<std::string, std::string>
 get_resources(const std::string & resource_type);

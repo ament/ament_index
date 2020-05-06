@@ -22,6 +22,14 @@
 namespace ament_index_cpp
 {
 
+/// Return the install path of resource if exists
+/**
+ * \param[in] resource_type type of the resource
+ * \param[in] resource_name name of the resource
+ * \param[out] prefix_path the installation prefix of the given resource if found.
+ * \return `true` if resource exists,`false` otherwise
+ * \throws std::runtime_error if resource_type or resource_name are empty
+ */
 AMENT_INDEX_CPP_PUBLIC
 bool
 has_resource(
