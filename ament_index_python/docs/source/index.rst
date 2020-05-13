@@ -1,5 +1,5 @@
-rclpy
-=====
+ament_index_python
+==================
 
 *ament_index_python* is a python API to access the ament resource index.
 
