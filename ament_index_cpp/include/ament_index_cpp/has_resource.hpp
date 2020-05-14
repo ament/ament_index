@@ -22,7 +22,7 @@
 namespace ament_index_cpp
 {
 
-/// Return the install path of resource if exists
+/// Check if resource exists and get its path
 /**
  * \param[in] resource_type type of the resource
  * \param[in] resource_name name of the resource
