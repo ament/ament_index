@@ -12,6 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/** \mainpage ament_index_cpp: C++ API to access the ament resource index.
+ *
+ * This package contains functions to operate with the resource index
+ *
+ * - Get installation prefix of an installed package
+ *   - get_package_prefix()
+ *   - ament_index_cpp/get_package_prefix.hpp
+ * - Get share directory of an installed package
+ *   - get_package_share_directory()
+ *   - ament_index_cpp/get_package_share_directory.hpp
+ * - Get a map of package names to their installation prefix
+ *   - get_packages_with_prefixes()
+ *   - ament_index_cpp/get_packages_with_prefixes.hpp
+ * - Get the content and path of a resource
+ *   - get_resource()
+ *   - ament_index_cpp/get_resource.hpp
+ * - Get a map of resources based on a resource type
+ *   - get_resources()
+ *   - ament_index_cpp/get_resources.hpp
+ * - Check if resource exists and get its path
+ *   - has_resource()
+ *   - ament_index_cpp/has_resource.hpp
+ * - Macros for controlling symbol visibility on the library
+ *   - ament_index_cpp/visibility_control.h
+ */
+
 #ifndef AMENT_INDEX_CPP__GET_RESOURCE_HPP_
 #define AMENT_INDEX_CPP__GET_RESOURCE_HPP_
 
