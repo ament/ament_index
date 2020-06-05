@@ -2,7 +2,7 @@ This document is a declaration of software quality for the `ament_index_cpp` pac
 
 # `ament_index_cpp` Quality Declaration
 
-The package `ament_index_cpp` claims to be in the **Quality Level 4** category.
+The package `ament_index_cpp` claims to be in the **Quality Level 2** category.
 
 Below are the rationales, notes, and caveats for this claim, organized by each requirement listed in the [Package Quality Categories in REP-2004](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#package-quality-categories)
 
@@ -66,11 +66,11 @@ All pull requests must resolve related documentation changes before merging.
 
 ### Feature Documentation [3.i]
 
-`ament_index_cpp` does not have a documented feature list. Although it currently states part of its conceptual overview [here](https://github.com/ament/ament_cmake/blob/master/ament_cmake_core/doc/resource_index.md).
+`ament_index_cpp` has a documented feature list hosted [here](http://docs.ros2.org/latest/api/ament_index_cpp/index.html).
 
 ### Public API Documentation [3.ii]
 
-Some `ament_index_cpp` API functions are documented using docstrings. However, this is not hosted anywhere.
+Some `ament_index_cpp` API functions are documented using docstrings, and it is [hosted](http://docs.ros2.org/latest/api/ament_index_cpp/index.html).
 
 ### License [3.iii]
 
@@ -114,7 +114,7 @@ This includes:
 
 Changes are required to make a best effort to keep or increase coverage before being accepted, but decreases are allowed if properly justified and accepted by reviewers.
 
-Current coverage statistics can be viewed [here](https://ci.ros2.org/job/ci_linux_coverage/85/cobertura/src_ament_ament_index_ament_index_cpp_src/).
+Current coverage statistics can be viewed [here](https://ci.ros2.org/job/ci_linux_coverage/lastBuild/cobertura/src_ament_ament_index_ament_index_cpp_src/).
 
 ### Performance [4.iv]
 
@@ -151,7 +151,7 @@ The chart below compares the requirements in the REP-2004 with the current state
 |--|--|--|
 |1| **Version policy** |---|
 |1.i|Version Policy available | ✓ |
-|1.ii|Stable version |☓|
+|1.ii|Stable version |✓|
 |1.iii|Declared public API|✓|
 |1.iv|API stability policy|✓|
 |1.v|ABI stability policy|✓|
@@ -163,8 +163,8 @@ The chart below compares the requirements in the REP-2004 with the current state
 |2.iv| CI policy for change requests | ✓ |
 |2.v| Documentation policy for change requests | ✓ |
 |3| **Documentation** | --- |
-|3.i| Per feature documentation | ☓ |
-|3.ii| Per public API item documentation | ☓ |
+|3.i| Per feature documentation | ✓ |
+|3.ii| Per public API item documentation | ✓ |
 |3.iii| Declared License(s) | ✓ |
 |3.iv| Copyright in source files| ✓ |
 |3.v.a| Quality declaration linked to README | ✓ |
@@ -185,6 +185,6 @@ The chart below compares the requirements in the REP-2004 with the current state
 |6| Platform support | --- |
 |6.i| Support targets Tier1 ROS platforms| ✓ |
 |7| Security | --- |
-|7.i| Vulnerability Disclosure Policy | ☓ |
+|7.i| Vulnerability Disclosure Policy | ✓ |
 
-Comparing this table with the [Quality Level Comparison Chart of REP2004](https://github.com/ros-infrastructure/rep/blob/master/rep-2004.rst#quality-level-comparison-chart) lead us to decide that this package qualifies to Quality Level 4.
+Comparing this table with the [Quality Level Comparison Chart of REP2004](https://github.com/ros-infrastructure/rep/blob/master/rep-2004.rst#quality-level-comparison-chart) lead us to decide that this package qualifies to Quality Level 2.
