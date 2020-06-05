@@ -66,11 +66,12 @@ All pull requests must resolve related documentation changes before merging.
 
 ### Feature Documentation [3.i]
 
-`ament_index_cpp` has a documented feature list hosted [here](http://docs.ros2.org/latest/api/ament_index_cpp/index.html).
+`ament_index_cpp` has a documented feature list, but it is not yet hosted.
+It is currently described in the get_resource.hpp header and can be automatically generated with doxygen.
 
 ### Public API Documentation [3.ii]
 
-Some `ament_index_cpp` API functions are documented using docstrings, and it is [hosted](http://docs.ros2.org/latest/api/ament_index_cpp/index.html).
+Some `ament_index_cpp` API functions are documented using docstrings, but it is not yet hosted.
 
 ### License [3.iii]
 
