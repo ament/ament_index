@@ -6,4 +6,4 @@ See [https://github.com/ament/ament_cmake/blob/master/ament_cmake_core/doc/resou
 
 ## Quality Declaration
 
-This package claims to be in the **Quality Level 4** category, see the [Quality Declaration](./QUALITY_DECLARATION.md) for more details.
+See the [Quality Declaration](./QUALITY_DECLARATION.md) for details on the declared Quality Level.
