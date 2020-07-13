@@ -27,12 +27,17 @@ namespace ament_index_cpp
 class PackageNotFoundError : public std::out_of_range
 {
 public:
+  /// Constuctor of an exception class to notify that a pacakge is not found
+  /*
+  * \param[in] package_name used in the exception message
+  */
   AMENT_INDEX_CPP_PUBLIC
   explicit PackageNotFoundError(const std::string & package_name);
 
   AMENT_INDEX_CPP_PUBLIC
   virtual ~PackageNotFoundError();
 
+  /// package name used in the exception message
   const std::string package_name;
 };
 
