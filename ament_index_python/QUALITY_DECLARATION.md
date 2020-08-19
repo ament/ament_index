@@ -119,7 +119,7 @@ Current coverage statistics can be viewed [here](https://ci.ros2.org/job/ci_linu
 ### Performance [4.iv]
 
 An environment variable defines the prefix paths of such resource indices and the API has a time complexity of `O(n)` where `n` is the number of prefix paths.
-The time complexity to query information is either scaling lineraly with the number of resource types or with the number of resources per type (depending on which dimension is requested).
+The time complexity to query information is either scaling linearly with the number of resource types or with the number of resources per type (depending on which dimension is requested).
 If the content of a specific resource is retrieved the time complexity is linear to the size of the content as is the memory usage in that case since the content is returned to the caller.
 The performance of the implementation is defined by the performance of the underlying filesystem functions and the implemented logic doesn't add any significant overhead.
 
