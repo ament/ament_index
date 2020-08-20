@@ -121,7 +121,13 @@ A description of how coverage statistics are summarized from this page, can be f
 
 ### Performance [4.iv]
 
-`ament_index_cpp` does not conduct performance tests.
+An environment variable defines the prefix paths of such resource indices and the API has a time complexity of `O(n)` where `n` is the number of prefix paths.
+The time complexity to query information is either scaling linearly with the number of resource types or with the number of resources per type (depending on which dimension is requested).
+If the content of a specific resource is retrieved the time complexity is linear to the size of the content as is the memory usage in that case since the content is returned to the caller.
+The runtime cost of the implementation is dominated by the runtime cost of the underlying filesystem API, and the implemented logic doesn't add any significant overhead.
+
+From a usage point of view it is also expected that the resource index is commonly only queried during startup and not at runtime of a production system.
+Therefore `ament_index_cpp` does not conduct explicit performance tests.
 
 ### Linters and Static Analysis [4.v]
 
