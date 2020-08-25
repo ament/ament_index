@@ -100,7 +100,7 @@ New features are required to have tests before being added.
 
 ### Public API Testing [4.ii]
 
-All the functionality of the declared API in this package is covered in its unit tests. Currently it has a line coverage of [99%](https://ci.ros2.org/job/ci_linux_coverage/85/cobertura/src_ament_ament_index_ament_index_cpp_src/).
+All the functionality of the declared API in this package is covered in its unit tests. Currently it has a line coverage of [99%](https://ci.ros2.org/job/nightly_linux_coverage/lastSuccessfulBuild/cobertura/src_ament_ament_index_ament_index_cpp_src/).
 
 ### Coverage [4.iii]
 
@@ -109,7 +109,7 @@ All the functionality of the declared API in this package is covered in its unit
 This includes:
 
 - tracking and reporting line coverage statistics
-- achieving and maintaining a reasonable branch line coverage (90-100%)
+- achieving and maintaining a reasonable branch or line coverage (90-100%)
 - no lines are manually skipped in coverage calculations
 
 Changes are required to make a best effort to keep or increase coverage before being accepted, but decreases are allowed if properly justified and accepted by reviewers.
