@@ -8,4 +8,5 @@ Features are described in detail at [http://docs.ros2.org](http://docs.ros2.org/
 
 ## Quality Declaration
 
-See the [Quality Declaration](./QUALITY_DECLARATION.md) for details on the declared Quality Level.
+This package claims to be in the **Quality Level 1** category.
+See the [Quality Declaration](./QUALITY_DECLARATION.md) for more details.
