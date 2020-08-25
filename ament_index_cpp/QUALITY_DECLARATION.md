@@ -2,7 +2,7 @@ This document is a declaration of software quality for the `ament_index_cpp` pac
 
 # `ament_index_cpp` Quality Declaration
 
-The package `ament_index_cpp` claims to be in the **Quality Level 2** category.
+The package `ament_index_cpp` claims to be in the **Quality Level 1** category.
 
 Below are the rationales, notes, and caveats for this claim, organized by each requirement listed in the [Package Quality Categories in REP-2004](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#package-quality-categories)
 
@@ -66,12 +66,11 @@ All pull requests must resolve related documentation changes before merging.
 
 ### Feature Documentation [3.i]
 
-`ament_index_cpp` has a documented feature list, but it is not yet hosted.
-It is currently described in the get_resource.hpp header and can be automatically generated with doxygen.
+`ament_index_cpp` has a documented feature list, and it is [hosted](http://docs.ros2.org/latest/api/ament_index_cpp/).
 
 ### Public API Documentation [3.ii]
 
-Some `ament_index_cpp` API functions are documented using docstrings, but it is not yet hosted.
+All `ament_index_cpp` API functions are documented using docstrings, and it is [hosted](http://docs.ros2.org/latest/api/ament_index_cpp/).
 
 ### License [3.iii]
 
@@ -183,7 +182,7 @@ The chart below compares the requirements in the REP-2004 with the current state
 |4.ii| Public API tests | ✓ |
 |4.iii.a| Using coverage |✓ |
 |4.iii.a| Coverage policy | ✓ |
-|4.iv.a| Performance tests (if applicable) | ☓ |
+|4.iv.a| Performance tests (if applicable) | ✓ |
 |4.iv.b| Performance tests policy| ✓ |
 |4.v.a| Code style enforcement (linters)| ✓ |
 |4.v.b| Use of static analysis tools | ✓ |
@@ -196,4 +195,4 @@ The chart below compares the requirements in the REP-2004 with the current state
 |7| Security | --- |
 |7.i| Vulnerability Disclosure Policy | ✓ |
 
-Comparing this table with the [Quality Level Comparison Chart of REP2004](https://github.com/ros-infrastructure/rep/blob/master/rep-2004.rst#quality-level-comparison-chart) lead us to decide that this package qualifies to Quality Level 2.
+Comparing this table with the [Quality Level Comparison Chart of REP-2004](https://github.com/ros-infrastructure/rep/blob/master/rep-2004.rst#quality-level-comparison-chart) lead us to decide that this package qualifies to Quality Level 1.
