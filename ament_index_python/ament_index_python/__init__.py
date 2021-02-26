@@ -33,7 +33,7 @@ __all__ = [
     'get_search_paths',
     'get_resource_types',
     'has_resource',
-    'InvalidResourceNameError'
+    'InvalidResourceNameError',
     'PackageNotFoundError',
     'RESOURCE_INDEX_SUBFOLDER',
 ]
