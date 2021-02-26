@@ -18,13 +18,16 @@ from .constants import RESOURCE_INDEX_SUBFOLDER
 
 from .search_paths import get_search_paths
 
+
 class InvalidResourceNameError(ValueError):
     pass
+
 
 def name_is_invalid(resource_name):
     if '/' in resource_name:
         return True
     return False
+
 
 def get_resource(resource_type, resource_name):
     """
@@ -43,7 +46,7 @@ def get_resource(resource_type, resource_name):
     assert resource_name, 'The resource name must not be empty'
     if name_is_invalid(resource_name):
         raise InvalidResourceNameError(
-            "Resource name '%s' is invalid" % resource_name )
+            "Resource name '%s' is invalid" % resource_name)
     for path in get_search_paths():
         resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type, resource_name)
         if os.path.isfile(resource_path):
@@ -118,7 +121,7 @@ def has_resource(resource_type, resource_name):
     assert resource_name, 'The resource name must not be empty'
     if name_is_invalid(resource_name):
         raise InvalidResourceNameError(
-            "Resource name '%s' is invalid" % resource_name )
+            "Resource name '%s' is invalid" % resource_name)
     for path in get_search_paths():
         resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type, resource_name)
         if os.path.isfile(resource_path):

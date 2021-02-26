@@ -108,6 +108,7 @@ def test_absolute_path_resource():
     with pytest.raises(InvalidResourceNameError):
         get_resource('resource_type4', str(extant_absolute_path))
 
+
 def test_resource():
     set_ament_prefix_path(['prefix1'])
     exists = has_resource('resource_type4', 'foo')
