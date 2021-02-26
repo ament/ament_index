@@ -24,6 +24,7 @@ from ament_index_python import get_resources
 from ament_index_python import get_search_paths
 from ament_index_python import has_resource
 from ament_index_python import PackageNotFoundError
+from ament_index_python import InvalidResourceNameError
 from ament_index_python.cli import main
 from ament_index_python.cli import resource_name_completer
 from ament_index_python.cli import resource_type_completer
@@ -96,6 +97,17 @@ def test_unknown_resource():
         get_resource('resource_type4', 'bar')
 
 
+def test_absolute_path_resource():
+    extant_absolute_path = os.path.abspath(__file__)
+
+    set_ament_prefix_path(['prefix1'])
+    with pytest.raises(InvalidResourceNameError):
+        exists = has_resource('resource_type4', str(extant_absolute_path))
+        assert not exists, 'Resource should not exist'
+
+    with pytest.raises(InvalidResourceNameError):
+        get_resource('resource_type4', str(extant_absolute_path))
+
 def test_resource():
     set_ament_prefix_path(['prefix1'])
     exists = has_resource('resource_type4', 'foo')
@@ -143,6 +155,12 @@ def test_get_package_prefix():
     with pytest.raises(PackageNotFoundError):
         get_package_prefix('does_not_exist')
     assert issubclass(PackageNotFoundError, KeyError)
+
+    with pytest.raises(InvalidResourceNameError):
+        # An absolue path is not a valid package name
+        extant_absolute_path = os.path.abspath(__file__)
+        get_package_prefix(extant_absolute_path)
+    assert issubclass(InvalidResourceNameError, ValueError)
 
 
 def test_get_package_share_directory():
