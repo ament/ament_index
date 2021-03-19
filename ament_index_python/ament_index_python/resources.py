@@ -19,14 +19,16 @@ from .constants import RESOURCE_INDEX_SUBFOLDER
 from .search_paths import get_search_paths
 
 
+class InvalidResourceTypeNameError(ValueError):
+    pass
+
+
 class InvalidResourceNameError(ValueError):
     pass
 
 
 def name_is_invalid(resource_name):
-    if ('/' in resource_name) or ('\\' in resource_name):
-        return True
-    return False
+    return ('/' in resource_name) or ('\\' in resource_name)
 
 
 def get_resource(resource_type, resource_name):
@@ -41,9 +43,14 @@ def get_resource(resource_type, resource_name):
     :raises: :exc:`EnvironmentError`
     :raises: :exc:`OSError`
     :raises: :exc:`LookupError`
+    :raises: :exc:`InvalidResourceTypeNameError`
+    :raises: :exc:`InvalidResourceNameError`
     """
     assert resource_type, 'The resource type must not be empty'
     assert resource_name, 'The resource name must not be empty'
+    if name_is_invalid(resource_type):
+        raise InvalidResourceTypeNameError(
+            "Resource type '%s' is invalid" % resource_type)
     if name_is_invalid(resource_name):
         raise InvalidResourceNameError(
             "Resource name '%s' is invalid" % resource_name)
@@ -70,8 +77,12 @@ def get_resources(resource_type):
     :type resource_type: str
     :returns: dict of resource names to the prefix path they are in
     :raises: :exc:`EnvironmentError`
+    :raises: :exc:`InvalidResourceTypeNameError`
     """
     assert resource_type, 'The resource type must not be empty'
+    if name_is_invalid(resource_type):
+        raise InvalidResourceTypeNameError(
+            "Resource type '%s' is invalid" % resource_type)
     resources = {}
     for path in get_search_paths():
         resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type)
@@ -116,9 +127,14 @@ def has_resource(resource_type, resource_name):
     :type resource_name: str
     :returns: The prefix path if the resource exists, False otherwise
     :raises: :exc:`EnvironmentError`
+    :raises: :exc:`InvalidResourceTypeNameError`
+    :raises: :exc:`InvalidResourceNameError`
     """
     assert resource_type, 'The resource type must not be empty'
     assert resource_name, 'The resource name must not be empty'
+    if name_is_invalid(resource_type):
+        raise InvalidResourceTypeNameError(
+            "Resource type '%s' is invalid" % resource_type)
     if name_is_invalid(resource_name):
         raise InvalidResourceNameError(
             "Resource name '%s' is invalid" % resource_name)

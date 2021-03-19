@@ -24,6 +24,7 @@ from ament_index_python import get_resources
 from ament_index_python import get_search_paths
 from ament_index_python import has_resource
 from ament_index_python import PackageNotFoundError
+from ament_index_python import InvalidResourceTypeNameError
 from ament_index_python import InvalidResourceNameError
 from ament_index_python.cli import main
 from ament_index_python.cli import resource_name_completer
@@ -65,6 +66,25 @@ def test_unknown_resources():
     set_ament_prefix_path(['prefix1'])
     resources = get_resources('unknown_resource_type')
     assert len(resources) == 0, 'Expected no resources'
+
+
+def test_invalid_resources():
+    set_ament_prefix_path(['prefix1'])
+
+    invalid_resource_type_names = [
+        '/invalid/name', 'invalid/name', '\\invalid\\name', 'invalid\\name']
+
+    for name in invalid_resource_type_names:
+        with pytest.raises(InvalidResourceTypeNameError):
+            resources = get_resources(name)
+            assert len(resources) == 0, 'Expected no resources'
+
+        with pytest.raises(InvalidResourceTypeNameError):
+            exists = has_resource(name, "example_resource")
+            assert not exists, 'Resource should not exist'
+
+        with pytest.raises(InvalidResourceTypeNameError):
+            get_resource(name, "example_resource")
 
 
 def test_resources():
