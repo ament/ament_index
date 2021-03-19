@@ -97,6 +97,21 @@ def test_unknown_resource():
         get_resource('resource_type4', 'bar')
 
 
+def test_invalid_resource_names():
+    set_ament_prefix_path(['prefix1'])
+
+    invalid_resource_names = [
+        '/invalid/name', 'invalid/name', '\\invalid\\name', 'invalid\\name']
+
+    for name in invalid_resource_names:
+        with pytest.raises(InvalidResourceNameError):
+            exists = has_resource('resource_type4', name)
+            assert not exists, 'Resource should not exist'
+
+        with pytest.raises(InvalidResourceNameError):
+            get_resource('resource_type4', name)
+
+
 def test_absolute_path_resource():
     extant_absolute_path = os.path.abspath(__file__)
 

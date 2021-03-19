@@ -24,7 +24,7 @@ class InvalidResourceNameError(ValueError):
 
 
 def name_is_invalid(resource_name):
-    if '/' in resource_name:
+    if ('/' in resource_name) or ('\\' in resource_name):
         return True
     return False
 
