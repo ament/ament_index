@@ -157,11 +157,15 @@ def test_get_package_prefix():
         get_package_prefix('does_not_exist')
     assert issubclass(PackageNotFoundError, KeyError)
 
-    with pytest.raises(InvalidResourceNameError):
+    invalid_package_names = ['_package','packageA','package a','package/a','0package','package.a']
+    for name in invalid_package_names:
+        with pytest.raises(ValueError):
+            get_package_prefix(name)
+
+    with pytest.raises(ValueError):
         # An absolue path is not a valid package name
         extant_absolute_path = os.path.abspath(__file__)
         get_package_prefix(extant_absolute_path)
-    assert issubclass(InvalidResourceNameError, ValueError)
 
 
 def test_get_package_share_directory():
@@ -183,6 +187,9 @@ def test_get_package_share_directory():
 
     with pytest.raises(PackageNotFoundError):
         get_package_share_directory('does_not_exist')
+
+    with pytest.raises(ValueError):
+        get_package_share_directory('/invalid/package/name')
 
 
 def test_get_resource_types():
