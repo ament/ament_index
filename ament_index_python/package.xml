@@ -6,11 +6,11 @@
   <description>
     Python API to access the ament resource index.
   </description>
-  <maintainer email="clairewang@openrobotics.org">Claire Wang</maintainer>
   <maintainer email="audrow@openrobotics.org">Audrow Nash</maintainer>
   <license>Apache License 2.0</license>
 
-  <author email="dthomas@osrfoundation.org">Dirk Thomas</author>
+  <author>Dirk Thomas</author>
+  <author>Claire Wang</author>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
