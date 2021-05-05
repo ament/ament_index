@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+import pathlib
 
 from .resources import get_resource
 from .resources import get_resources
@@ -67,3 +68,19 @@ def get_package_share_directory(package_name):
     :raises: :exc:`PackageNotFoundError` if the package is not found
     """
     return os.path.join(get_package_prefix(package_name), 'share', package_name)
+
+def get_package_share_path(package_name):
+    """
+    Return the share directory of the given package as a pathlib.Path.
+
+    For example, if you install the package 'foo' into
+    '/home/user/ros2_ws/install' and you called this function with 'foo' as the
+    argument, then it will return a path representing '/home/user/ros2_ws/install/share/foo'
+    and then you could use it to construct the path to a shared file with
+    `get_package_share_path('foo') / 'urdf/robot.urdf'`
+
+    :param str package_name: name of the package to locate
+    :returns: share directory of the package as a pathlib.Path
+    :raises: :exc:`PackageNotFoundError` if the package is not found
+    """
+    return pathlib.Path(get_package_share_directory(package_name))
