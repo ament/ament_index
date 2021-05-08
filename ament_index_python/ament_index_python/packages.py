@@ -69,6 +69,7 @@ def get_package_share_directory(package_name):
     """
     return os.path.join(get_package_prefix(package_name), 'share', package_name)
 
+
 def get_package_share_path(package_name):
     """
     Return the share directory of the given package as a pathlib.Path.
