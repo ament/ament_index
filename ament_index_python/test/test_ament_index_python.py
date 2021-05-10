@@ -80,11 +80,11 @@ def test_invalid_resources():
             assert len(resources) == 0, 'Expected no resources'
 
         with pytest.raises(InvalidResourceTypeNameError):
-            exists = has_resource(name, "example_resource")
+            exists = has_resource(name, 'example_resource')
             assert not exists, 'Resource should not exist'
 
         with pytest.raises(InvalidResourceTypeNameError):
-            get_resource(name, "example_resource")
+            get_resource(name, 'example_resource')
 
 
 def test_resources():
