@@ -23,9 +23,9 @@ from ament_index_python import get_resource_types
 from ament_index_python import get_resources
 from ament_index_python import get_search_paths
 from ament_index_python import has_resource
-from ament_index_python import PackageNotFoundError
-from ament_index_python import InvalidResourceTypeNameError
 from ament_index_python import InvalidResourceNameError
+from ament_index_python import InvalidResourceTypeNameError
+from ament_index_python import PackageNotFoundError
 from ament_index_python.cli import main
 from ament_index_python.cli import resource_name_completer
 from ament_index_python.cli import resource_type_completer

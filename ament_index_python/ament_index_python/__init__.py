@@ -21,8 +21,8 @@ from .resources import get_resource
 from .resources import get_resource_types
 from .resources import get_resources
 from .resources import has_resource
-from .resources import InvalidResourceTypeNameError
 from .resources import InvalidResourceNameError
+from .resources import InvalidResourceTypeNameError
 from .search_paths import get_search_paths
 
 __all__ = [
