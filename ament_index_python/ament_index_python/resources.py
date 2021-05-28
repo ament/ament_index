@@ -20,14 +20,30 @@ from .search_paths import get_search_paths
 
 
 class InvalidResourceTypeNameError(ValueError):
+    """Raised when a resource type name is invalid."""
+
     pass
 
 
 class InvalidResourceNameError(ValueError):
+    """Raised when a resource name is invalid."""
+
     pass
 
 
 def name_is_invalid(resource_name):
+    """
+    Get the whether a resource name or a resource type name is invalid.
+
+    A name is considered invalid if it contains any path separators. The index represents resources
+    as files and resource types as folders so allowing path separators causes issues.
+
+    For a more complete discussion, see: https://github.com/ament/ament_index/pull/69
+
+    :param resource_name: the name of the resource or resource type
+    :type resource_name: str
+    :returns: True or False
+    """
     return ('/' in resource_name) or ('\\' in resource_name)
 
 
