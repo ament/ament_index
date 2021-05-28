@@ -193,7 +193,7 @@ def test_get_package_prefix():
     assert issubclass(PackageNotFoundError, KeyError)
 
     invalid_package_names = [
-        '_package', 'packageA', 'package a', 'package/a', '0package', 'package.a']
+        '_package', 'package a', 'package/a', 'package.a']
     for name in invalid_package_names:
         with pytest.raises(ValueError):
             get_package_prefix(name)

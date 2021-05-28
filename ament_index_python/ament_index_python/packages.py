@@ -47,7 +47,9 @@ def get_package_prefix(package_name):
     :raises: :exc:`PackageNotFoundError` if the package is not found
     :raises: :exc:`ValueError` if the package name is invalid
     """
-    if re.fullmatch('[a-z][a-z0-9_]+', package_name, re.ASCII) is None:
+    # This regex checks for a valid package name as defined by REP-127 including the recommended
+    #  exemptions. See https://ros.org/reps/rep-0127.html#name
+    if re.fullmatch('[a-zA-Z0-9][a-zA-Z0-9_-]+', package_name, re.ASCII) is None:
         raise ValueError(
             "'{}' is not a valid package name".format(package_name))
     try:
