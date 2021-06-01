@@ -31,9 +31,11 @@ class InvalidResourceNameError(ValueError):
     pass
 
 
-def name_is_invalid(resource_name):
+def _name_is_invalid(resource_name):
     """
     Get the whether a resource name or a resource type name is invalid.
+
+    This is not considered public API.
 
     A name is considered invalid if it contains any path separators. The index represents resources
     as files and resource types as folders so allowing path separators causes issues.
@@ -64,10 +66,10 @@ def get_resource(resource_type, resource_name):
     """
     assert resource_type, 'The resource type must not be empty'
     assert resource_name, 'The resource name must not be empty'
-    if name_is_invalid(resource_type):
+    if _name_is_invalid(resource_type):
         raise InvalidResourceTypeNameError(
             "Resource type '%s' is invalid" % resource_type)
-    if name_is_invalid(resource_name):
+    if _name_is_invalid(resource_name):
         raise InvalidResourceNameError(
             "Resource name '%s' is invalid" % resource_name)
     for path in get_search_paths():
@@ -96,7 +98,7 @@ def get_resources(resource_type):
     :raises: :exc:`InvalidResourceTypeNameError`
     """
     assert resource_type, 'The resource type must not be empty'
-    if name_is_invalid(resource_type):
+    if _name_is_invalid(resource_type):
         raise InvalidResourceTypeNameError(
             "Resource type '%s' is invalid" % resource_type)
     resources = {}
@@ -148,10 +150,10 @@ def has_resource(resource_type, resource_name):
     """
     assert resource_type, 'The resource type must not be empty'
     assert resource_name, 'The resource name must not be empty'
-    if name_is_invalid(resource_type):
+    if _name_is_invalid(resource_type):
         raise InvalidResourceTypeNameError(
             "Resource type '%s' is invalid" % resource_type)
-    if name_is_invalid(resource_name):
+    if _name_is_invalid(resource_name):
         raise InvalidResourceNameError(
             "Resource name '%s' is invalid" % resource_name)
     for path in get_search_paths():
