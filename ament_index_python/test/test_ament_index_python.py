@@ -17,6 +17,7 @@ from pathlib import Path, PurePath
 
 from ament_index_python import get_package_prefix
 from ament_index_python import get_package_share_directory
+from ament_index_python import get_package_share_path
 from ament_index_python import get_packages_with_prefixes
 from ament_index_python import get_resource
 from ament_index_python import get_resource_types
@@ -226,6 +227,25 @@ def test_get_package_share_directory():
 
     with pytest.raises(ValueError):
         get_package_share_directory('/invalid/package/name')
+
+
+def test_get_package_share_path():
+    set_ament_prefix_path(['prefix1', 'prefix2'])
+
+    def get_package_share_path_test(package_name, expect_prefix):
+        my_path = get_package_share_path(package_name)
+        assert len(my_path.parts) >= 3
+        assert my_path.parts[-1] == package_name, f"Expected package name '{package_name}'"
+        assert my_path.parts[-2] == 'share', "Expected 'share'"
+        assert my_path.parts[-3] == expect_prefix, f"Expected '{expect_prefix}'"
+
+    get_package_share_path_test('foo', 'prefix1')
+    # found in both prefix1 and prefix2, but prefix1 is ahead on the APP
+    get_package_share_path_test('bar', 'prefix1')
+    get_package_share_path_test('baz', 'prefix2')
+
+    with pytest.raises(PackageNotFoundError):
+        get_package_share_path('does_not_exist')
 
 
 def test_get_resource_types():
