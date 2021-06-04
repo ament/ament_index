@@ -19,6 +19,36 @@ from .constants import RESOURCE_INDEX_SUBFOLDER
 from .search_paths import get_search_paths
 
 
+class InvalidResourceTypeNameError(ValueError):
+    """Raised when a resource type name is invalid."""
+
+    pass
+
+
+class InvalidResourceNameError(ValueError):
+    """Raised when a resource name is invalid."""
+
+    pass
+
+
+def _name_is_invalid(resource_name):
+    """
+    Get the whether a resource name or a resource type name is invalid.
+
+    This is not considered public API.
+
+    A name is considered invalid if it contains any path separators. The index represents resources
+    as files and resource types as folders so allowing path separators causes issues.
+
+    For a more complete discussion, see: https://github.com/ament/ament_index/pull/69
+
+    :param resource_name: the name of the resource or resource type
+    :type resource_name: str
+    :returns: True or False
+    """
+    return ('/' in resource_name) or ('\\' in resource_name)
+
+
 def get_resource(resource_type, resource_name):
     """
     Get the content of a specific resource and its prefix path.
@@ -31,9 +61,17 @@ def get_resource(resource_type, resource_name):
     :raises: :exc:`EnvironmentError`
     :raises: :exc:`OSError`
     :raises: :exc:`LookupError`
+    :raises: :exc:`InvalidResourceTypeNameError`
+    :raises: :exc:`InvalidResourceNameError`
     """
     assert resource_type, 'The resource type must not be empty'
     assert resource_name, 'The resource name must not be empty'
+    if _name_is_invalid(resource_type):
+        raise InvalidResourceTypeNameError(
+            "Resource type '%s' is invalid" % resource_type)
+    if _name_is_invalid(resource_name):
+        raise InvalidResourceNameError(
+            "Resource name '%s' is invalid" % resource_name)
     for path in get_search_paths():
         resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type, resource_name)
         if os.path.isfile(resource_path):
@@ -57,8 +95,12 @@ def get_resources(resource_type):
     :type resource_type: str
     :returns: dict of resource names to the prefix path they are in
     :raises: :exc:`EnvironmentError`
+    :raises: :exc:`InvalidResourceTypeNameError`
     """
     assert resource_type, 'The resource type must not be empty'
+    if _name_is_invalid(resource_type):
+        raise InvalidResourceTypeNameError(
+            "Resource type '%s' is invalid" % resource_type)
     resources = {}
     for path in get_search_paths():
         resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type)
@@ -103,9 +145,17 @@ def has_resource(resource_type, resource_name):
     :type resource_name: str
     :returns: The prefix path if the resource exists, False otherwise
     :raises: :exc:`EnvironmentError`
+    :raises: :exc:`InvalidResourceTypeNameError`
+    :raises: :exc:`InvalidResourceNameError`
     """
     assert resource_type, 'The resource type must not be empty'
     assert resource_name, 'The resource name must not be empty'
+    if _name_is_invalid(resource_type):
+        raise InvalidResourceTypeNameError(
+            "Resource type '%s' is invalid" % resource_type)
+    if _name_is_invalid(resource_name):
+        raise InvalidResourceNameError(
+            "Resource name '%s' is invalid" % resource_name)
     for path in get_search_paths():
         resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type, resource_name)
         if os.path.isfile(resource_path):

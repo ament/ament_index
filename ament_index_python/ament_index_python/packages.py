@@ -14,6 +14,7 @@
 
 import os
 import pathlib
+import re
 
 from .resources import get_resource
 from .resources import get_resources
@@ -45,7 +46,13 @@ def get_package_prefix(package_name):
     :param str package_name: name of the package to locate
     :returns: installation prefix of the package
     :raises: :exc:`PackageNotFoundError` if the package is not found
+    :raises: :exc:`ValueError` if the package name is invalid
     """
+    # This regex checks for a valid package name as defined by REP-127 including the recommended
+    #  exemptions. See https://ros.org/reps/rep-0127.html#name
+    if re.fullmatch('[a-zA-Z0-9][a-zA-Z0-9_-]+', package_name, re.ASCII) is None:
+        raise ValueError(
+            "'{}' is not a valid package name".format(package_name))
     try:
         content, package_prefix = get_resource('packages', package_name)
     except LookupError:
@@ -66,6 +73,7 @@ def get_package_share_directory(package_name):
     :param str package_name: name of the package to locate
     :returns: share directory of the package
     :raises: :exc:`PackageNotFoundError` if the package is not found
+    :raises: :exc:`ValueError` if the package name is invalid
     """
     return os.path.join(get_package_prefix(package_name), 'share', package_name)
 
