@@ -311,6 +311,7 @@ def test_main_tool(capsys):
         f"bar\t{base_path / 'prefix1'}",
         f"baz\t{base_path / 'prefix2'}",
         f"foo\t{base_path / 'prefix1'}",
+        f"trogdor\t{base_path / 'prefix1'}",
         ''
     ])
     assert captured.out == expected_result
