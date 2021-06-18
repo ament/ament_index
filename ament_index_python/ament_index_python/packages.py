@@ -15,6 +15,7 @@
 import os
 import pathlib
 import re
+import warnings
 
 from .resources import get_resource
 from .resources import get_resources
@@ -61,7 +62,7 @@ def get_package_prefix(package_name):
     return package_prefix
 
 
-def get_package_share_directory(package_name):
+def get_package_share_directory(package_name, print_warning=True):
     """
     Return the share directory of the given package.
 
@@ -71,14 +72,18 @@ def get_package_share_directory(package_name):
     the package's share directory.
 
     :param str package_name: name of the package to locate
+    :param bool print_warning: if true, print a warning if the directory does not exist
     :returns: share directory of the package
     :raises: :exc:`PackageNotFoundError` if the package is not found
     :raises: :exc:`ValueError` if the package name is invalid
     """
-    return os.path.join(get_package_prefix(package_name), 'share', package_name)
+    path = os.path.join(get_package_prefix(package_name), 'share', package_name)
+    if print_warning and not os.path.exists(path):
+        warnings.warn(f'Share directory for {package_name} ({path}) does not exist.', stacklevel=2)
+    return path
 
 
-def get_package_share_path(package_name):
+def get_package_share_path(package_name, print_warning=True):
     """
     Return the share directory of the given package as a pathlib.Path.
 
@@ -89,7 +94,11 @@ def get_package_share_path(package_name):
     `get_package_share_path('foo') / 'urdf/robot.urdf'`
 
     :param str package_name: name of the package to locate
+    :param bool print_warning: if true, print a warning if the path does not exist
     :returns: share directory of the package as a pathlib.Path
     :raises: :exc:`PackageNotFoundError` if the package is not found
     """
-    return pathlib.Path(get_package_share_directory(package_name))
+    path = pathlib.Path(get_package_share_directory(package_name, print_warning=False))
+    if print_warning and not path.exists():
+        warnings.warn(f'Share path for {package_name} ({path}) does not exist.', stacklevel=2)
+    return path

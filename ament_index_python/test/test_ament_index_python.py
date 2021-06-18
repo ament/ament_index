@@ -200,7 +200,7 @@ def test_get_package_prefix():
             get_package_prefix(name)
 
     with pytest.raises(ValueError):
-        # An absolue path is not a valid package name
+        # An absolute path is not a valid package name
         extant_absolute_path = os.path.abspath(__file__)
         get_package_prefix(extant_absolute_path)
 
@@ -228,6 +228,12 @@ def test_get_package_share_directory():
     with pytest.raises(ValueError):
         get_package_share_directory('/invalid/package/name')
 
+    with pytest.warns(UserWarning):
+        # Package exists, but should print warning because there is no share dir
+        get_package_share_directory('trogdor')
+
+    get_package_share_directory('trogdor', print_warning=False)
+
 
 def test_get_package_share_path():
     set_ament_prefix_path(['prefix1', 'prefix2'])
@@ -246,6 +252,12 @@ def test_get_package_share_path():
 
     with pytest.raises(PackageNotFoundError):
         get_package_share_path('does_not_exist')
+
+    with pytest.warns(UserWarning):
+        # Package exists, but should print warning because there is no share dir
+        get_package_share_path('trogdor')
+
+    get_package_share_path('trogdor', print_warning=False)
 
 
 def test_get_resource_types():
@@ -299,6 +311,7 @@ def test_main_tool(capsys):
         f"bar\t{base_path / 'prefix1'}",
         f"baz\t{base_path / 'prefix2'}",
         f"foo\t{base_path / 'prefix1'}",
+        f"trogdor\t{base_path / 'prefix1'}",
         ''
     ])
     assert captured.out == expected_result
