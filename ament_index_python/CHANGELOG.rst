@@ -2,6 +2,11 @@
 Changelog for package ament_index_python
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add get_package_share_path method (`#73 <https://github.com/ament/ament_index/issues/73>`_) (`#76 <https://github.com/ament/ament_index/issues/76>`_)
+* Contributors: David V. Lu
+
 1.0.6 (2021-05-06)
 ------------------
 
