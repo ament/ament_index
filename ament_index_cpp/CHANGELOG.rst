@@ -2,8 +2,8 @@
 Changelog for package ament_index_cpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.4.0 (2022-03-01)
+------------------
 * Install includes to include/ (`#83 <https://github.com/ament/ament_index/issues/83>`_)
 * Remove ament_export_include_directories and ament_export_libraries (`#81 <https://github.com/ament/ament_index/issues/81>`_)
 * Contributors: Shane Loretz

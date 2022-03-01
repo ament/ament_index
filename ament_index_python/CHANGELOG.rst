@@ -2,8 +2,8 @@
 Changelog for package ament_index_python
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.4.0 (2022-03-01)
+------------------
 
 * Print warning when get_package_share_directory() does not exist (Fix `#74 <https://github.com/ament/ament_index/issues/74>`_) (`#77 <https://github.com/ament/ament_index/issues/77>`_)
 * Fail lookups on invalid resource names (`#69 <https://github.com/ament/ament_index/issues/69>`_)
