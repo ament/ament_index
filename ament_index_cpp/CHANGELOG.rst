@@ -2,6 +2,9 @@
 Changelog for package ament_index_cpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.5.0 (2022-04-29)
+------------------
+
 1.4.0 (2022-03-01)
 ------------------
 * Install includes to include/ (`#83 <https://github.com/ament/ament_index/issues/83>`_)

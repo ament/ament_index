@@ -5,7 +5,7 @@ package_name = 'ament_index_python'
 
 setup(
     name=package_name,
-    version='1.4.0',
+    version='1.5.0',
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/' + package_name, ['package.xml']),
