@@ -70,8 +70,8 @@ get_resources(const std::string & resource_type)
 
 #else
     std::string pattern = path + "/*";
-    WIN32_FIND_DATA find_data;
-    HANDLE find_handle = FindFirstFile(pattern.c_str(), &find_data);
+    WIN32_FIND_DATAA find_data;
+    HANDLE find_handle = FindFirstFileA(pattern.c_str(), &find_data);
     if (find_handle == INVALID_HANDLE_VALUE) {
       continue;
     }
@@ -89,7 +89,7 @@ get_resources(const std::string & resource_type)
       if (resources.find(find_data.cFileName) == resources.end()) {
         resources[find_data.cFileName] = base_path;
       }
-    } while (FindNextFile(find_handle, &find_data));
+    } while (FindNextFileA(find_handle, &find_data));
     FindClose(find_handle);
 #endif
   }
