@@ -2,6 +2,11 @@
 Changelog for package ament_index_cpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Update to C++17 (`#90 <https://github.com/ament/ament_index/issues/90>`_)
+* Contributors: Chris Lalancette
+
 1.6.0 (2023-04-27)
 ------------------
 
