@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+from typing import Dict, Union, Literal, Tuple
 
 from .constants import RESOURCE_INDEX_SUBFOLDER
 
@@ -22,16 +23,12 @@ from .search_paths import get_search_paths
 class InvalidResourceTypeNameError(ValueError):
     """Raised when a resource type name is invalid."""
 
-    pass
-
 
 class InvalidResourceNameError(ValueError):
     """Raised when a resource name is invalid."""
 
-    pass
 
-
-def _name_is_invalid(resource_name):
+def _name_is_invalid(resource_name: str) -> bool:
     """
     Get the whether a resource name or a resource type name is invalid.
 
@@ -49,7 +46,7 @@ def _name_is_invalid(resource_name):
     return ('/' in resource_name) or ('\\' in resource_name)
 
 
-def get_resource(resource_type, resource_name):
+def get_resource(resource_type: str, resource_name: str) -> Tuple[str, Union[str, os.PathLike[str]]]:
     """
     Get the content of a specific resource and its prefix path.
 
@@ -87,7 +84,7 @@ def get_resource(resource_type, resource_name):
         "Could not find the resource '%s' of type '%s'" % (resource_name, resource_type))
 
 
-def get_resources(resource_type):
+def get_resources(resource_type: str) -> Dict[str, Union[str, os.PathLike[str]]]:
     """
     Get the resource names of all resources of the specified type.
 
@@ -115,7 +112,7 @@ def get_resources(resource_type):
     return resources
 
 
-def get_resource_types():
+def get_resource_types() -> set[str]:
     """
     Get the resource types.
 
@@ -135,7 +132,7 @@ def get_resource_types():
     return resource_types
 
 
-def has_resource(resource_type, resource_name):
+def has_resource(resource_type: str, resource_name: str) -> Union[str, os.PathLike[str], Literal[False]]:
     """
     Check if a specific resource exists.
 

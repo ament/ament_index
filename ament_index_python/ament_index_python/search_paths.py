@@ -14,10 +14,12 @@
 
 import os
 
+from typing import List, Union
+
 from .constants import AMENT_PREFIX_PATH_ENV_VAR
 
 
-def get_search_paths():
+def get_search_paths() -> Union[List[str], List[os.PathLike[str]]]:
     """
     Get the paths from the environment variable '{AMENT_PREFIX_PATH_ENV_VAR}'.
 
