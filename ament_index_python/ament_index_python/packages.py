@@ -23,7 +23,7 @@ from .resources import get_resource
 from .resources import get_resources
 from .search_paths import get_search_paths
 
-
+ 
 class PackageNotFoundError(KeyError):
     pass
 
