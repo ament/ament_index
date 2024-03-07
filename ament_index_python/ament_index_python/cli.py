@@ -16,8 +16,9 @@ import argparse
 import sys
 from typing import Any, Dict, Generator, List, Tuple, Optional, Union
 
-from ament_index_python.resources import (get_resource, get_resource_types,
-                                          get_resources)
+from ament_index_python.resources import get_resource
+from ament_index_python.resources import get_resource_types
+from ament_index_python.resources import get_resources
 
 
 def main(argv: List[str] = sys.argv[1:]) -> Optional[str]:

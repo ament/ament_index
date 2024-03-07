@@ -28,7 +28,7 @@ class PackageNotFoundError(KeyError):
     pass
 
 
-def get_packages_with_prefixes() -> Dict[str, Union[str, os.PathLike[str]]]:
+def get_packages_with_prefixes() -> Dict[str, str]:
     """
     Return a dict of package names to the prefixes in which they are found.
 

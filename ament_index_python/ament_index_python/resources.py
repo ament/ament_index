@@ -23,9 +23,13 @@ from .search_paths import get_search_paths
 class InvalidResourceTypeNameError(ValueError):
     """Raised when a resource type name is invalid."""
 
+    pass
+
 
 class InvalidResourceNameError(ValueError):
     """Raised when a resource name is invalid."""
+
+    pass
 
 
 def _name_is_invalid(resource_name: str) -> bool:
@@ -84,7 +88,7 @@ def get_resource(resource_type: str, resource_name: str) -> Tuple[str, Union[str
         "Could not find the resource '%s' of type '%s'" % (resource_name, resource_type))
 
 
-def get_resources(resource_type: str) -> Dict[str, Union[str, os.PathLike[str]]]:
+def get_resources(resource_type: str) -> Dict[str, str]:
     """
     Get the resource names of all resources of the specified type.
 
