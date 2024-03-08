@@ -16,7 +16,6 @@ import os
 from typing import Dict, Literal, Tuple, Union
 
 from .constants import RESOURCE_INDEX_SUBFOLDER
-
 from .search_paths import get_search_paths
 
 

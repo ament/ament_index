@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import os
-
 from typing import List
 
 from .constants import AMENT_PREFIX_PATH_ENV_VAR
