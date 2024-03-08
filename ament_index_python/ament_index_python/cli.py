@@ -14,7 +14,7 @@
 
 import argparse
 import sys
-from typing import Any, Dict, Generator, List, Tuple, Optional, Union
+from typing import Any, Dict, Generator, List, Optional, Tuple, Union
 
 from ament_index_python.resources import get_resource
 from ament_index_python.resources import get_resource_types
@@ -62,17 +62,19 @@ def main(argv: List[str] = sys.argv[1:]) -> Optional[str]:
         print('<<<')
         print(content)
         print('>>>')
-    
+
     return None
 
 
-def resource_type_completer(prefix: Union[str, Tuple[str, ...]], **kwarg: Dict[str, Any]) -> Generator[str, None, None]:
+def resource_type_completer(prefix: Union[str, Tuple[str, ...]],
+                            **kwarg: Dict[str, Any]) -> Generator[str, None, None]:
     return (t for t in get_resource_types() if t.startswith(prefix))
 
 
 def resource_name_completer(prefix: Union[str, Tuple[str, ...]],
                             parsed_args: argparse.Namespace,
-                            **kwargs: Dict[str, Any]) -> Union[Generator[str, None, None], List[str]]:
+                            **kwargs: Dict[str, Any]) -> Union[Generator[str, None, None],
+                                                               List[str]]:
     resource_type = getattr(parsed_args, 'resource_type', None)
     if not resource_type:
         return []

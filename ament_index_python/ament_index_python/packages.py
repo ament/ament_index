@@ -15,9 +15,9 @@
 import os
 import pathlib
 import re
+from typing import Dict
 import warnings
 
-from typing import Dict
 
 from .resources import get_resource
 from .resources import get_resources

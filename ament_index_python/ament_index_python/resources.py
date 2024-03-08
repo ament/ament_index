@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import os
-from typing import Dict, Union, Literal, Tuple
+from typing import Dict, Literal, Tuple, Union
 
 from .constants import RESOURCE_INDEX_SUBFOLDER
 
