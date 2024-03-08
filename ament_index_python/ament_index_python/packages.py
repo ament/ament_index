@@ -17,7 +17,7 @@ import pathlib
 import re
 import warnings
 
-from typing import Dict, Union
+from typing import Dict
 
 from .resources import get_resource
 from .resources import get_resources
@@ -38,7 +38,7 @@ def get_packages_with_prefixes() -> Dict[str, str]:
     return get_resources('packages')
 
 
-def get_package_prefix(package_name: str) -> Union[str, os.PathLike[str]]:
+def get_package_prefix(package_name: str) -> str:
     """
     Return the installation prefix directory of the given package.
 

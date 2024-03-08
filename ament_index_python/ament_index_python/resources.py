@@ -50,7 +50,7 @@ def _name_is_invalid(resource_name: str) -> bool:
     return ('/' in resource_name) or ('\\' in resource_name)
 
 
-def get_resource(resource_type: str, resource_name: str) -> Tuple[str, Union[str, os.PathLike[str]]]:
+def get_resource(resource_type: str, resource_name: str) -> Tuple[str, str]:
     """
     Get the content of a specific resource and its prefix path.
 
@@ -136,7 +136,7 @@ def get_resource_types() -> set[str]:
     return resource_types
 
 
-def has_resource(resource_type: str, resource_name: str) -> Union[str, os.PathLike[str], Literal[False]]:
+def has_resource(resource_type: str, resource_name: str) -> Union[str, Literal[False]]:
     """
     Check if a specific resource exists.
 
