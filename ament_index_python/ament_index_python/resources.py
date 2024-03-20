@@ -13,7 +13,13 @@
 # limitations under the License.
 
 import os
+import sys
 from typing import Dict, Literal, Tuple, Union
+
+if sys.version_info >= (3, 10):
+    Set = set
+else:
+    from typing import Set
 
 from .constants import RESOURCE_INDEX_SUBFOLDER
 from .search_paths import get_search_paths
@@ -115,7 +121,7 @@ def get_resources(resource_type: str) -> Dict[str, str]:
     return resources
 
 
-def get_resource_types() -> set[str]:
+def get_resource_types() -> Set[str]:
     """
     Get the resource types.
 
