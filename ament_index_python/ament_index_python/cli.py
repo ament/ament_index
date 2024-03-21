@@ -14,13 +14,14 @@
 
 import argparse
 import sys
+from typing import Any, Dict, Generator, List, Optional, Tuple, Union
 
 from ament_index_python.resources import get_resource
 from ament_index_python.resources import get_resource_types
 from ament_index_python.resources import get_resources
 
 
-def main(argv=sys.argv[1:]):
+def main(argv: List[str] = sys.argv[1:]) -> Optional[str]:
     parser = argparse.ArgumentParser(
         description='Query the ament resource index.')
     arg = parser.add_argument(
@@ -44,13 +45,13 @@ def main(argv=sys.argv[1:]):
     if args.resource_type is None:
         for resource_type in sorted(get_resource_types()):
             print(resource_type)
-        return
+        return None
 
     if args.resource_name is None:
         resources = get_resources(args.resource_type)
         for resource_name in sorted(resources.keys()):
-            print(resource_name + '\t' + resources[resource_name])
-        return
+            print(f'{resource_name}\t{resources[resource_name]}')
+        return None
 
     try:
         content, path = get_resource(args.resource_type, args.resource_name)
@@ -62,12 +63,18 @@ def main(argv=sys.argv[1:]):
         print(content)
         print('>>>')
 
+    return None
 
-def resource_type_completer(prefix, **kwargs):
+
+def resource_type_completer(prefix: Union[str, Tuple[str, ...]],
+                            **kwarg: Dict[str, Any]) -> Generator[str, None, None]:
     return (t for t in get_resource_types() if t.startswith(prefix))
 
 
-def resource_name_completer(prefix, parsed_args, **kwargs):
+def resource_name_completer(prefix: Union[str, Tuple[str, ...]],
+                            parsed_args: argparse.Namespace,
+                            **kwargs: Dict[str, Any]) -> Union[Generator[str, None, None],
+                                                               List[str]]:
     resource_type = getattr(parsed_args, 'resource_type', None)
     if not resource_type:
         return []
