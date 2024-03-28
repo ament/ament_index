@@ -14,7 +14,8 @@ Below are the rationales, notes, and caveats for this claim, organized by each r
 
 ### Version Stability [1.ii]
 
-`ament_index_python` is at a stable version, i.e. >= 1.0.0. The current version can be found in its [package.xml](./package.xml).
+`ament_index_python` is at a stable version, i.e. >= 1.0.0.
+The current version can be found in its [package.xml](./package.xml).
 
 ### Public API Declaration [1.iii]
 
@@ -42,7 +43,8 @@ All changes will occur through a pull request, check the [ROS 2 Developer Guide]
 
 ### Contributor Origin [2.ii]
 
-This package uses DCO as its confirmation of contributor origin policy. More information can be found in [CONTRIBUTING](../CONTRIBUTING.md).
+This package uses DCO as its confirmation of contributor origin policy.
+More information can be found in [CONTRIBUTING](../CONTRIBUTING.md).
 
 ### Peer Review Policy [2.iii]
 
@@ -66,23 +68,26 @@ All pull requests must resolve related documentation changes before merging.
 
 ### Feature Documentation [3.i]
 
-`ament_index_python` does not have a documented feature list. Although it currently states part of its conceptual overview [here](https://github.com/ament/ament_cmake/blob/master/ament_cmake_core/doc/resource_index.md).
+`ament_index_python` does not have a documented feature list, although it currently states part of its conceptual overview [here](https://github.com/ament/ament_cmake/blob/rolling/ament_cmake_core/doc/resource_index.md).
 
 ### Public API Documentation [3.ii]
 
-Most `ament_index_python` API functions are documented using docstrings. However, this is not hosted anywhere.
+Most `ament_index_python` API functions are documented using docstrings.
+However, this is not hosted anywhere.
 
 ### License [3.iii]
 
 The license for `ament_index_python` is Apache 2.0, and a summary is in each source file, the type is declared in the [`package.xml`](./package.xml) manifest file, and a full copy of the license is in the [`LICENSE`](../LICENSE) file.
 
-There is an automated test which runs a linter that ensures each file has a license statement. [Here](https://ci.ros2.org/view/nightly/job/nightly_linux_release/lastBuild/testReport/ament_index_python.src.ament.ament_index.ament_index_python.test/) can be found a list with the latest results of the various linters being run on the package.
+There is an automated test which runs a linter that ensures each file has a license statement.
+[Here](https://ci.ros2.org/view/nightly/job/nightly_linux_release/lastBuild/testReport/ament_index_python.src.ament.ament_index.ament_index_python.test/) can be found a list with the latest results of the various linters being run on the package.
 
 ### Copyright Statements [3.iv]
 
 The copyright holders each provide a statement of copyright in each source code file in `ament_index_python`.
 
-There is an automated test which runs a linter that ensures each file has at least one copyright statement. Latest linter result report can be seen [here](https://ci.ros2.org/view/nightly/job/nightly_linux_release/lastBuild/testReport/ament_index_python.src.ament.ament_index.ament_index_python.test/test_copyright/) .
+There is an automated test which runs a linter that ensures each file has at least one copyright statement.
+Latest linter result report can be seen [here](https://ci.ros2.org/view/nightly/job/nightly_linux_release/lastBuild/testReport/ament_index_python.src.ament.ament_index.ament_index_python.test/test_copyright/) .
 
 ## Testing [4]
 
@@ -100,7 +105,8 @@ New features are required to have tests before being added.
 
 ### Public API Testing [4.ii]
 
-All the functionality of the declared API in this package is covered in its unit tests. Currently it has a line coverage of [96%](https://ci.ros2.org/job/ci_linux_coverage/85/cobertura/ament_index_python/).
+All the functionality of the declared API in this package is covered in its unit tests.
+Currently it has a line coverage of [96%](https://ci.ros2.org/job/ci_linux_coverage/85/cobertura/ament_index_python/).
 
 ### Coverage [4.iii]
 
@@ -128,7 +134,8 @@ Therefore `ament_index_python` does not conduct explicit performance tests.
 
 ### Linters and Static Analysis [4.v]
 
-`ament_index_python` uses and passes all the ROS2 standard linters and static analysis tools for a Python package as described in the [ROS 2 Developer Guide](https://docs.ros.org/en/rolling/Contributing/Developer-Guide.html#linters-and-static-analysis). Passing implies there are no linter/static errors when testing against CI of supported platforms.
+`ament_index_python` uses and passes all the ROS 2 standard linters and static analysis tools for a Python package as described in the [ROS 2 Developer Guide](https://docs.ros.org/en/rolling/Contributing/Developer-Guide.html#linters-and-static-analysis).
+Passing implies there are no linter/static errors when testing against CI of supported platforms.
 
 Currently nightly test results can be seen here:
 * [linux-aarch64_release](https://ci.ros2.org/view/nightly/job/nightly_linux-aarch64_release/lastBuild/testReport/ament_index_python.src.ament.ament_index.ament_index_python.test/)
