@@ -14,7 +14,8 @@ Below are the rationales, notes, and caveats for this claim, organized by each r
 
 ### Version Stability [1.ii]
 
-`ament_index_cpp` is at a stable version, i.e. >= 1.0.0. The current version can be found in its [package.xml](./package.xml).
+`ament_index_cpp` is at a stable version, i.e. >= 1.0.0.
+The current version can be found in its [package.xml](./package.xml).
 
 ### Public API Declaration [1.iii]
 
@@ -42,7 +43,8 @@ All changes will occur through a pull request, check the [ROS 2 Developer Guide]
 
 ### Contributor Origin [2.ii]
 
-This package uses DCO as its confirmation of contributor origin policy. More information can be found in [CONTRIBUTING](../CONTRIBUTING.md)
+This package uses DCO as its confirmation of contributor origin policy.
+More information can be found in [CONTRIBUTING](../CONTRIBUTING.md)
 
 ### Peer Review Policy [2.iii]
 
@@ -76,13 +78,15 @@ All `ament_index_cpp` API functions are documented using docstrings, and it is [
 
 The license for `ament_index_cpp` is Apache 2.0, and a summary is in each source file, the type is declared in the [`package.xml`](./package.xml) manifest file, and a full copy of the license is in the [`LICENSE`](../LICENSE) file.
 
-There is an automated test which runs a linter that ensures each file has a license statement. [Here](https://ci.ros2.org/view/nightly/job/nightly_linux_release/lastBuild/testReport/ament_index_cpp/) can be found a list with the latest results of the various linters being run on the package.
+There is an automated test which runs a linter that ensures each file has a license statement.
+[Here](https://ci.ros2.org/view/nightly/job/nightly_linux_release/lastBuild/testReport/ament_index_cpp/) can be found a list with the latest results of the various linters being run on the package.
 
 ### Copyright Statements [3.iv]
 
 The copyright holders each provide a statement of copyright in each source code file in `ament_index_cpp`.
 
-There is an automated test which runs a linter that ensures each file has at least one copyright statement. Latest linter result report can be seen [here](https://ci.ros2.org/view/nightly/job/nightly_linux_release/lastBuild/testReport/ament_index_cpp/copyright/).
+There is an automated test which runs a linter that ensures each file has at least one copyright statement.
+Latest linter result report can be seen [here](https://ci.ros2.org/view/nightly/job/nightly_linux_release/lastBuild/testReport/ament_index_cpp/copyright/).
 
 ## Testing [4]
 
@@ -100,7 +104,8 @@ New features are required to have tests before being added.
 
 ### Public API Testing [4.ii]
 
-All the functionality of the declared API in this package is covered in its unit tests. Currently it has a line coverage of [99%](https://ci.ros2.org/job/nightly_linux_coverage/lastSuccessfulBuild/cobertura/src_ament_ament_index_ament_index_cpp_src/).
+All the functionality of the declared API in this package is covered in its unit tests.
+Currently it has a line coverage of [99%](https://ci.ros2.org/job/nightly_linux_coverage/lastSuccessfulBuild/cobertura/src_ament_ament_index_ament_index_cpp_src/).
 
 ### Coverage [4.iii]
 
@@ -130,7 +135,8 @@ Therefore `ament_index_cpp` does not conduct explicit performance tests.
 
 ### Linters and Static Analysis [4.v]
 
-`ament_index_cpp` uses and passes all the ROS2 standard linters and static analysis tools for a C++ package as described in the [ROS 2 Developer Guide](https://docs.ros.org/en/rolling/Contributing/Developer-Guide.html#linters-and-static-analysis). Passing implies there are no linter/static errors when testing against CI of supported platforms.
+`ament_index_cpp` uses and passes all the ROS 2 standard linters and static analysis tools for a C++ package as described in the [ROS 2 Developer Guide](https://docs.ros.org/en/rolling/Contributing/Developer-Guide.html#linters-and-static-analysis).
+Passing implies there are no linter/static errors when testing against CI of supported platforms.
 
 Currently nightly results can be seen here:
 * [linux-aarch64_release](https://ci.ros2.org/view/nightly/job/nightly_linux-aarch64_release/lastBuild/testReport/ament_index_cpp/)
