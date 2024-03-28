@@ -2,8 +2,8 @@
 Changelog for package ament_index_python
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.8.0 (2024-03-28)
+------------------
 * Add type annotations to python files. (`#93 <https://github.com/ament/ament_index/issues/93>`_)
 * Contributors: Michael Carlstrom
 
