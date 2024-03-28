@@ -2,6 +2,11 @@
 Changelog for package ament_index_cpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* only append search paths on first PackageNotFound (`#91 <https://github.com/ament/ament_index/issues/91>`_)
+* Contributors: Lucas Walter
+
 1.7.0 (2023-08-21)
 ------------------
 * Update to C++17 (`#90 <https://github.com/ament/ament_index/issues/90>`_)
