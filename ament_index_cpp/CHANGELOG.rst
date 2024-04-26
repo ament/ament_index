@@ -2,6 +2,11 @@
 Changelog for package ament_index_cpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Update quality declaration documents (`#94 <https://github.com/ament/ament_index/issues/94>`_)
+* Contributors: Christophe Bedard
+
 1.8.0 (2024-03-28)
 ------------------
 * only append search paths on first PackageNotFound (`#91 <https://github.com/ament/ament_index/issues/91>`_)
