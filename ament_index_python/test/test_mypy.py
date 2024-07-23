@@ -16,5 +16,5 @@ from ament_mypy.main import main
 
 
 def test_mypy() -> None:
-    rc = main(argv=['--exclude', 'test', 'docs'])
+    rc = main(argv=['--exclude', 'test'])
     assert rc == 0, 'Found code style errors / warnings'

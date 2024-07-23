@@ -30,6 +30,8 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+# -- Imports -----------------------------------------------------
+from typing import Dict, List, Sequence
 
 # -- Project information -----------------------------------------------------
 
@@ -82,7 +84,7 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []
+exclude_patterns: Sequence[str] = []
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = None
@@ -104,7 +106,7 @@ html_theme = 'alabaster'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = []
+html_static_path: List[str] = []
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -125,7 +127,7 @@ htmlhelp_basename = 'ament_index_python_doc'
 
 # -- Options for LaTeX output ------------------------------------------------
 
-latex_elements = {
+latex_elements: Dict[str, str] = {
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
