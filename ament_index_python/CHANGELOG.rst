@@ -2,8 +2,8 @@
 Changelog for package ament_index_python
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.10.0 (2024-10-03)
+-------------------
 * Add ament_mypy unit test and export types (`#95 <https://github.com/ament/ament_index/issues/95>`_)
 * Contributors: Michael Carlstrom
 
