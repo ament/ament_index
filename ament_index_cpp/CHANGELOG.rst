@@ -2,6 +2,9 @@
 Changelog for package ament_index_cpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.9.0 (2024-04-26)
 ------------------
 * Update quality declaration documents (`#94 <https://github.com/ament/ament_index/issues/94>`_)
