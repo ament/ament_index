@@ -2,8 +2,8 @@
 Changelog for package ament_index_python
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.10.1 (2024-11-20)
+-------------------
 * Add test_xmllint to ament_index_python. (`#96 <https://github.com/ament/ament_index/issues/96>`_)
 * Contributors: Chris Lalancette
 
