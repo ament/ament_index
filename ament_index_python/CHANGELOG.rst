@@ -2,6 +2,11 @@
 Changelog for package ament_index_python
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.10.2 (2025-04-17)
+-------------------
+* Add py.typed to package_data (`#100 <https://github.com/ament/ament_index/issues/100>`_)
+* Contributors: Michael Carlstrom
+
 1.10.1 (2024-11-20)
 -------------------
 * Add test_xmllint to ament_index_python. (`#96 <https://github.com/ament/ament_index/issues/96>`_)
