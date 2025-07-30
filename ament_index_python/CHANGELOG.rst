@@ -2,6 +2,11 @@
 Changelog for package ament_index_python
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix setuptools deprecations (`#101 <https://github.com/ament/ament_index/issues/101>`_)
+* Contributors: mosfet80
+
 1.12.0 (2025-04-24)
 -------------------
 
