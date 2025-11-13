@@ -148,7 +148,22 @@ TEST(AmentIndexCpp, get_resources_underlay) {
 
 TEST(AmentIndexCpp, get_empty_resource) {
   std::string content;
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   EXPECT_THROW(ament_index_cpp::get_resource("", "", content), std::runtime_error);
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
+  auto result = ament_index_cpp::get_resource("", "");
+  EXPECT_EQ(std::get<0>(result), std::nullopt);
+  EXPECT_EQ(std::get<1>(result), "");
 }
 
 TEST(AmentIndexCpp, get_unknown_resource) {
@@ -156,8 +171,23 @@ TEST(AmentIndexCpp, get_unknown_resource) {
   subfolders.push_back("prefix1");
   set_ament_prefix_path(subfolders);
   std::string content;
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   bool success = ament_index_cpp::get_resource("resource_type4", "bar", content);
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
   EXPECT_FALSE(success);
+  auto result = ament_index_cpp::get_resource("resource_type4", "bar");
+  EXPECT_EQ(std::get<0>(result), std::nullopt);
+  EXPECT_EQ(std::get<1>(result), "");
 }
 
 TEST(AmentIndexCpp, get_resource) {
@@ -165,9 +195,24 @@ TEST(AmentIndexCpp, get_resource) {
   subfolders.push_back("prefix1");
   set_ament_prefix_path(subfolders);
   std::string content;
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   bool success = ament_index_cpp::get_resource("resource_type4", "foo", content);
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
   EXPECT_TRUE(success);
   EXPECT_EQ(content, "foo");
+  auto result = ament_index_cpp::get_resource("resource_type4", "foo");
+  EXPECT_NE(std::get<0>(result), std::nullopt);
+  EXPECT_EQ(std::get<1>(result), "foo");
 }
 
 TEST(AmentIndexCpp, get_resource_underlay) {
@@ -178,9 +223,24 @@ TEST(AmentIndexCpp, get_resource_underlay) {
   set_ament_prefix_path(subfolders);
   std::string content;
   // This resource is only found in the underlay
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   bool success = ament_index_cpp::get_resource("resource_type2", "bar", content);
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
   EXPECT_TRUE(success);
   EXPECT_EQ(content, "");
+  auto result = ament_index_cpp::get_resource("resource_type2", "bar");
+  EXPECT_NE(std::get<0>(result), std::nullopt);
+  EXPECT_EQ(std::get<1>(result), "");
 }
 
 TEST(AmentIndexCpp, get_resource_overlay) {
@@ -191,9 +251,24 @@ TEST(AmentIndexCpp, get_resource_overlay) {
   set_ament_prefix_path(subfolders);
   std::string content;
   // This resource is in both the overlay and the underlay
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   bool success = ament_index_cpp::get_resource("resource_type5", "foo", content);
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
   EXPECT_TRUE(success);
   EXPECT_EQ(content, "foo1");
+  auto result = ament_index_cpp::get_resource("resource_type5", "foo");
+  EXPECT_NE(std::get<0>(result), std::nullopt);
+  EXPECT_EQ(std::get<1>(result), "foo1");
 }
 
 TEST(AmentIndexCpp, get_resource_overlay_base_path) {
@@ -205,9 +280,23 @@ TEST(AmentIndexCpp, get_resource_overlay_base_path) {
   std::string content;
   std::string base_path;
   // This resource is only found in the overlay
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   bool success = ament_index_cpp::get_resource("resource_type2", "foo", content, &base_path);
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
   EXPECT_TRUE(success);
   EXPECT_EQ(base_path, generate_subfolder_path("prefix1"));
+  auto result = ament_index_cpp::get_resource("resource_type2", "foo");
+  EXPECT_EQ(std::get<0>(result), generate_subfolder_path("prefix1"));
 }
 
 TEST(AmentIndexCpp, get_resource_underlay_base_path) {
@@ -219,9 +308,23 @@ TEST(AmentIndexCpp, get_resource_underlay_base_path) {
   std::string content;
   std::string base_path;
   // This resource is only found in the underlay
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   bool success = ament_index_cpp::get_resource("resource_type2", "bar", content, &base_path);
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
   EXPECT_TRUE(success);
   EXPECT_EQ(base_path, generate_subfolder_path("prefix2"));
+  auto result = ament_index_cpp::get_resource("resource_type2", "bar");
+  EXPECT_EQ(std::get<0>(result), generate_subfolder_path("prefix2"));
 }
 
 TEST(AmentIndexCpp, get_package_prefix) {
@@ -230,6 +333,13 @@ TEST(AmentIndexCpp, get_package_prefix) {
   subfolders.push_back("prefix1");  // only contains foo and bar packages
   subfolders.push_back("prefix2");  // only contains bar and baz packages
   set_ament_prefix_path(subfolders);
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   // foo is found in prefix 1
   EXPECT_EQ(generate_subfolder_path("prefix1"), ament_index_cpp::get_package_prefix("foo"));
   // bar is in both, but prefix 1 takes precedence
@@ -243,7 +353,30 @@ TEST(AmentIndexCpp, get_package_prefix) {
   // exception when the package name is empty
   EXPECT_THROW(
     ament_index_cpp::get_package_prefix(""),
-    std::runtime_error);
+    ament_index_cpp::PackageNotFoundError);
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
+  std::filesystem::path path_result;
+  ament_index_cpp::get_package_prefix("foo", path_result);
+  // foo is found in prefix 1
+  EXPECT_EQ(generate_subfolder_path("prefix1"), path_result.c_str());
+  // bar is in both, but prefix 1 takes precedence
+  ament_index_cpp::get_package_prefix("bar", path_result);
+  EXPECT_EQ(generate_subfolder_path("prefix1"), path_result.c_str());
+  // baz is found in prefix 2 only
+  ament_index_cpp::get_package_prefix("baz", path_result);
+  EXPECT_EQ(generate_subfolder_path("prefix2"), path_result.c_str());
+  // exception when package is not found
+  EXPECT_THROW(
+    ament_index_cpp::get_package_prefix("does_not_exist", path_result),
+    ament_index_cpp::PackageNotFoundError);
+  // exception when the package name is empty
+  EXPECT_THROW(
+    ament_index_cpp::get_package_prefix("", path_result),
+    ament_index_cpp::PackageNotFoundError);
 }
 
 TEST(AmentIndexCpp, get_package_share_directory) {
@@ -253,9 +386,26 @@ TEST(AmentIndexCpp, get_package_share_directory) {
   subfolders.push_back("prefix2");  // only contains bar and baz packages
   set_ament_prefix_path(subfolders);
   // bar is in both, but prefix 1 takes precedence
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   EXPECT_EQ(
     generate_subfolder_path("prefix1") + "/share/bar",
     ament_index_cpp::get_package_share_directory("bar"));
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
+  std::filesystem::path path_result;
+  ament_index_cpp::get_package_share_directory("bar", path_result);
+  EXPECT_EQ(
+    generate_subfolder_path("prefix1") + "/share/bar",
+    path_result.c_str());
 }
 
 TEST(AmentIndexCpp, get_packages_with_prefixes) {
@@ -278,32 +428,130 @@ TEST(AmentIndexCpp, get_packages_with_prefixes) {
 }
 
 TEST(AmentIndexCpp, has_empty_name) {
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   EXPECT_THROW(
     ament_index_cpp::has_resource("type", ""),
     std::runtime_error);
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
+  auto result = ament_index_cpp::is_resource_available("type", "");
+  EXPECT_EQ(result, std::nullopt);
 }
 
 TEST(AmentIndexCpp, has_empty_type) {
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   EXPECT_THROW(
     ament_index_cpp::has_resource("", "name"),
     std::runtime_error);
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
+  auto result = ament_index_cpp::is_resource_available("", "name");
+  EXPECT_EQ(result, std::nullopt);
 }
 
 TEST(AmentIndexCpp, has_unknown_resource) {
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   bool success = ament_index_cpp::has_resource("resource_type4", "bar21");
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
   EXPECT_FALSE(success);
+  auto result = ament_index_cpp::is_resource_available("resource_type4", "bar21");
+  EXPECT_EQ(result, std::nullopt);
 }
 
 TEST(AmentIndexCpp, has_resource) {
   std::string result_path;
-
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   EXPECT_TRUE(ament_index_cpp::has_resource("resource_type1", "foo", &result_path));
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
   EXPECT_EQ(result_path, generate_subfolder_path("prefix1"));
+  auto result = ament_index_cpp::is_resource_available("resource_type1", "foo");
+  EXPECT_EQ(result.value().c_str(), generate_subfolder_path("prefix1"));
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   EXPECT_TRUE(ament_index_cpp::has_resource("resource_type3", "bar"));
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
+  result = ament_index_cpp::is_resource_available("resource_type3", "bar");
+  EXPECT_NE(result, std::nullopt);
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   EXPECT_TRUE(ament_index_cpp::has_resource("packages", "baz", &result_path));
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
   EXPECT_EQ(result_path, generate_subfolder_path("prefix2"));
+  result = ament_index_cpp::is_resource_available("packages", "baz");
+  EXPECT_NE(result, std::nullopt);
+  EXPECT_EQ(result_path, result.value().c_str());
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4996)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
   EXPECT_FALSE(ament_index_cpp::has_resource("resource_type1", "resource", &result_path));
+#ifdef _MSC_VER
+#pragma warning(pop)
+#else
+#pragma GCC diagnostic pop
+#endif
+  result = ament_index_cpp::is_resource_available("resource_type1", "resource");
+  EXPECT_EQ(result, std::nullopt);
 }

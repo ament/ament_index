@@ -57,12 +57,20 @@ PackageNotFoundError::~PackageNotFoundError() {}
 std::string
 get_package_prefix(const std::string & package_name)
 {
-  std::string content;
-  std::string prefix_path;
-  if (!get_resource("packages", package_name, content, &prefix_path)) {
-    throw PackageNotFoundError(package_name);
-  }
-  return prefix_path;
+  std::filesystem::path result;
+  get_package_prefix(package_name, result);
+  return result.c_str();
 }
 
+void
+get_package_prefix(const std::string & package_name, std::filesystem::path & path)
+{
+  std::string content;
+  std::string prefix_path;
+  auto result = get_resource("packages", package_name);
+  if (std::get<0>(result) == std::nullopt) {
+    throw PackageNotFoundError(package_name);
+  }
+  path = std::get<0>(result).value().c_str();
+}
 }  // namespace ament_index_cpp

@@ -15,14 +15,40 @@
 #include "ament_index_cpp/get_resource.hpp"
 
 #include <fstream>
+#include <optional>
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <tuple>
 
 #include "ament_index_cpp/get_search_paths.hpp"
 
 namespace ament_index_cpp
 {
+std::tuple<std::optional<std::filesystem::path>, std::string>
+get_resource(
+  const std::string & resource_type,
+  const std::string & resource_name)
+{
+  if (resource_type.empty()) {
+    return std::make_tuple(std::nullopt, "");
+  }
+  if (resource_name.empty()) {
+    return std::make_tuple(std::nullopt, "");
+  }
+  auto paths = get_search_paths();
+  for (auto path : paths) {
+    auto resource_path = path + "/share/ament_index/resource_index/" +
+      resource_type + "/" + resource_name;
+    std::ifstream s(resource_path);
+    if (s.is_open()) {
+      std::stringstream buffer;
+      buffer << s.rdbuf();
+      return std::make_tuple(std::filesystem::path(path), buffer.str());
+    }
+  }
+  return std::make_tuple(std::nullopt, "");
+}
 
 bool
 get_resource(
@@ -37,20 +63,13 @@ get_resource(
   if (resource_name.empty()) {
     throw std::runtime_error("ament_index_cpp::get_resource() resource name must not be empty");
   }
-  auto paths = get_search_paths();
-  for (auto path : paths) {
-    auto resource_path = path + "/share/ament_index/resource_index/" +
-      resource_type + "/" + resource_name;
-    std::ifstream s(resource_path);
-    if (s.is_open()) {
-      std::stringstream buffer;
-      buffer << s.rdbuf();
-      content = buffer.str();
-      if (prefix_path) {
-        *prefix_path = path;
-      }
-      return true;
+  auto result = get_resource(resource_type, resource_name);
+  if (std::get<0>(result) != std::nullopt) {
+    content = std::get<1>(result);
+    if (prefix_path) {
+      *prefix_path = std::get<0>(result).value().c_str();
     }
+    return true;
   }
   return false;
 }

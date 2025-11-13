@@ -41,7 +41,10 @@
 #ifndef AMENT_INDEX_CPP__GET_RESOURCE_HPP_
 #define AMENT_INDEX_CPP__GET_RESOURCE_HPP_
 
+#include <filesystem>
+#include <optional>
 #include <string>
+#include <tuple>
 
 #include "ament_index_cpp/visibility_control.h"
 
@@ -56,6 +59,7 @@ namespace ament_index_cpp
  * \return `true` is the resource exists, `false` otherwise.
  * \throws std::runtime_error if resource_type or resource_name are empty.
  */
+[[deprecated("Use std::tuple<> get_resource(...) instead")]]
 AMENT_INDEX_CPP_PUBLIC
 bool
 get_resource(
@@ -63,6 +67,20 @@ get_resource(
   const std::string & resource_name,
   std::string & content,
   std::string * prefix_path = nullptr);
+
+/// Get a the content and path of a resource
+/**
+ * \param[in] resource_type type of the resource
+ * \param[in] resource_name name of the resource
+ * \return a tuple with the the installation prefix of the given resource if found
+ *         and the contesnt of the resource
+ * \throws std::runtime_error if resource_type or resource_name are empty.
+ */
+AMENT_INDEX_CPP_PUBLIC
+std::tuple<std::optional<std::filesystem::path>, std::string>
+get_resource(
+  const std::string & resource_type,
+  const std::string & resource_name);
 
 }  // namespace ament_index_cpp
 
