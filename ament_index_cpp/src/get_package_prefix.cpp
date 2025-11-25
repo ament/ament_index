@@ -37,9 +37,9 @@ format_package_not_found_error_message(const std::string & package_name)
   }
 
   message += ", searching: [";
-  auto search_paths = get_search_paths();
+  auto search_paths = get_searcheable_paths();
   for (const auto & path : search_paths) {
-    message += path + ", ";
+    message += path.string() + ", ";
   }
   if (search_paths.size() > 0) {
     message = message.substr(0, message.size() - 2);

@@ -44,7 +44,6 @@ has_resource(
 /**
  * \param[in] resource_type type of the resource
  * \param[in] resource_name name of the resource
- * \param[out] prefix_path the installation prefix of the given resource if found.
  * \return the installation prefix of the given resource if found or std::nullptr otherwise
  * \throws std::runtime_error if resource_type or resource_name are empty
  */

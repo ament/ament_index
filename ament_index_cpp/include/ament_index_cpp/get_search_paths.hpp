@@ -15,6 +15,7 @@
 #ifndef AMENT_INDEX_CPP__GET_SEARCH_PATHS_HPP_
 #define AMENT_INDEX_CPP__GET_SEARCH_PATHS_HPP_
 
+#include <filesystem>
 #include <list>
 #include <string>
 
@@ -27,9 +28,19 @@ namespace ament_index_cpp
  * \return a list with the searcheable paths
  * \throws runtime_error if the environment variable AMENT_PREFIX_PATH is not set
  */
+[[deprecated("Use get_searcheable_paths() instead")]]
 AMENT_INDEX_CPP_PUBLIC
 std::list<std::string>
 get_search_paths();
+
+/// Get the searcheable paths in the environment variable AMENT_PREFIX_PATH.
+/**
+ * \return a list with the searcheable paths
+ * \throws runtime_error if the environment variable AMENT_PREFIX_PATH is not set
+ */
+AMENT_INDEX_CPP_PUBLIC
+std::list<std::filesystem::path>
+get_searcheable_paths();
 
 }  // namespace ament_index_cpp
 
