@@ -44,7 +44,7 @@
 #include <filesystem>
 #include <optional>
 #include <string>
-#include <tuple>
+#include <utility>
 
 #include "ament_index_cpp/visibility_control.h"
 
@@ -59,7 +59,7 @@ namespace ament_index_cpp
  * \return `true` is the resource exists, `false` otherwise.
  * \throws std::runtime_error if resource_type or resource_name are empty.
  */
-[[deprecated("Use std::tuple<> get_resource(...) instead")]]
+[[deprecated("Use std::pair<> get_resource(...) instead")]]
 AMENT_INDEX_CPP_PUBLIC
 bool
 get_resource(
@@ -72,12 +72,12 @@ get_resource(
 /**
  * \param[in] resource_type type of the resource
  * \param[in] resource_name name of the resource
- * \return a tuple with the the installation prefix of the given resource if found
- *         and the contesnt of the resource
+ * \return a pair with the the installation prefix of the given resource if found
+ *         and the contents of the resource
  * \throws std::runtime_error if resource_type or resource_name are empty.
  */
 AMENT_INDEX_CPP_PUBLIC
-std::tuple<std::optional<std::filesystem::path>, std::string>
+std::pair<std::optional<std::filesystem::path>, std::string>
 get_resource(
   const std::string & resource_type,
   const std::string & resource_name);

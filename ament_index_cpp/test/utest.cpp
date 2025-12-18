@@ -152,8 +152,8 @@ TEST(AmentIndexCpp, get_resources_underlay) {
 TEST(AmentIndexCpp, get_empty_resource) {
   std::string content;
   auto result = ament_index_cpp::get_resource("", "");
-  EXPECT_EQ(std::get<0>(result), std::nullopt);
-  EXPECT_EQ(std::get<1>(result), "");
+  EXPECT_EQ(result.first, std::nullopt);
+  EXPECT_EQ(result.second, "");
 }
 
 TEST(AmentIndexCpp, get_unknown_resource) {
@@ -161,8 +161,8 @@ TEST(AmentIndexCpp, get_unknown_resource) {
   subfolders.push_back("prefix1");
   set_ament_prefix_path(subfolders);
   auto result = ament_index_cpp::get_resource("resource_type4", "bar");
-  EXPECT_EQ(std::get<0>(result), std::nullopt);
-  EXPECT_EQ(std::get<1>(result), "");
+  EXPECT_EQ(result.first, std::nullopt);
+  EXPECT_EQ(result.second, "");
 }
 
 TEST(AmentIndexCpp, get_resource) {
@@ -170,8 +170,8 @@ TEST(AmentIndexCpp, get_resource) {
   subfolders.push_back("prefix1");
   set_ament_prefix_path(subfolders);
   auto result = ament_index_cpp::get_resource("resource_type4", "foo");
-  EXPECT_NE(std::get<0>(result), std::nullopt);
-  EXPECT_EQ(std::get<1>(result), "foo");
+  EXPECT_NE(result.first, std::nullopt);
+  EXPECT_EQ(result.second, "foo");
 }
 
 TEST(AmentIndexCpp, get_resource_underlay) {
@@ -181,8 +181,8 @@ TEST(AmentIndexCpp, get_resource_underlay) {
   subfolders.push_back("prefix2");
   set_ament_prefix_path(subfolders);
   auto result = ament_index_cpp::get_resource("resource_type2", "bar");
-  EXPECT_NE(std::get<0>(result), std::nullopt);
-  EXPECT_EQ(std::get<1>(result), "");
+  EXPECT_NE(result.first, std::nullopt);
+  EXPECT_EQ(result.second, "");
 }
 
 TEST(AmentIndexCpp, get_resource_overlay) {
@@ -192,8 +192,8 @@ TEST(AmentIndexCpp, get_resource_overlay) {
   subfolders.push_back("prefix2");
   set_ament_prefix_path(subfolders);
   auto result = ament_index_cpp::get_resource("resource_type5", "foo");
-  EXPECT_NE(std::get<0>(result), std::nullopt);
-  EXPECT_EQ(std::get<1>(result), "foo1");
+  EXPECT_NE(result.first, std::nullopt);
+  EXPECT_EQ(result.second, "foo1");
 }
 
 TEST(AmentIndexCpp, get_resource_overlay_base_path) {
@@ -203,7 +203,7 @@ TEST(AmentIndexCpp, get_resource_overlay_base_path) {
   subfolders.push_back("prefix2");
   set_ament_prefix_path(subfolders);
   auto result = ament_index_cpp::get_resource("resource_type2", "foo");
-  EXPECT_EQ(std::get<0>(result), generate_subfolder_path("prefix1"));
+  EXPECT_EQ(result.first, generate_subfolder_path("prefix1"));
 }
 
 TEST(AmentIndexCpp, get_resource_underlay_base_path) {
@@ -213,7 +213,7 @@ TEST(AmentIndexCpp, get_resource_underlay_base_path) {
   subfolders.push_back("prefix2");
   set_ament_prefix_path(subfolders);
   auto result = ament_index_cpp::get_resource("resource_type2", "bar");
-  EXPECT_EQ(std::get<0>(result), generate_subfolder_path("prefix2"));
+  EXPECT_EQ(result.first, generate_subfolder_path("prefix2"));
 }
 
 TEST(AmentIndexCpp, get_package_prefix) {
