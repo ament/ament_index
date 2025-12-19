@@ -59,7 +59,7 @@ get_package_prefix(const std::string & package_name)
 {
   std::filesystem::path result;
   get_package_prefix(package_name, result);
-  return result.c_str();
+  return result.string();
 }
 
 void
@@ -71,6 +71,6 @@ get_package_prefix(const std::string & package_name, std::filesystem::path & pat
   if (result.first == std::nullopt) {
     throw PackageNotFoundError(package_name);
   }
-  path = result.first.value().c_str();
+  path = result.first.value().string();
 }
 }  // namespace ament_index_cpp

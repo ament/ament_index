@@ -28,7 +28,7 @@ get_packages_with_prefixes()
   std::map<std::string, std::string> result;
   std::map<std::string, std::filesystem::path> resources = get_resources_by_name("packages");
   for (const auto & resource : resources) {
-    result[resource.first] = resource.second;
+    result[resource.first] = resource.second.string();
   }
   return result;
 }

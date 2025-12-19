@@ -50,8 +50,8 @@ get_resources_by_name(const std::string & resource_type)
         continue;
       }
 
-      if (resources.find(filename.c_str()) == resources.end()) {
-        resources[filename.c_str()] = base_path;
+      if (resources.find(filename.string()) == resources.end()) {
+        resources[filename.string()] = base_path;
       }
     }
   }
@@ -64,7 +64,7 @@ get_resources(const std::string & resource_type)
   std::map<std::string, std::string> result;
   std::map<std::string, std::filesystem::path> resources = get_resources_by_name(resource_type);
   for (const auto & resource : resources) {
-    result[resource.first] = resource.second;
+    result[resource.first] = resource.second.string();
   }
   return result;
 }

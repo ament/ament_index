@@ -225,13 +225,13 @@ TEST(AmentIndexCpp, get_package_prefix) {
   std::filesystem::path path_result;
   ament_index_cpp::get_package_prefix("foo", path_result);
   // foo is found in prefix 1
-  EXPECT_EQ(generate_subfolder_path("prefix1"), path_result.c_str());
+  EXPECT_EQ(generate_subfolder_path("prefix1"), path_result.string());
   // bar is in both, but prefix 1 takes precedence
   ament_index_cpp::get_package_prefix("bar", path_result);
-  EXPECT_EQ(generate_subfolder_path("prefix1"), path_result.c_str());
+  EXPECT_EQ(generate_subfolder_path("prefix1"), path_result.string());
   // baz is found in prefix 2 only
   ament_index_cpp::get_package_prefix("baz", path_result);
-  EXPECT_EQ(generate_subfolder_path("prefix2"), path_result.c_str());
+  EXPECT_EQ(generate_subfolder_path("prefix2"), path_result.string());
   // exception when package is not found
   EXPECT_THROW(
     ament_index_cpp::get_package_prefix("does_not_exist", path_result),
@@ -252,8 +252,8 @@ TEST(AmentIndexCpp, get_package_share_directory) {
   std::filesystem::path path_result;
   ament_index_cpp::get_package_share_directory("bar", path_result);
   EXPECT_EQ(
-    generate_subfolder_path("prefix1") + "/share/bar",
-    path_result.c_str());
+    std::filesystem::path(generate_subfolder_path("prefix1")) / "share" / "bar",
+    path_result);
 }
 
 TEST(AmentIndexCpp, get_packages_with_prefixes) {
@@ -292,7 +292,7 @@ TEST(AmentIndexCpp, has_unknown_resource) {
 
 TEST(AmentIndexCpp, has_resource) {
   auto result = ament_index_cpp::is_resource_available("resource_type1", "foo");
-  EXPECT_EQ(result.value().c_str(), generate_subfolder_path("prefix1"));
+  EXPECT_EQ(result.value().string(), generate_subfolder_path("prefix1"));
   result = ament_index_cpp::is_resource_available("resource_type3", "bar");
   EXPECT_NE(result, std::nullopt);
 

@@ -27,7 +27,7 @@ get_package_share_directory(const std::string & package_name)
 {
   std::filesystem::path result;
   get_package_share_directory(package_name, result);
-  return result.c_str();
+  return result.string();
 }
 
 void get_package_share_directory(

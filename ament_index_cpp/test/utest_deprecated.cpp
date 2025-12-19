@@ -262,7 +262,7 @@ TEST(AmentIndexCpp, get_package_share_directory) {
   set_ament_prefix_path(subfolders);
   // bar is in both, but prefix 1 takes precedence
   EXPECT_EQ(
-    generate_subfolder_path("prefix1") + "/share/bar",
+    (std::filesystem::path(generate_subfolder_path("prefix1")) / "share" / "bar").string(),
     ament_index_cpp::get_package_share_directory("bar"));
 }
 

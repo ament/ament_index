@@ -38,7 +38,7 @@ has_resource(
   std::optional<std::filesystem::path> result = is_resource_available(resource_type, resource_name);
   if (result.has_value()) {
     if (prefix_path) {
-      *prefix_path = result.value().c_str();
+      *prefix_path = result.value().string();
     }
     return true;
   }

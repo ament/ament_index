@@ -67,7 +67,7 @@ get_resource(
   if (result.first != std::nullopt) {
     content = result.second;
     if (prefix_path) {
-      *prefix_path = result.first.value().c_str();
+      *prefix_path = result.first.value().string();
     }
     return true;
   }
