@@ -25,16 +25,16 @@
 
 namespace ament_index_cpp
 {
-std::pair<std::optional<std::filesystem::path>, std::string>
+PathWithResource
 get_resource(
   const std::string & resource_type,
   const std::string & resource_name)
 {
   if (resource_type.empty()) {
-    return std::make_pair(std::nullopt, "");
+    return PathWithResource{std::nullopt, ""};
   }
   if (resource_name.empty()) {
-    return std::make_pair(std::nullopt, "");
+    return PathWithResource{std::nullopt, ""};
   }
   auto paths = get_searcheable_paths();
   for (auto path : paths) {
@@ -44,10 +44,10 @@ get_resource(
     if (s.is_open()) {
       std::stringstream buffer;
       buffer << s.rdbuf();
-      return std::make_pair(std::filesystem::path(path), buffer.str());
+      return PathWithResource{std::filesystem::path(path), buffer.str()};
     }
   }
-  return std::make_pair(std::nullopt, "");
+  return PathWithResource{std::nullopt, ""};
 }
 
 bool
@@ -64,10 +64,10 @@ get_resource(
     throw std::runtime_error("ament_index_cpp::get_resource() resource name must not be empty");
   }
   auto result = get_resource(resource_type, resource_name);
-  if (result.first != std::nullopt) {
-    content = result.second;
+  if (result.resourcePath != std::nullopt) {
+    content = result.contents;
     if (prefix_path) {
-      *prefix_path = result.first.value().string();
+      *prefix_path = result.resourcePath.value().string();
     }
     return true;
   }

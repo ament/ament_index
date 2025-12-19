@@ -68,9 +68,9 @@ get_package_prefix(const std::string & package_name, std::filesystem::path & pat
   std::string content;
   std::string prefix_path;
   auto result = get_resource("packages", package_name);
-  if (result.first == std::nullopt) {
+  if (result.resourcePath == std::nullopt) {
     throw PackageNotFoundError(package_name);
   }
-  path = result.first.value().string();
+  path = result.resourcePath.value().string();
 }
 }  // namespace ament_index_cpp
