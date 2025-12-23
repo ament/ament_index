@@ -35,19 +35,34 @@ has_resource(
   if (resource_name.empty()) {
     throw std::runtime_error("ament_index_cpp::has_resource() resource name must not be empty");
   }
-  auto paths = get_search_paths();
-  for (auto path : paths) {
-    auto resource_path = path + "/share/ament_index/resource_index/" +
-      resource_type + "/" + resource_name;
-    std::ifstream s(resource_path);
-    if (s.is_open()) {
-      if (prefix_path) {
-        *prefix_path = path;
-      }
-      return true;
+  std::optional<std::filesystem::path> result = is_resource_available(resource_type, resource_name);
+  if (result.has_value()) {
+    if (prefix_path) {
+      *prefix_path = result.value().string();
     }
+    return true;
   }
   return false;
+}
+
+std::optional<std::filesystem::path>
+is_resource_available(
+  const std::string & resource_type,
+  const std::string & resource_name)
+{
+  std::optional<std::filesystem::path> result = std::nullopt;
+
+  auto paths = get_searcheable_paths();
+  for (auto path : paths) {
+    auto resource_path = path / "share" / "ament_index" / "resource_index" /
+      resource_type / resource_name;
+    std::ifstream s(resource_path.string());
+    if (s.is_open()) {
+      result = path;
+      return result;
+    }
+  }
+  return result;
 }
 
 }  // namespace ament_index_cpp

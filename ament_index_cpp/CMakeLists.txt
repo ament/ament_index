@@ -46,6 +46,13 @@ if(BUILD_TESTING)
     target_include_directories(${PROJECT_NAME}_utest PUBLIC include)
     target_link_libraries(${PROJECT_NAME}_utest ${PROJECT_NAME})
   endif()
+
+  ament_add_gtest(${PROJECT_NAME}_utest_deprecated test/utest_deprecated.cpp)
+  if(TARGET ${PROJECT_NAME}_utest_deprecated)
+    target_include_directories(${PROJECT_NAME}_utest_deprecated PUBLIC include)
+    target_link_libraries(${PROJECT_NAME}_utest_deprecated ${PROJECT_NAME})
+  endif()
+
 endif()
 
 ament_package()
