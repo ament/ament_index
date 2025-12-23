@@ -15,6 +15,7 @@
 #ifndef AMENT_INDEX_CPP__GET_PACKAGE_SHARE_DIRECTORY_HPP_
 #define AMENT_INDEX_CPP__GET_PACKAGE_SHARE_DIRECTORY_HPP_
 
+#include <filesystem>
 #include <string>
 
 #include "ament_index_cpp/visibility_control.h"
@@ -28,9 +29,21 @@ namespace ament_index_cpp
  * \return share path of the package.
  * \throws PackageNotFoundError when the given package is not found.
  */
+[[deprecated("Use get_package_share_directory(..., std::filesystem::path) instead")]]
 AMENT_INDEX_CPP_PUBLIC
 std::string
 get_package_share_directory(const std::string & package_name);
+
+/// Return the share directory of the given package if found.
+/**
+ * \param[in] package_name the name of the package to locate.
+ * \param[out] path share path of the package.
+ * \return
+ * \throws PackageNotFoundError when the given package is not found.
+ */
+AMENT_INDEX_CPP_PUBLIC
+void
+get_package_share_directory(const std::string & package_name, std::filesystem::path & path);
 
 }  // namespace ament_index_cpp
 

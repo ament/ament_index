@@ -14,14 +14,8 @@
 
 #include "ament_index_cpp/get_resources.hpp"
 
-#ifndef _WIN32
-#include <dirent.h>
-#include <errno.h>
-#else
-#include <windows.h>
-#endif
+#include <filesystem>
 #include <map>
-#include <stdexcept>
 #include <string>
 
 #include "ament_index_cpp/get_search_paths.hpp"
@@ -29,71 +23,50 @@
 namespace ament_index_cpp
 {
 
-std::map<std::string, std::string>
-get_resources(const std::string & resource_type)
+std::map<std::string, std::filesystem::path>
+get_resources_by_name(const std::string & resource_type)
 {
   if (resource_type.empty()) {
     throw std::runtime_error("ament_index_cpp::get_resources() resource type must not be empty");
   }
-  std::map<std::string, std::string> resources;
-  auto paths = get_search_paths();
+  std::map<std::string, std::filesystem::path> resources;
+  auto paths = get_searcheable_paths();
   for (auto base_path : paths) {
-    auto path = base_path + "/share/ament_index/resource_index/" + resource_type;
+    auto path = base_path / "share" / "ament_index" / "resource_index" / resource_type;
 
-#ifndef _WIN32
-    auto dir = opendir(path.c_str());
-    if (!dir) {
+    if (!std::filesystem::exists(path)) {
       continue;
     }
-    dirent * entry;
-    while ((entry = readdir(dir)) != NULL) {
-      // ignore directories
-      auto subdir = opendir((path + "/" + entry->d_name).c_str());
-      if (subdir) {
-        closedir(subdir);
+
+    for (auto const & dir_entry : std::filesystem::directory_iterator{path}) {
+      if (std::filesystem::is_directory(dir_entry.path())) {
         continue;
       }
-      if (errno != ENOTDIR) {
-        continue;
-      }
+
+      auto filename = dir_entry.path().filename();
 
       // ignore files starting with a dot
-      if (entry->d_name[0] == '.') {
+      if (filename.c_str()[0] == '.') {
         continue;
       }
 
-      if (resources.find(entry->d_name) == resources.end()) {
-        resources[entry->d_name] = base_path;
+      if (resources.find(filename.string()) == resources.end()) {
+        resources[filename.string()] = base_path;
       }
     }
-    closedir(dir);
-
-#else
-    std::string pattern = path + "/*";
-    WIN32_FIND_DATA find_data;
-    HANDLE find_handle = FindFirstFile(pattern.c_str(), &find_data);
-    if (find_handle == INVALID_HANDLE_VALUE) {
-      continue;
-    }
-    do {
-      // ignore directories
-      if ((find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
-        continue;
-      }
-
-      // ignore files starting with a dot
-      if (find_data.cFileName[0] == '.') {
-        continue;
-      }
-
-      if (resources.find(find_data.cFileName) == resources.end()) {
-        resources[find_data.cFileName] = base_path;
-      }
-    } while (FindNextFile(find_handle, &find_data));
-    FindClose(find_handle);
-#endif
   }
   return resources;
+}
+
+std::map<std::string, std::string>
+get_resources(const std::string & resource_type)
+{
+  std::map<std::string, std::string> result;
+  std::map<std::string, std::filesystem::path> resources = get_resources_by_name(resource_type);
+  for (const auto & resource : resources) {
+    result[resource.first] = resource.second.string();
+  }
+  return result;
 }
 
 }  // namespace ament_index_cpp
