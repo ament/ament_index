@@ -18,6 +18,7 @@ unless the library was explicitly added as a static library."
   ON)
 
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_gen_version_h REQUIRED)
 
 add_library(${PROJECT_NAME}
   src/get_package_prefix.cpp
@@ -47,6 +48,7 @@ if(BUILD_TESTING)
 endif()
 
 ament_package()
+ament_generate_version_header(ament_index_cpp)
 
 install(DIRECTORY include/ DESTINATION include/${PROJECT_NAME})
 
