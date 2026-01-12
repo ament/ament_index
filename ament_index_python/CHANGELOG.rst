@@ -2,6 +2,9 @@
 Changelog for package ament_index_python
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.8.2 (2026-01-12)
+------------------
+
 1.8.1 (2024-04-24)
 ------------------
 * Update quality declaration documents (`#94 <https://github.com/ament/ament_index/issues/94>`_)
