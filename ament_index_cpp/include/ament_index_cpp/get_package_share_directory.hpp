@@ -29,7 +29,6 @@ namespace ament_index_cpp
  * \return share path of the package.
  * \throws PackageNotFoundError when the given package is not found.
  */
-[[deprecated("Use get_package_share_directory(..., std::filesystem::path) instead")]]
 AMENT_INDEX_CPP_PUBLIC
 std::string
 get_package_share_directory(const std::string & package_name);

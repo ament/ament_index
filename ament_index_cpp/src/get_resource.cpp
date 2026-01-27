@@ -14,6 +14,7 @@
 
 #include "ament_index_cpp/get_resource.hpp"
 
+#include <filesystem>
 #include <fstream>
 #include <optional>
 #include <sstream>
@@ -30,24 +31,17 @@ get_resource(
   const std::string & resource_type,
   const std::string & resource_name)
 {
-  if (resource_type.empty()) {
-    return PathWithResource{std::nullopt, ""};
-  }
-  if (resource_name.empty()) {
-    return PathWithResource{std::nullopt, ""};
-  }
-  auto paths = get_searcheable_paths();
-  for (auto path : paths) {
-    auto resource_path = path / "share" / "ament_index" / "resource_index" /
-      resource_type / resource_name;
-    std::ifstream s(resource_path.string());
-    if (s.is_open()) {
-      std::stringstream buffer;
-      buffer << s.rdbuf();
-      return PathWithResource{std::filesystem::path(path), buffer.str()};
+  try {
+    std::string content;
+    std::string prefix_path;
+    const auto success = get_resource(resource_type, resource_name, content, &prefix_path);
+    if (!success) {
+      return PathWithResource{std::nullopt, ""};
     }
+    return PathWithResource{std::filesystem::path(prefix_path), content};
+  } catch (const std::runtime_error &) {
+    return PathWithResource{std::nullopt, ""};
   }
-  return PathWithResource{std::nullopt, ""};
 }
 
 bool
@@ -63,13 +57,20 @@ get_resource(
   if (resource_name.empty()) {
     throw std::runtime_error("ament_index_cpp::get_resource() resource name must not be empty");
   }
-  auto result = get_resource(resource_type, resource_name);
-  if (result.resourcePath != std::nullopt) {
-    content = result.contents;
-    if (prefix_path) {
-      *prefix_path = result.resourcePath.value().string();
+  auto paths = get_search_paths();
+  for (auto path : paths) {
+    auto resource_path = path + "/share/ament_index/resource_index/" +
+      resource_type + "/" + resource_name;
+    std::ifstream s(resource_path);
+    if (s.is_open()) {
+      std::stringstream buffer;
+      buffer << s.rdbuf();
+      content = buffer.str();
+      if (prefix_path) {
+        *prefix_path = path;
+      }
+      return true;
     }
-    return true;
   }
   return false;
 }

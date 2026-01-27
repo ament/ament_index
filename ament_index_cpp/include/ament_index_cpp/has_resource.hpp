@@ -32,7 +32,6 @@ namespace ament_index_cpp
  * \return `true` if resource exists,`false` otherwise
  * \throws std::runtime_error if resource_type or resource_name are empty
  */
-[[deprecated("Use is_resource_available(...) instead")]]
 AMENT_INDEX_CPP_PUBLIC
 bool
 has_resource(

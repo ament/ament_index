@@ -25,18 +25,14 @@ namespace ament_index_cpp
 std::string
 get_package_share_directory(const std::string & package_name)
 {
-  std::filesystem::path result;
-  get_package_share_directory(package_name, result);
-  return result.string();
+  return get_package_prefix(package_name) + "/share/" + package_name;
 }
 
 void get_package_share_directory(
   const std::string & package_name,
   std::filesystem::path & path)
 {
-  std::filesystem::path result;
-  get_package_prefix(package_name, result);
-  path = result / "share" / package_name;
+  path = get_package_share_directory(package_name);
 }
 
 }  // namespace ament_index_cpp

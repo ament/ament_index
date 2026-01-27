@@ -59,7 +59,6 @@ namespace ament_index_cpp
  * \return `true` is the resource exists, `false` otherwise.
  * \throws std::runtime_error if resource_type or resource_name are empty.
  */
-[[deprecated("Use std::pair<> get_resource(...) instead")]]
 AMENT_INDEX_CPP_PUBLIC
 bool
 get_resource(

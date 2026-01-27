@@ -48,7 +48,6 @@ public:
  * \return installation prefix path in which the package was found.
  * \throws PackageNotFoundError when the given package is not found.
  */
-[[deprecated("Use get_package_prefix(..., std::filesystem::path) instead")]]
 AMENT_INDEX_CPP_PUBLIC
 std::string
 get_package_prefix(const std::string & package_name);
