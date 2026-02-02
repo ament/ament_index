@@ -15,6 +15,7 @@
 #ifndef AMENT_INDEX_CPP__GET_RESOURCES_HPP_
 #define AMENT_INDEX_CPP__GET_RESOURCES_HPP_
 
+#include <filesystem>
 #include <map>
 #include <string>
 
@@ -32,6 +33,16 @@ namespace ament_index_cpp
 AMENT_INDEX_CPP_PUBLIC
 std::map<std::string, std::string>
 get_resources(const std::string & resource_type);
+
+/// Get a map of resources names to their installation prefix.
+/**
+ * \param resource_type type of the resource.
+ * \return a map of resources names to their installation prefix.
+ * \throws std::runtime_error if resource_type is empty.
+ */
+AMENT_INDEX_CPP_PUBLIC
+std::map<std::string, std::filesystem::path>
+get_resources_by_name(const std::string & resource_type);
 
 }  // namespace ament_index_cpp
 

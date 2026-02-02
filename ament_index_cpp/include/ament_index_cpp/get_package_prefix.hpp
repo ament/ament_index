@@ -15,6 +15,7 @@
 #ifndef AMENT_INDEX_CPP__GET_PACKAGE_PREFIX_HPP_
 #define AMENT_INDEX_CPP__GET_PACKAGE_PREFIX_HPP_
 
+#include <filesystem>
 #include <stdexcept>
 #include <string>
 
@@ -50,6 +51,16 @@ public:
 AMENT_INDEX_CPP_PUBLIC
 std::string
 get_package_prefix(const std::string & package_name);
+
+/// Return the installation prefix of the given package if found.
+/**
+ * \param[in] package_name the name of the package to locate.
+ * \param[out] path installation prefix path in which the package was found.
+ * \throws PackageNotFoundError when the given package is not found.
+ */
+AMENT_INDEX_CPP_PUBLIC
+void
+get_package_prefix(const std::string & package_name, std::filesystem::path & path);
 
 }  // namespace ament_index_cpp
 
