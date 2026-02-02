@@ -16,7 +16,9 @@
 
 #include <sys/stat.h>
 
+#include <iostream>
 #include <cstdlib>
+#include <filesystem>
 #include <list>
 #include <sstream>
 #include <stdexcept>
@@ -75,6 +77,16 @@ get_search_paths()
   }
 #endif
 
+  return paths;
+}
+
+std::list<std::filesystem::path>
+get_searcheable_paths()
+{
+  std::list<std::filesystem::path> paths;
+  for (const auto & path : get_search_paths()) {
+    paths.emplace_back(path);
+  }
   return paths;
 }
 

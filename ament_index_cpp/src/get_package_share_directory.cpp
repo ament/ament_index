@@ -14,6 +14,7 @@
 
 #include "ament_index_cpp/get_package_share_directory.hpp"
 
+#include <filesystem>
 #include <string>
 
 #include "ament_index_cpp/get_package_prefix.hpp"
@@ -25,6 +26,13 @@ std::string
 get_package_share_directory(const std::string & package_name)
 {
   return get_package_prefix(package_name) + "/share/" + package_name;
+}
+
+void get_package_share_directory(
+  const std::string & package_name,
+  std::filesystem::path & path)
+{
+  path = get_package_share_directory(package_name);
 }
 
 }  // namespace ament_index_cpp

@@ -14,6 +14,7 @@
 
 #include "ament_index_cpp/get_package_prefix.hpp"
 
+#include <filesystem>
 #include <stdexcept>
 #include <string>
 
@@ -65,4 +66,13 @@ get_package_prefix(const std::string & package_name)
   return prefix_path;
 }
 
+void
+get_package_prefix(const std::string & package_name, std::filesystem::path & path)
+{
+  try {
+    path = get_package_prefix(package_name);
+  } catch (const std::runtime_error &) {
+    throw PackageNotFoundError(package_name);
+  }
+}
 }  // namespace ament_index_cpp
