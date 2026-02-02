@@ -14,7 +14,9 @@
 
 #include "ament_index_cpp/has_resource.hpp"
 
+#include <filesystem>
 #include <fstream>
+#include <optional>
 #include <stdexcept>
 #include <string>
 
@@ -48,6 +50,26 @@ has_resource(
     }
   }
   return false;
+}
+
+
+std::optional<std::filesystem::path>
+is_resource_available(
+  const std::string & resource_type,
+  const std::string & resource_name)
+{
+  std::optional<std::filesystem::path> result = std::nullopt;
+
+  try {
+    std::string prefix_path;
+    if (has_resource(resource_type, resource_name, &prefix_path)) {
+      result.emplace(prefix_path);
+    }
+  } catch (const std::runtime_error &) {
+    // just keep nullopt in result
+  }
+
+  return result;
 }
 
 }  // namespace ament_index_cpp

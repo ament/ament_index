@@ -20,6 +20,7 @@
 #else
 #include <windows.h>
 #endif
+#include <filesystem>
 #include <map>
 #include <stdexcept>
 #include <string>
@@ -92,6 +93,17 @@ get_resources(const std::string & resource_type)
     } while (FindNextFile(find_handle, &find_data));
     FindClose(find_handle);
 #endif
+  }
+  return resources;
+}
+
+std::map<std::string, std::filesystem::path>
+get_resources_by_name(const std::string & resource_type)
+{
+  const auto resources_str = get_resources(resource_type);
+  std::map<std::string, std::filesystem::path> resources;
+  for (const auto & [filename, base_path] : resources_str) {
+    resources[filename] = std::filesystem::path(base_path);
   }
   return resources;
 }
