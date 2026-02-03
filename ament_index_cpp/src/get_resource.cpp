@@ -14,15 +14,35 @@
 
 #include "ament_index_cpp/get_resource.hpp"
 
+#include <filesystem>
 #include <fstream>
+#include <optional>
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <utility>
 
 #include "ament_index_cpp/get_search_paths.hpp"
 
 namespace ament_index_cpp
 {
+PathWithResource
+get_resource(
+  const std::string & resource_type,
+  const std::string & resource_name)
+{
+  try {
+    std::string content;
+    std::string prefix_path;
+    const auto success = get_resource(resource_type, resource_name, content, &prefix_path);
+    if (!success) {
+      return PathWithResource{std::nullopt, ""};
+    }
+    return PathWithResource{std::filesystem::path(prefix_path), content};
+  } catch (const std::runtime_error &) {
+    return PathWithResource{std::nullopt, ""};
+  }
+}
 
 bool
 get_resource(

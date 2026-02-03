@@ -46,6 +46,13 @@ if(BUILD_TESTING)
     target_include_directories(${PROJECT_NAME}_utest PUBLIC include)
     target_link_libraries(${PROJECT_NAME}_utest ${PROJECT_NAME})
   endif()
+
+  ament_add_gtest(${PROJECT_NAME}_utest_filesystem test/utest_filesystem.cpp)
+  if(TARGET ${PROJECT_NAME}_utest_filesystem)
+    target_include_directories(${PROJECT_NAME}_utest_filesystem PUBLIC include)
+    target_link_libraries(${PROJECT_NAME}_utest_filesystem ${PROJECT_NAME})
+  endif()
+
 endif()
 
 ament_package()
