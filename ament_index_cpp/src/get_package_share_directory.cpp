@@ -29,4 +29,11 @@ get_package_share_directory(const std::string & package_name)
   return get_package_share_path(package_name).string();
 }
 
+void get_package_share_directory(
+  const std::string & package_name,
+  std::filesystem::path & path)
+{
+  path = get_package_share_path(package_name);
+}
+
 }  // namespace ament_index_cpp
