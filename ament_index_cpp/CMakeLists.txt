@@ -24,6 +24,7 @@ find_package(ament_cmake_gen_version_h REQUIRED)
 add_library(${PROJECT_NAME}
   src/get_package_prefix.cpp
   src/get_package_share_directory.cpp
+  src/get_package_share_path.cpp
   src/get_packages_with_prefixes.cpp
   src/get_resource.cpp
   src/get_resources.cpp
