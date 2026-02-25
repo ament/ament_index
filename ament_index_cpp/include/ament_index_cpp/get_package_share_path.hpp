@@ -1,4 +1,4 @@
-// Copyright 2017 Open Source Robotics Foundation, Inc.
+// Copyright 2026 Open Source Robotics Foundation, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AMENT_INDEX_CPP__GET_PACKAGE_SHARE_DIRECTORY_HPP_
-#define AMENT_INDEX_CPP__GET_PACKAGE_SHARE_DIRECTORY_HPP_
+#ifndef AMENT_INDEX_CPP__GET_PACKAGE_SHARE_PATH_HPP_
+#define AMENT_INDEX_CPP__GET_PACKAGE_SHARE_PATH_HPP_
 
 #include <filesystem>
 #include <string>
@@ -29,23 +29,10 @@ namespace ament_index_cpp
  * \return share path of the package.
  * \throws PackageNotFoundError when the given package is not found.
  */
-[[deprecated("Use get_package_share_path(...) instead")]]
 AMENT_INDEX_CPP_PUBLIC
-std::string
-get_package_share_directory(const std::string & package_name);
-
-/// Return the share directory of the given package if found.
-/**
- * \param[in] package_name the name of the package to locate.
- * \param[out] path share path of the package.
- * \return
- * \throws PackageNotFoundError when the given package is not found.
- */
-[[deprecated("Use get_package_share_path(...) instead")]]
-AMENT_INDEX_CPP_PUBLIC
-void
-get_package_share_directory(const std::string & package_name, std::filesystem::path & path);
+std::filesystem::path
+get_package_share_path(const std::string & package_name);
 
 }  // namespace ament_index_cpp
 
-#endif  // AMENT_INDEX_CPP__GET_PACKAGE_SHARE_DIRECTORY_HPP_
+#endif  // AMENT_INDEX_CPP__GET_PACKAGE_SHARE_PATH_HPP_

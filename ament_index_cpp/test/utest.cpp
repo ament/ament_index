@@ -22,7 +22,7 @@
 #include <string>
 
 #include "ament_index_cpp/get_package_prefix.hpp"
-#include "ament_index_cpp/get_package_share_directory.hpp"
+#include "ament_index_cpp/get_package_share_path.hpp"
 #include "ament_index_cpp/get_packages_with_prefixes.hpp"
 #include "ament_index_cpp/get_resource.hpp"
 #include "ament_index_cpp/get_resources.hpp"
@@ -242,15 +242,14 @@ TEST(AmentIndexCpp, get_package_prefix) {
     ament_index_cpp::PackageNotFoundError);
 }
 
-TEST(AmentIndexCpp, get_package_share_directory) {
+TEST(AmentIndexCpp, get_package_share_path) {
   // Ensure that a known to exist package is found and the share directory is correct.
   std::list<std::string> subfolders;
   subfolders.push_back("prefix1");  // only contains foo and bar packages
   subfolders.push_back("prefix2");  // only contains bar and baz packages
   set_ament_prefix_path(subfolders);
   // bar is in both, but prefix 1 takes precedence
-  std::filesystem::path path_result;
-  ament_index_cpp::get_package_share_directory("bar", path_result);
+  auto path_result = ament_index_cpp::get_package_share_path("bar");
   EXPECT_EQ(
     std::filesystem::path(generate_subfolder_path("prefix1")) / "share" / "bar",
     path_result);
