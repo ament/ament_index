@@ -28,10 +28,29 @@ namespace ament_index_cpp
  * \return share path of the package.
  * \throws PackageNotFoundError when the given package is not found.
  */
+<<<<<<< HEAD
+=======
+[[deprecated("Use get_package_share_path(...) instead")]]
+>>>>>>> acfcac6 (Use get_package_share_path just as python (#112))
 AMENT_INDEX_CPP_PUBLIC
 std::string
 get_package_share_directory(const std::string & package_name);
 
+<<<<<<< HEAD
+=======
+/// Return the share directory of the given package if found.
+/**
+ * \param[in] package_name the name of the package to locate.
+ * \param[out] path share path of the package.
+ * \return
+ * \throws PackageNotFoundError when the given package is not found.
+ */
+[[deprecated("Use get_package_share_path(...) instead")]]
+AMENT_INDEX_CPP_PUBLIC
+void
+get_package_share_directory(const std::string & package_name, std::filesystem::path & path);
+
+>>>>>>> acfcac6 (Use get_package_share_path just as python (#112))
 }  // namespace ament_index_cpp
 
 #endif  // AMENT_INDEX_CPP__GET_PACKAGE_SHARE_DIRECTORY_HPP_
