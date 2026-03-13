@@ -12,9 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from argparse import Namespace
 import os
 from pathlib import Path, PurePath
-from argparse import Namespace
+
+
+from _pytest.capture import CaptureFixture
 
 from ament_index_python import get_package_prefix
 from ament_index_python import get_package_share_directory
@@ -33,7 +36,6 @@ from ament_index_python.cli import resource_name_completer
 from ament_index_python.cli import resource_type_completer
 
 import pytest
-from _pytest.capture import CaptureFixture
 
 
 def set_ament_prefix_path(subfolders: list[str]) -> None:
