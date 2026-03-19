@@ -16,7 +16,6 @@ from argparse import Namespace
 import os
 from pathlib import Path, PurePath
 
-
 from _pytest.capture import CaptureFixture
 
 from ament_index_python import get_package_prefix
