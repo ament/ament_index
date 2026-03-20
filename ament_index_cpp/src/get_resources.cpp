@@ -31,7 +31,7 @@ get_resources_by_name(const std::string & resource_type)
   }
   std::map<std::string, std::filesystem::path> resources;
   auto paths = get_searcheable_paths();
-  for (auto base_path : paths) {
+  for (const auto & base_path : paths) {
     auto path = base_path / "share" / "ament_index" / "resource_index" / resource_type;
 
     if (!std::filesystem::exists(path)) {

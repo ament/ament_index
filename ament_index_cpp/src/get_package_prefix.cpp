@@ -14,6 +14,7 @@
 
 #include "ament_index_cpp/get_package_prefix.hpp"
 
+#include <mutex>
 #include <stdexcept>
 #include <string>
 
@@ -23,7 +24,7 @@
 namespace ament_index_cpp
 {
 
-static size_t package_not_found_count = 0;
+static std::once_flag search_paths_included;
 
 static
 std::string
@@ -31,8 +32,10 @@ format_package_not_found_error_message(const std::string & package_name)
 {
   std::string message = "package '" + package_name + "' not found";
 
-  // Don't need to print out the package paths more than once
-  if (package_not_found_count++ > 0) {
+  // Include the search paths in the error message only once (thread-safe)
+  bool include_paths = false;
+  std::call_once(search_paths_included, [&include_paths]() {include_paths = true;});
+  if (!include_paths) {
     return message;
   }
 
@@ -65,8 +68,6 @@ get_package_prefix(const std::string & package_name)
 void
 get_package_prefix(const std::string & package_name, std::filesystem::path & path)
 {
-  std::string content;
-  std::string prefix_path;
   auto result = get_resource("packages", package_name);
   if (result.resourcePath == std::nullopt) {
     throw PackageNotFoundError(package_name);

@@ -53,7 +53,7 @@ is_resource_available(
   std::optional<std::filesystem::path> result = std::nullopt;
 
   auto paths = get_searcheable_paths();
-  for (auto path : paths) {
+  for (const auto & path : paths) {
     auto resource_path = path / "share" / "ament_index" / "resource_index" /
       resource_type / resource_name;
     std::ifstream s(resource_path.string());

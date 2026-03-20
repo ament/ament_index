@@ -14,19 +14,12 @@
 
 #include "ament_index_cpp/get_search_paths.hpp"
 
-#include <sys/stat.h>
-
-#include <iostream>
 #include <cstdlib>
 #include <filesystem>
 #include <list>
 #include <sstream>
 #include <stdexcept>
 #include <string>
-
-#ifdef _WIN32
-#define stat _stat
-#endif
 
 namespace ament_index_cpp
 {
@@ -61,12 +54,8 @@ get_searcheable_paths()
     if (tok.empty()) {
       continue;
     }
-    // skip non existing directories
-    struct stat s;
-    if (stat(tok.c_str(), &s)) {
-      continue;
-    }
-    if ((s.st_mode & S_IFMT) == S_IFDIR) {
+    // skip non-existing paths and non-directories
+    if (std::filesystem::is_directory(tok)) {
       paths.push_back(std::filesystem::path(tok));
     }
   }
@@ -85,7 +74,7 @@ get_search_paths()
 {
   std::list<std::string> result;
   auto paths = get_searcheable_paths();
-  for(const auto & path : paths) {
+  for (const auto & path : paths) {
     result.push_back(path.string());
   }
   return result;
