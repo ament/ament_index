@@ -21,7 +21,9 @@ from ament_index_python.resources import get_resource_types
 from ament_index_python.resources import get_resources
 
 
-def main(argv: List[str] = sys.argv[1:]) -> Optional[str]:
+def main(argv: Optional[List[str]] = None) -> Optional[str]:
+    if argv is None:
+        argv = sys.argv[1:]
     parser = argparse.ArgumentParser(
         description='Query the ament resource index.')
     arg = parser.add_argument(
