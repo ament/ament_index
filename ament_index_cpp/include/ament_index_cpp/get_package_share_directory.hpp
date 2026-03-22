@@ -15,8 +15,11 @@
 #ifndef AMENT_INDEX_CPP__GET_PACKAGE_SHARE_DIRECTORY_HPP_
 #define AMENT_INDEX_CPP__GET_PACKAGE_SHARE_DIRECTORY_HPP_
 
-#include <filesystem>
 #include <string>
+
+#if __cplusplus >= 201703L
+#include <filesystem>
+#endif
 
 #include "ament_index_cpp/visibility_control.h"
 
@@ -40,9 +43,11 @@ get_package_share_directory(const std::string & package_name);
  * \return
  * \throws PackageNotFoundError when the given package is not found.
  */
+#if __cplusplus >= 201703L
 AMENT_INDEX_CPP_PUBLIC
 void
 get_package_share_directory(const std::string & package_name, std::filesystem::path & path);
+#endif
 
 }  // namespace ament_index_cpp
 
