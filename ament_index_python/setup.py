@@ -18,7 +18,7 @@ setup(
     ],
     package_data={'': ['py.typed']},
     install_requires=['setuptools'],
-    zip_safe=True,
+    zip_safe=False,
     author='Dirk Thomas',
     author_email='dthomas@osrfoundation.org',
     maintainer='Dharini Dutia',
