@@ -81,9 +81,9 @@ public:
 /**
  * \param[in] resource_type type of the resource
  * \param[in] resource_name name of the resource
- * \return a struct with the the installation prefix of the given resource if found
- *         and the contents of the resource
- * \throws std::runtime_error if resource_type or resource_name are empty.
+ * \return a struct with the installation prefix of the given resource if found
+ *         and the contents of the resource. Returns a struct with std::nullopt path
+ *         (does not throw) if resource_type or resource_name are empty.
  */
 AMENT_INDEX_CPP_PUBLIC
 PathWithResource
