@@ -2,6 +2,9 @@
 Changelog for package ament_index_python
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.13.3 (2026-04-08)
 -------------------
 * Cleanups ament_index_python (`#115 <https://github.com/ament/ament_index/issues/115>`_)
