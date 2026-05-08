@@ -20,8 +20,8 @@
  *   - get_package_prefix()
  *   - ament_index_cpp/get_package_prefix.hpp
  * - Get share directory of an installed package
- *   - get_package_share_directory()
- *   - ament_index_cpp/get_package_share_directory.hpp
+ *   - get_package_share_path()
+ *   - ament_index_cpp/get_package_share_path.hpp
  * - Get a map of package names to their installation prefix
  *   - get_packages_with_prefixes()
  *   - ament_index_cpp/get_packages_with_prefixes.hpp
@@ -29,10 +29,10 @@
  *   - get_resource()
  *   - ament_index_cpp/get_resource.hpp
  * - Get a map of resources based on a resource type
- *   - get_resources()
+ *   - get_resources_by_name()
  *   - ament_index_cpp/get_resources.hpp
  * - Check if resource exists and get its path
- *   - has_resource()
+ *   - is_resource_available()
  *   - ament_index_cpp/has_resource.hpp
  * - Macros for controlling symbol visibility on the library
  *   - ament_index_cpp/visibility_control.h
@@ -50,24 +50,6 @@
 
 namespace ament_index_cpp
 {
-/// Get a the content and path of a resource
-/**
- * \param[in] resource_type type of the resource
- * \param[in] resource_name name of the resource
- * \param[out] content content of the resource
- * \param[out] prefix_path the installation prefix of the given resource if found.
- * \return `true` is the resource exists, `false` otherwise.
- * \throws std::runtime_error if resource_type or resource_name are empty.
- */
-[[deprecated("Use std::pair<> get_resource(...) instead")]]
-AMENT_INDEX_CPP_PUBLIC
-bool
-get_resource(
-  const std::string & resource_type,
-  const std::string & resource_name,
-  std::string & content,
-  std::string * prefix_path = nullptr);
-
 typedef struct PathWithResource
 {
 public:

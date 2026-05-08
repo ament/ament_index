@@ -15,35 +15,12 @@
 #include "ament_index_cpp/has_resource.hpp"
 
 #include <fstream>
-#include <stdexcept>
 #include <string>
 
 #include "ament_index_cpp/get_search_paths.hpp"
 
 namespace ament_index_cpp
 {
-
-bool
-has_resource(
-  const std::string & resource_type,
-  const std::string & resource_name,
-  std::string * prefix_path)
-{
-  if (resource_type.empty()) {
-    throw std::runtime_error("ament_index_cpp::has_resource() resource type must not be empty");
-  }
-  if (resource_name.empty()) {
-    throw std::runtime_error("ament_index_cpp::has_resource() resource name must not be empty");
-  }
-  std::optional<std::filesystem::path> result = is_resource_available(resource_type, resource_name);
-  if (result.has_value()) {
-    if (prefix_path) {
-      *prefix_path = result.value().string();
-    }
-    return true;
-  }
-  return false;
-}
 
 std::optional<std::filesystem::path>
 is_resource_available(
