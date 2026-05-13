@@ -26,22 +26,14 @@ namespace ament_index_cpp
 std::string
 get_package_share_directory(const std::string & package_name)
 {
-<<<<<<< HEAD
-  return get_package_prefix(package_name) + "/share/" + package_name;
-=======
   return get_package_share_path(package_name).string();
->>>>>>> acfcac6 (Use get_package_share_path just as python (#112))
 }
 
 void get_package_share_directory(
   const std::string & package_name,
   std::filesystem::path & path)
 {
-<<<<<<< HEAD
-  path = get_package_share_directory(package_name);
-=======
   path = get_package_share_path(package_name);
->>>>>>> acfcac6 (Use get_package_share_path just as python (#112))
 }
 
 }  // namespace ament_index_cpp
