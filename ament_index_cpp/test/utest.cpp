@@ -253,13 +253,10 @@ TEST(AmentIndexCpp, get_package_share_path) {
   subfolders.push_back("prefix2");  // only contains bar and baz packages
   set_ament_prefix_path(subfolders);
   // bar is in both, but prefix 1 takes precedence
-<<<<<<< HEAD
-=======
   auto path_result = ament_index_cpp::get_package_share_path("bar");
->>>>>>> acfcac6 (Use get_package_share_path just as python (#112))
   EXPECT_EQ(
-    generate_subfolder_path("prefix1") + "/share/bar",
-    ament_index_cpp::get_package_share_directory("bar"));
+    std::filesystem::path(generate_subfolder_path("prefix1")) / "share" / "bar",
+    path_result);
 }
 
 TEST(AmentIndexCpp, get_packages_with_prefixes) {
