@@ -2,6 +2,11 @@
 Changelog for package ament_index_cpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.11.4 (2026-05-15)
+-------------------
+* Use get_package_share_path just as python (backport `#112 <https://github.com/ament/ament_index/issues/112>`_) (`#117 <https://github.com/ament/ament_index/issues/117>`_)
+* Contributors: mergify[bot]
+
 1.11.3 (2026-01-04)
 -------------------
 * Extend API to use std::filesystem (backport `#104 <https://github.com/ament/ament_index/issues/104>`_) (`#109 <https://github.com/ament/ament_index/issues/109>`_) (`#110 <https://github.com/ament/ament_index/issues/110>`_)
