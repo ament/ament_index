@@ -57,14 +57,6 @@ PackageNotFoundError::PackageNotFoundError(const std::string & _package_name)
 
 PackageNotFoundError::~PackageNotFoundError() {}
 
-std::string
-get_package_prefix(const std::string & package_name)
-{
-  std::filesystem::path result;
-  get_package_prefix(package_name, result);
-  return result.string();
-}
-
 void
 get_package_prefix(const std::string & package_name, std::filesystem::path & path)
 {

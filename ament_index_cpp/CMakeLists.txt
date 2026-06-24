@@ -23,7 +23,6 @@ find_package(ament_cmake_gen_version_h REQUIRED)
 
 add_library(${PROJECT_NAME}
   src/get_package_prefix.cpp
-  src/get_package_share_directory.cpp
   src/get_package_share_path.cpp
   src/get_packages_with_prefixes.cpp
   src/get_resource.cpp
@@ -46,12 +45,6 @@ if(BUILD_TESTING)
   if(TARGET ${PROJECT_NAME}_utest)
     target_include_directories(${PROJECT_NAME}_utest PUBLIC include)
     target_link_libraries(${PROJECT_NAME}_utest ${PROJECT_NAME})
-  endif()
-
-  ament_add_gtest(${PROJECT_NAME}_utest_deprecated test/utest_deprecated.cpp)
-  if(TARGET ${PROJECT_NAME}_utest_deprecated)
-    target_include_directories(${PROJECT_NAME}_utest_deprecated PUBLIC include)
-    target_link_libraries(${PROJECT_NAME}_utest_deprecated ${PROJECT_NAME})
   endif()
 
 endif()

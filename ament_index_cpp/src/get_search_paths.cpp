@@ -69,15 +69,4 @@ get_searcheable_paths()
   return paths;
 }
 
-std::list<std::string>
-get_search_paths()
-{
-  std::list<std::string> result;
-  auto paths = get_searcheable_paths();
-  for (const auto & path : paths) {
-    result.push_back(path.string());
-  }
-  return result;
-}
-
 }  // namespace ament_index_cpp

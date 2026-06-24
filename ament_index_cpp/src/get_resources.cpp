@@ -58,15 +58,4 @@ get_resources_by_name(const std::string & resource_type)
   return resources;
 }
 
-std::map<std::string, std::string>
-get_resources(const std::string & resource_type)
-{
-  std::map<std::string, std::string> result;
-  std::map<std::string, std::filesystem::path> resources = get_resources_by_name(resource_type);
-  for (const auto & resource : resources) {
-    result[resource.first] = resource.second.string();
-  }
-  return result;
-}
-
 }  // namespace ament_index_cpp
