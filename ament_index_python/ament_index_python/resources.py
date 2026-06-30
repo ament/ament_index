@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+from pathlib import Path
 from typing import Literal
 
 from .constants import RESOURCE_INDEX_SUBFOLDER
@@ -70,11 +71,10 @@ def get_resource(resource_type: str, resource_name: str) -> tuple[str, str]:
         raise InvalidResourceNameError(
             f"Resource name '{resource_name}' is invalid")
     for path in get_search_paths():
-        resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type, resource_name)
-        if os.path.isfile(resource_path):
+        resource_path = Path(path, RESOURCE_INDEX_SUBFOLDER, resource_type, resource_name)
+        if resource_path.is_file():
             try:
-                with open(resource_path, encoding='utf-8') as h:
-                    content = h.read()
+                content = resource_path.read_text(encoding='utf-8')
             except OSError as e:
                 raise OSError(
                     f"Could not open the resource '{resource_name}' of type "
@@ -101,15 +101,15 @@ def get_resources(resource_type: str) -> dict[str, str]:
             f"Resource type '{resource_type}' is invalid")
     resources = {}
     for path in get_search_paths():
-        resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type)
-        if os.path.isdir(resource_path):
-            for resource in os.listdir(resource_path):
-                # Ignore subdirectories, and anything starting with a dot
-                if os.path.isdir(os.path.join(resource_path, resource)) \
-                        or resource.startswith('.'):
-                    continue
-                if resource not in resources:
-                    resources[resource] = path
+        resource_path = Path(path, RESOURCE_INDEX_SUBFOLDER, resource_type)
+        if resource_path.is_dir():
+            with os.scandir(resource_path) as entries:
+                for entry in entries:
+                    # Ignore subdirectories, and anything starting with a dot
+                    if entry.is_dir() or entry.name.startswith('.'):
+                        continue
+                    if entry.name not in resources:
+                        resources[entry.name] = path
     return resources
 
 
@@ -122,14 +122,14 @@ def get_resource_types() -> set[str]:
     """
     resource_types = set()
     for path in get_search_paths():
-        basepath = os.path.join(path, RESOURCE_INDEX_SUBFOLDER)
-        if os.path.isdir(basepath):
-            for resource_type in os.listdir(basepath):
-                # Ignore non-subdirectories, and anything starting with a dot
-                if not os.path.isdir(os.path.join(basepath, resource_type)) \
-                        or resource_type.startswith('.'):
-                    continue
-                resource_types.add(resource_type)
+        basepath = Path(path, RESOURCE_INDEX_SUBFOLDER)
+        if basepath.is_dir():
+            with os.scandir(basepath) as entries:
+                for entry in entries:
+                    # Ignore non-subdirectories, and anything starting with a dot
+                    if not entry.is_dir() or entry.name.startswith('.'):
+                        continue
+                    resource_types.add(entry.name)
     return resource_types
 
 
@@ -155,7 +155,7 @@ def has_resource(resource_type: str, resource_name: str) -> str | Literal[False]
         raise InvalidResourceNameError(
             f"Resource name '{resource_name}' is invalid")
     for path in get_search_paths():
-        resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type, resource_name)
-        if os.path.isfile(resource_path):
+        resource_path = Path(path, RESOURCE_INDEX_SUBFOLDER, resource_type, resource_name)
+        if resource_path.is_file():
             return path
     return False
