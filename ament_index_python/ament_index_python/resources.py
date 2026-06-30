@@ -22,13 +22,9 @@ from .search_paths import get_search_paths
 class InvalidResourceTypeNameError(ValueError):
     """Raised when a resource type name is invalid."""
 
-    pass
-
 
 class InvalidResourceNameError(ValueError):
     """Raised when a resource name is invalid."""
-
-    pass
 
 
 def _name_is_invalid(resource_name: str) -> bool:
