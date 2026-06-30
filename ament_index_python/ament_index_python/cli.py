@@ -70,13 +70,13 @@ def main(argv: list[str] | None = None) -> str | None:
 
 
 def resource_type_completer(prefix: str | tuple[str, ...],
-                            **kwarg: dict[str, Any]) -> Generator[str, None, None]:
+                            **kwargs: Any) -> Generator[str, None, None]:
     return (t for t in get_resource_types() if t.startswith(prefix))
 
 
 def resource_name_completer(prefix: str | tuple[str, ...],
                             parsed_args: argparse.Namespace,
-                            **kwargs: dict[str, Any]) -> Generator[str, None, None] | list[str]:
+                            **kwargs: Any) -> Generator[str, None, None] | list[str]:
     resource_type = getattr(parsed_args, 'resource_type', None)
     if not resource_type:
         return []

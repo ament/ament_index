@@ -77,7 +77,7 @@ def get_resource(resource_type: str, resource_name: str) -> tuple[str, str]:
         resource_path = os.path.join(path, RESOURCE_INDEX_SUBFOLDER, resource_type, resource_name)
         if os.path.isfile(resource_path):
             try:
-                with open(resource_path, 'r') as h:
+                with open(resource_path, encoding='utf-8') as h:
                     content = h.read()
             except OSError as e:
                 raise OSError(
