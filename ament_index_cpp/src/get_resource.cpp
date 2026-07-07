@@ -17,7 +17,6 @@
 #include <fstream>
 #include <optional>
 #include <sstream>
-#include <stdexcept>
 #include <string>
 #include <utility>
 
@@ -37,7 +36,7 @@ get_resource(
     return PathWithResource{std::nullopt, ""};
   }
   auto paths = get_searcheable_paths();
-  for (auto path : paths) {
+  for (const auto & path : paths) {
     auto resource_path = path / "share" / "ament_index" / "resource_index" /
       resource_type / resource_name;
     std::ifstream s(resource_path.string());
@@ -48,30 +47,6 @@ get_resource(
     }
   }
   return PathWithResource{std::nullopt, ""};
-}
-
-bool
-get_resource(
-  const std::string & resource_type,
-  const std::string & resource_name,
-  std::string & content,
-  std::string * prefix_path)
-{
-  if (resource_type.empty()) {
-    throw std::runtime_error("ament_index_cpp::get_resource() resource type must not be empty");
-  }
-  if (resource_name.empty()) {
-    throw std::runtime_error("ament_index_cpp::get_resource() resource name must not be empty");
-  }
-  auto result = get_resource(resource_type, resource_name);
-  if (result.resourcePath != std::nullopt) {
-    content = result.contents;
-    if (prefix_path) {
-      *prefix_path = result.resourcePath.value().string();
-    }
-    return true;
-  }
-  return false;
 }
 
 }  // namespace ament_index_cpp

@@ -20,11 +20,11 @@ from .constants import AMENT_PREFIX_PATH_ENV_VAR
 
 def get_search_paths() -> List[str]:
     """
-    Get the paths from the environment variable '{AMENT_PREFIX_PATH_ENV_VAR}'.
+    Get the paths from the environment variable 'AMENT_PREFIX_PATH'.
 
     :returns: list of paths
     :raises: :exc:`EnvironmentError`
-    """.format(AMENT_PREFIX_PATH_ENV_VAR=AMENT_PREFIX_PATH_ENV_VAR)
+    """
     ament_prefix_path = os.environ.get(AMENT_PREFIX_PATH_ENV_VAR)
     if not ament_prefix_path:
         raise EnvironmentError(

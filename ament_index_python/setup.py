@@ -5,7 +5,7 @@ package_name = 'ament_index_python'
 
 setup(
     name=package_name,
-    version='1.13.2',
+    version='1.14.1',
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/' + package_name, ['package.xml']),
@@ -18,7 +18,7 @@ setup(
     ],
     package_data={'': ['py.typed']},
     install_requires=['setuptools'],
-    zip_safe=True,
+    zip_safe=False,
     author='Dirk Thomas',
     author_email='dthomas@osrfoundation.org',
     maintainer='Dharini Dutia',

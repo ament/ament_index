@@ -2,6 +2,19 @@
 Changelog for package ament_index_cpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.14.1 (2026-06-29)
+-------------------
+* Removed deprecated aPI (`#120 <https://github.com/ament/ament_index/issues/120>`_)
+* Contributors: Alejandro Hernández Cordero
+
+1.14.0 (2026-05-05)
+-------------------
+
+1.13.3 (2026-04-08)
+-------------------
+* Cleanups (`#114 <https://github.com/ament/ament_index/issues/114>`_)
+* Contributors: Alejandro Hernández Cordero
+
 1.13.2 (2026-02-25)
 -------------------
 * Use get_package_share_path just as python (`#112 <https://github.com/ament/ament_index//issues/112>`_)

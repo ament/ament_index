@@ -31,7 +31,7 @@ get_resources_by_name(const std::string & resource_type)
   }
   std::map<std::string, std::filesystem::path> resources;
   auto paths = get_searcheable_paths();
-  for (auto base_path : paths) {
+  for (const auto & base_path : paths) {
     auto path = base_path / "share" / "ament_index" / "resource_index" / resource_type;
 
     if (!std::filesystem::exists(path)) {
@@ -56,17 +56,6 @@ get_resources_by_name(const std::string & resource_type)
     }
   }
   return resources;
-}
-
-std::map<std::string, std::string>
-get_resources(const std::string & resource_type)
-{
-  std::map<std::string, std::string> result;
-  std::map<std::string, std::filesystem::path> resources = get_resources_by_name(resource_type);
-  for (const auto & resource : resources) {
-    result[resource.first] = resource.second.string();
-  }
-  return result;
 }
 
 }  // namespace ament_index_cpp

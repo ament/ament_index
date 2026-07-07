@@ -28,7 +28,7 @@ namespace ament_index_cpp
 class PackageNotFoundError : public std::out_of_range
 {
 public:
-  /// Constuctor of an exception class to notify that a pacakge is not found
+  /// Constructor of an exception class to notify that a package is not found
   /*
   * \param[in] package_name used in the exception message
   */
@@ -41,17 +41,6 @@ public:
   /// package name used in the exception message
   const std::string package_name;
 };
-
-/// Return the installation prefix of the given package if found.
-/**
- * \param[in] package_name the name of the package to locate.
- * \return installation prefix path in which the package was found.
- * \throws PackageNotFoundError when the given package is not found.
- */
-[[deprecated("Use get_package_prefix(..., std::filesystem::path) instead")]]
-AMENT_INDEX_CPP_PUBLIC
-std::string
-get_package_prefix(const std::string & package_name);
 
 /// Return the installation prefix of the given package if found.
 /**
