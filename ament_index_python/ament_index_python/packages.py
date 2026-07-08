@@ -13,9 +13,8 @@
 # limitations under the License.
 
 import os
-import pathlib
+from pathlib import Path
 import re
-from typing import Dict
 import warnings
 
 
@@ -25,10 +24,10 @@ from .search_paths import get_search_paths
 
 
 class PackageNotFoundError(KeyError):
-    pass
+    """Raised when a package is not found in the search paths."""
 
 
-def get_packages_with_prefixes() -> Dict[str, str]:
+def get_packages_with_prefixes() -> dict[str, str]:
     """
     Return a dict of package names to the prefixes in which they are found.
 
@@ -55,12 +54,12 @@ def get_package_prefix(package_name: str) -> str:
     #  exemptions. See https://ros.org/reps/rep-0127.html#name
     if re.fullmatch('[a-zA-Z0-9][a-zA-Z0-9_-]+', package_name, re.ASCII) is None:
         raise ValueError(
-            "'{}' is not a valid package name".format(package_name))
+            f"'{package_name}' is not a valid package name")
     try:
         content, package_prefix = get_resource('packages', package_name)
     except LookupError:
         raise PackageNotFoundError(
-            "package '{}' not found, searching: {}".format(package_name, get_search_paths()))
+            f"package '{package_name}' not found, searching: {get_search_paths()}")
     return package_prefix
 
 
@@ -85,7 +84,7 @@ def get_package_share_directory(package_name: str, print_warning: bool = True) -
     return path
 
 
-def get_package_share_path(package_name: str, print_warning: bool = True) -> pathlib.Path:
+def get_package_share_path(package_name: str, print_warning: bool = True) -> Path:
     """
     Return the share directory of the given package as a pathlib.Path.
 
@@ -100,7 +99,7 @@ def get_package_share_path(package_name: str, print_warning: bool = True) -> pat
     :returns: share directory of the package as a pathlib.Path
     :raises: :exc:`PackageNotFoundError` if the package is not found
     """
-    path = pathlib.Path(get_package_share_directory(package_name, print_warning=False))
+    path = Path(get_package_share_directory(package_name, print_warning=False))
     if print_warning and not path.exists():
         warnings.warn(f'Share path for {package_name} ({path}) does not exist.', stacklevel=2)
     return path
