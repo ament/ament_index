@@ -13,15 +13,16 @@
 # limitations under the License.
 
 import argparse
+from collections.abc import Generator
 import sys
-from typing import Any, Dict, Generator, List, Optional, Tuple, Union
+from typing import Any
 
 from ament_index_python.resources import get_resource
 from ament_index_python.resources import get_resource_types
 from ament_index_python.resources import get_resources
 
 
-def main(argv: Optional[List[str]] = None) -> Optional[str]:
+def main(argv: list[str] | None = None) -> str | None:
     if argv is None:
         argv = sys.argv[1:]
     parser = argparse.ArgumentParser(
@@ -68,15 +69,14 @@ def main(argv: Optional[List[str]] = None) -> Optional[str]:
     return None
 
 
-def resource_type_completer(prefix: Union[str, Tuple[str, ...]],
-                            **kwarg: Dict[str, Any]) -> Generator[str, None, None]:
+def resource_type_completer(prefix: str | tuple[str, ...],
+                            **kwargs: Any) -> Generator[str, None, None]:
     return (t for t in get_resource_types() if t.startswith(prefix))
 
 
-def resource_name_completer(prefix: Union[str, Tuple[str, ...]],
+def resource_name_completer(prefix: str | tuple[str, ...],
                             parsed_args: argparse.Namespace,
-                            **kwargs: Dict[str, Any]) -> Union[Generator[str, None, None],
-                                                               List[str]]:
+                            **kwargs: Any) -> Generator[str, None, None] | list[str]:
     resource_type = getattr(parsed_args, 'resource_type', None)
     if not resource_type:
         return []

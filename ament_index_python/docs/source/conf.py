@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# -*- coding: utf-8 -*-
-#
 # Configuration file for the Sphinx documentation builder.
 #
 # This file does only contain a selection of the most common options. For a
@@ -31,7 +29,7 @@
 # sys.path.insert(0, os.path.abspath('.'))
 
 # -- Imports -----------------------------------------------------
-from typing import Dict, List, Sequence
+from collections.abc import Sequence
 
 # -- Project information -----------------------------------------------------
 
@@ -106,7 +104,7 @@ html_theme = 'alabaster'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path: List[str] = []
+html_static_path: list[str] = []
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -127,7 +125,7 @@ htmlhelp_basename = 'ament_index_python_doc'
 
 # -- Options for LaTeX output ------------------------------------------------
 
-latex_elements: Dict[str, str] = {
+latex_elements: dict[str, str] = {
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',

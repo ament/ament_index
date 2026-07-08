@@ -50,7 +50,7 @@ def set_ament_prefix_path(subfolders: list[str]) -> None:
 
 def test_empty_search_paths() -> None:
     set_ament_prefix_path([])
-    with pytest.raises(EnvironmentError):
+    with pytest.raises(OSError):
         get_search_paths()
 
 
@@ -265,7 +265,7 @@ def test_get_package_share_path() -> None:
 
 def test_get_resource_types() -> None:
     set_ament_prefix_path([])
-    with pytest.raises(EnvironmentError):
+    with pytest.raises(OSError):
         get_resource_types()
 
     set_ament_prefix_path(['prefix1', 'prefix2'])
