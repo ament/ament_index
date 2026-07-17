@@ -2,6 +2,13 @@
 Changelog for package ament_index_python
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.14.2 (2026-07-17)
+-------------------
+* [ament_index_python] Enforce ` --ament-strict` (`#113 <https://github.com/ament/ament_index/issues/113>`_)
+* Use pathlib and os.scandir (`#124 <https://github.com/ament/ament_index/issues/124>`_)
+* Python3 modernization (`#123 <https://github.com/ament/ament_index/issues/123>`_)
+* Contributors: Alejandro Hernández Cordero, Michael Carlstrom
+
 1.14.1 (2026-06-29)
 -------------------
 

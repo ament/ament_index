@@ -2,6 +2,9 @@
 Changelog for package ament_index_cpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.14.2 (2026-07-17)
+-------------------
+
 1.14.1 (2026-06-29)
 -------------------
 * Removed deprecated aPI (`#120 <https://github.com/ament/ament_index/issues/120>`_)
